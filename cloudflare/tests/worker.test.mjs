@@ -15,6 +15,13 @@ test('database failure closes public access rather than falling through to stati
   for(const path of ['/','/src/main.mjs','/assets/portrait.png','/api/publication'])assert.equal((await worker.fetch(new Request(`https://game.example${path}`),env)).status,503);
   assert.equal(assets,0);
 });
+
+test('password mode exposes only login assets and denies protected admin routes without a session',async()=>{
+ let calls=0;const fail=()=>{calls++;throw Error('Must not be called');};const env={AUTH_MODE:'password',ENVIRONMENT:'production',LOCAL_ADMIN:'true',DB:{withSession:fail},ASSETS:{fetch:async()=>new Response('login')}};
+ const redirected=await worker.fetch(new Request('https://game.example/admin'),env);assert.equal(redirected.status,303);assert.equal(redirected.headers.get('location'),'/admin/login');
+ for(const path of ['/admin/admin.css','/admin/admin.mjs','/admin/api/settings','/admin%2Fapi/settings'])assert.equal((await worker.fetch(new Request('https://game.example'+path),env)).status,403);
+ assert.equal((await worker.fetch(new Request('https://game.example/admin/login'),env)).status,200);assert.equal(calls,0);
+});
 test('all game resources are gated and responses cannot bypass expiry through browser cache',async()=>{
   let row={...initialSettings};let assets=0;const env={DB:{withSession:()=>({prepare:()=>({first:async()=>row})})},ASSETS:{fetch:async request=>{assets++;return new Response(new URL(request.url).pathname);}}};
   assert.equal((await worker.fetch(new Request('https://game.example/src/main.mjs'),env)).status,403);assert.equal(assets,0);

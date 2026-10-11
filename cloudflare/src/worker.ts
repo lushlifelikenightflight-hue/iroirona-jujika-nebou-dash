@@ -1,4 +1,5 @@
 import {authenticate} from './auth.mjs';
+import {authenticationRoute} from './password-auth.mjs';
 import {publicStatus,validateSettings} from './publication.mjs';
 import {unavailablePage} from './pages.mjs';
 
@@ -18,7 +19,16 @@ async function readJSON(request:Request){
   return JSON.parse(new TextDecoder().decode(bytes));
 }
 async function admin(request:Request,env:Env,path:string){
-  let actor:string;try{actor=await authenticate(request,env);}catch{return respond('管理者ログインが必要です。',403,'text/plain; charset=utf-8');}
+  const authentication=await authenticationRoute(request,env,path,readJSON);if(authentication)return decorate(authentication);
+  if(env.AUTH_MODE==='password'&&['/admin/login','/admin/login.html','/admin/login.css','/admin/login.mjs'].includes(path)){
+    if(!['GET','HEAD'].includes(request.method))return json({error:'Method not allowed'},405);
+    const url=new URL(request.url);if(path==='/admin/login')url.pathname='/admin/login.html';
+    return decorate(await env.ASSETS.fetch(new Request(url,request)));
+  }
+  let actor:string;try{actor=await authenticate(request,env);}catch{
+    if(env.AUTH_MODE==='password'&&['/admin','/admin/','/admin/index.html'].includes(path)&&['GET','HEAD'].includes(request.method))return decorate(new Response(null,{status:303,headers:{Location:'/admin/login'}}));
+    return json({error:'管理者ログインが必要です。'},403);
+  }
   if(['/admin','/admin/','/admin/index.html','/admin/admin.css','/admin/admin.mjs'].includes(path)){
     if(!['GET','HEAD'].includes(request.method))return json({error:'Method not allowed'},405);
     const url=new URL(request.url);if(['/admin','/admin/'].includes(path))url.pathname='/admin/index.html';

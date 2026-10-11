@@ -1,30 +1,29 @@
 # 寝坊ダッシュ：Cloudflare公開管理
-- 状態：期間管理を実装・検証し、Cloudflareへ非公開で配置。Access組織の作成はユーザーが明示承認済み。接続トークンにAccess権限がないため追加認証待ち。認証設定が未完なので本番/adminは403。GitHub Pagesは保持。
+- 状態：カード不要のパスワード認証を実装・本番配信済み。本人の本番初回登録と公開期間の保存を確認済み。現在は2026/10/12 0:00〜10/13 0:00（JST）で公開中。GitHub Pagesは保持。
 - 正本：F:\Projects\色々な十字架_寝坊ダッシュ。ゲームv1.5.1。Cloudflare専用コード・設定・依存はcloudflare/。古いフォルダー／素材は移動しない。
-- GitHub：https://github.com/lushlifelikenightflight-hue/iroirona-jujika-nebou-dash 。Pages：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.5.1 。index/style/src/assetsと既存Pagesワークフローを今回変更していない。
-- Cloudflare：https://nebo-dash-publication.bug-plus-opening.workers.dev 。本番D1：nebo-dash-publication / d852492f-d36c-42e0-8f6d-675aa6252f9a。初期enabled=0・日時なし。Worker version ad2e2f73-c2a4-49de-9ccd-32d780549ff5。
-- 管理UI：/admin。日本時間で開始／終了、公開ON/OFF、期間外のメッセージ。保存済み終了日時まで今すぐ公開／即時停止。公開状態を10秒ごとに更新。保存中は入力を止め、revisionで別画面の更新を検知。
-- 配信：全資産run_worker_first。D1 first-primaryで現状を確認。開始<=現在<終了のみ配信。ページ・画像・音声・JSの直接アクセスも拒否。no-store、DB障害は503。初期は非公開。
-- プレイ中：Cloudflareパッケージだけにpublication-guard.mjsを追加。5秒ごとと期限にサーバーへ再確認して終了画面へ移動。通信不能でも停止。ブラウザのタイマーはラップして呼び出し、壁時計変更に依存せずperformanceで期限を計算。
-- 認証：/admin以下のHTML/CSS/JS/APIすべてでAccess JWT署名・issuer・aud・exp・管理者メールを確認。ヘッダーのメールだけは拒否。変更APIは同一Origin JSON、8192B上限、日時と文字数検証。ローカル省略はlocal環境+localhostのみ。
-- 本番認証の未設定：ACCESS_TEAM_DOMAIN / ACCESS_AUD / ADMIN_EMAILS。Cloudflare CLIは既存アカウントに接続済みだがAccess未有効。GET organizationsは403、appsはnot_enabled。
-- 承認：ユーザーが「進めてよい」と明示承認。名前「寝坊ダッシュ 公開管理」、本人だけ、8h、/adminだけ、課金契約なし。組織POSTを再実行したがCloudflare APIが401 Authentication errorで拒否。作成されていない。自動承認審査による拒否ではなく、既存OAuthにAccess権限がないため。
-- ブラウザ：ユーザーはスマホでCloudflareへGitHubログイン済み。PCのセッションには共有されない。Codex内とChromeではGitHubログインが必要だった。重複する未入力のログイン用タブは閉じた。パスワードをチャットへ要求しない。
-- 検証：ゲーム44件、Cloudflare11件、TypeScript／Wrangler型生成合格。実ローカルWorker12項目：初期／予約／公開／停止／再公開／期限終了／資産拒否／CSRF拒否／競合409。設定は戻す。
-- ブラウザ：管理UIで期間保存→ゲーム開始・移動・能力→即時停止→プレイ中終了。別途、実際の終了時刻までゲームを起動して自動終了を確認。390×844で入力／ボタンのはみ出しなし。新しい警告／エラーなし。
-- 本番：7項目でclosed・ページ403・画像403・JS403・admin403・encoded admin403・no-storeを確認。公開ゲームへのアクセスはまだ有効化していない。管理者本人の本番ログインと期間変更は未検証。
-- 起動：ゲームnpm start。Cloudflareはcloudflare/でnpm ci、local migration後npm run dev（127.0.0.1:8790/admin）。検証npm test / npm run typecheck、サーバー中npm run test:integration。npm run buildは元ゲームを保持してdistに80配信ファイルを作る。
-- 配信：npm run deployは本番設定不足なら止まる。初回bootstrapだけ、DBがenabled=0であることを確認してWranglerから非公開配置した。新CI cloudflare-test.ymlはテストだけ。
-- ゲーム継続：たかし／たける／ぽにて／べんぞー／きんぐ。全5面、闇／炎／雷／氷／光、走り・ペダル・しゃがみ、スティック、長押しメニュー、退出保護3秒、隠し家、バネ／滑り台、人数別結末、全員縦長ライブ絵、BGM8／SFX15。
-- v1.5.1：タイトル5人を幅に合わせ左右12px余白、横画面は高さ94%。公開commit7c74ad4379221c302deb9d9edb0543a1090bae72、記録HEAD9a65df6b0bebfd35fa4c25407beee9a80cd7dc38。HTML/CSS公開SHA256一致。
-- 限界：スマホ実機のタッチ／スピーカーは未検証。ダウンロード済みコピーと保持するGitHub PagesはCloudflareの制限対象外。
-- 記録：チャットoutputsの公開管理プレビュー／スマホ画像／期限終了画像／Cloudflare配信検証JSON／成果物案内。依存と元素材は保持。
-- 復旧：ゲームは直前HEAD9a65df6b0bebfd35fa4c25407beee9a80cd7dc38。CloudflareはWrangler rollback。D1の公開設定はコードrollbackとは別で保持される。
-- 次：1)ユーザーからAccess設定用APIトークンのファイルを受け取る。2)既存組織の有無を確認し、なければ承認済みの組織を作成。3)本人だけのAccessアプリを/adminと配下に設定、vars反映、型確認・配信。4)本番ログイン→保存→期間制御を検証し、非公開初期状態を保つ。
-- 保存・CI：source commit af28ada67c531f0045a5d8303e5826e526d28254。ゲームCI38144111983、Cloudflare CI38144111976が成功。認証設定後は本番管理者ログインを検証する。
-- 整理：サーバー99612を停止。dist全80ファイルを正本とSHA256照合し、distとwork/dry-runの計18,549,841Bを削除。記録はチャットoutputsとcloudflare/work/cleanup-record.json。npm run buildで再生成。依存・ローカルD1・Cの小さな再開用補助ファイルを保持。
-
-- 追加確認：Wrangler whoamiは成功、ゲーム配信のOAuthは有効。login --scopes-listにもAccess設定の権限がなく、Wranglerの再ログインでは解決しない。必要なのはAccount限定のAccess: Organizations, Identity Providers, and Groups Edit／Access: Apps and Policies Edit。期限1日程度の専用トークンをスマホで作成する手順をoutputsへ保存。
-- API補助：本チャットwork/cf-access-enable.mjsはトークンファイルのパスを引数に取り、値を出力しない。まずGET組織、未存在だけPOST作成。秘密は公開ソース／成果物へ埋め込まない。
-
-- 認証更新後にもAPIのGETで組織403 Authentication error、apps403 not_enabledを確認。権限不足／Access未有効が残っている。本番/adminは閉じたまま。ユーザー向け手順はoutputs/Cloudflare_認証設定を進めるための手順.md。
+- GitHub：https://github.com/lushlifelikenightflight-hue/iroirona-jujika-nebou-dash 。Pages：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.5.1 。今回はゲームindex/style/src/assetsと既存Pagesワークフローを変更していない。
+- 本番：https://nebo-dash-publication.bug-plus-opening.workers.dev 。管理：/admin。Worker version 134f2e78-6a1a-4be4-8e18-72425b6b77b7。
+- 専用D1：nebo-dash-publication / d852492f-d36c-42e0-8f6d-675aa6252f9a。配信前はenabled=0・日時なし・revision0。本人が初回登録後に公開期間を保存し、現在open。0002_admin_password.sqlで認証テーブルだけ追加。
+- 方針：ユーザーはカード不要の認証へ変更を指示。Zero Trust Freeの登録画面はカードと超過分請求の同意が必要だったため契約を確定していない。Accessの組織／アプリは作成していない。Wrangler OAuthは既存アカウントに接続済み。
+- 本人登録：本番タブ18の/admin/loginに登録用の鍵を入力済み。新しいパスワードの入力・確認・送信はブラウザー操作ルールにより本人へ引き継いだ。パスワードをチャットへ要求しない。16〜256文字。
+- エラー対応：ユーザーのFailed to fetchは、検証用localhost8791のタブ17で発生していた。本番タブのfeedbackは空だった。紛らわしい検証タブを閉じ、本番URLを案内した。パスワード値は読んでいない。
+- 認証：AUTH_MODE=password。初回登録は無作為256ビットの鍵・24時間以内・資格情報未登録の場合のみ。D1の一意キーとINSERT ON CONFLICT DO NOTHINGで登録の競合・上書きを拒否。
+- パスワード：Cloudflare秘密設定のpepperでHMAC→無作為saltとPBKDF2-SHA256 100,000回。DBにはhashとsaltだけを保存。秘密比較はCloudflare timingSafeEqualを優先。ログ／公開Gitに秘密なし。
+- セッション：無作為256ビットCookieのダイジェストだけD1へ保存。__Host-nebo_admin、Secure、HttpOnly、SameSite=Strict、Path=/、8h。期限を毎回DBで確認。logoutでDB側も失効。
+- 試行制限：登録／ログインは15分固定窓ごとにIP6回／全体50回まで。IPはSHA256で保存。超過時429。変更系APIは同一OriginのJSONだけ、8192B上限。
+- 秘密：ADMIN_AUTH_SECRETにはtoken/pepper/expiresAtをJSONで格納しWrangler secret bulkで登録。復旧用コピーはcloudflare/work/private/admin-auth-secret.json（Git無視）に保持。pepperは登録後に変更しない。
+- 登録鍵：チャットoutputs/寝坊ダッシュ_初回登録用の鍵.txtに本人用の一時コピー。登録完了を確認したので整理対象。鍵が期限切れならpepperを保持しtokenとexpiresAtだけ再発行する。
+- 管理UI：別画面の更新時も現在の期間表示を10秒ごとに反映し、入力中のフォームは保持。日本時間で開始／終了、公開ON/OFF、期間外メッセージ、保存済み終了日時まで今すぐ公開／即時停止、logout。revisionで別画面の更新を検知。
+- 配信：全資産run_worker_first。D1 first-primaryで確認。開始<=現在<終了だけ配信。ページ・画像・音声・JSの直接アクセスも拒否。no-store、DB障害503。プレイ中は5秒ごとと期限に再確認して終了画面へ移動。
+- 検証：ユニット15項目、TypeScript／Wrangler型生成合格。隔離した実Workerの認証10項目＋期間制御12項目合格。登録鍵・Origin・再利用・Cookie・logout失効・誤パス・正しいパス・試行制限、公開／予約／停止／期限終了／競合を確認。設定を戻す。
+- 本番匿名：10項目でroot403、publication200closed、画像／JS403、admin303→login、login資産200、管理資産／API／encoded admin403、全no-store。偽Cfメールヘッダーは認証に使われない。本人の本番登録・セッション・設定保存を確認。匿名でも期間内のゲームが起動し、管理APIと管理資産は403。最新の匿名10項目はopenに合わせて再確認済み。
+- 再現：cloudflare/でnpm ci、npm test、npm run typecheck。npm run test:authは8791で新規の隔離QA DBとダミー秘密を使って22項目を実行し、サーバーを停止。work/auth-qa-*に状態を残す。
+- 開発：local migration後npm run devで127.0.0.1:8790/admin。local環境＋localhostだけ認証省略。本番ではLOCAL_ADMINを受け付けない。npm run buildは83ファイルをdistへ生成し元ゲームを変更しない。
+- 配信：npm run deployは本番設定を検査。秘密設定とremote migrationを先に適用。配信だけでゲーム公開を有効にしない。
+- GitHub：CF初期source af28ada67c531f0045a5d8303e5826e526d28254、前の記録c2ede52。今回のコード・記録は検証後mainへ保存する。
+- 復旧：直前Worker ad2e2f73-c2a4-49de-9ccd-32d780549ff5へWrangler rollbackで戻すと管理画面は403。D1公開設定／資格情報はコードrollbackとは別に保持。パスワード再設定は本人依頼で資格情報／セッションだけ扱い公開設定を保持。
+- ゲーム：たかし／たける／ぽにて／べんぞー／きんぐ、全5面、闇／炎／雷／氷／光、走り・ペダル・しゃがみ、スティック、長押しメニュー、退出保護3秒、隠し家、バネ／滑り台、人数別結末、全員縦長ライブ絵、BGM8／SFX15。
+- 既存検証：ゲーム44件・素材61件、前のブラウザ実機相当表示と操作検証。スマホ実機タッチ／スピーカーは未確認。ダウンロード済みコピーと保持したPagesはCloudflareの制限対象外。
+- 記録：チャットoutputsに公開管理の使い方、初回登録画面、本番匿名検証JSON、旧管理プレビュー／スマホ／期限終了／成果物案内。素材・依存・旧成果物を保持。
+- 整理：以前にdist／dry-run計18,549,841BをSHA照合後に整理。今回の生成パッケージと小さなQA状態は検証のため一時保持。秘密の復旧用コピーは削除しない。開いたQAサーバーは停止済み。
+- 次：GitHubへコード／記録を保存してCIを確認し、検証済み生成物を整理する。新たな期間設定は本人が管理画面で行う。

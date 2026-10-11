@@ -23,7 +23,8 @@
     "ENVIRONMENT": "production",
     "ACCESS_TEAM_DOMAIN": "",
     "ACCESS_AUD": "",
-    "ADMIN_EMAILS": ""
+    "ADMIN_EMAILS": "",
+    "AUTH_MODE": "password"
   },
   "d1_databases": [
     {
@@ -41,7 +42,8 @@
         "LOCAL_ADMIN": "true",
         "ACCESS_TEAM_DOMAIN": "",
         "ACCESS_AUD": "",
-        "ADMIN_EMAILS": ""
+        "ADMIN_EMAILS": "",
+        "AUTH_MODE": "password"
       },
       "d1_databases": [
         {
@@ -50,7 +52,17 @@
           "database_id": "00000000-0000-0000-0000-000000000000",
           "migrations_dir": "migrations"
         }
-      ]
+      ],
+      "secrets": {
+        "required": [
+          "ADMIN_AUTH_SECRET"
+        ]
+      }
     }
+  },
+  "secrets": {
+    "required": [
+      "ADMIN_AUTH_SECRET"
+    ]
   }
 }

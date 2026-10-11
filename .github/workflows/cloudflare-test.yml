@@ -21,3 +21,5 @@ jobs:
         working-directory: cloudflare
       - run: npm run build
         working-directory: cloudflare
+      - run: node tools/test-auth.mjs
+        working-directory: cloudflare
