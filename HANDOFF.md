@@ -1,17 +1,22 @@
 # 現在の状態
-- 目的：全5面の寝坊ダッシュをGitHub Pagesで誰でも遊べるように公開。
-- 状態：仕様→素材→実装を完了、ローカル検証済み、公開準備中。
+- 目的／状態：色々な十字架の全5面2Dアクションを完成、GitHub Pagesで公開済み。
 - 正本：F:/Projects/色々な十字架_寝坊ダッシュ。
-- 技術：Canvas 2D / ES Modules、Node.js 22、外部パッケージ・CDN不要。
-- 仕様：仕様書.md。全体720秒、仲間の寄り道は任意、5面ボスは迂回可。
-- 画像：参照からimagegenで透過5×2アトラスと5人ライブ絵、提供集合絵、SVG18点。
-- 音：事前制作WAV20点（BGM8・SFX12）。tools/make-assets.mjsで再生成。
-- 実装：4部屋、5能力、追従、交代、一輪車、HP／時間、セーブ、3結末と内訳。
-- 検証：Node 10テスト、素材41点、ブラウザ統合19項目合格。
-- 追加修正：復帰地点を地面に限定、巡回敵の闇吸引、スマホHUD押下範囲、縦画面案内。
-- 未確認：実機iOS/Android、スピーカーの実聴、多コマ歩行アニメ未制作。
-- 保存：ブラウザのlocalStorage、ステージ入口で自動保存。元画像は変更なし。
-- 公開先：lushlifelikenightflight-hue/iroirona-jujika-nebou-dash（新規）。
 - URL：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/
-- 復旧：Git履歴から復旧。公開ワークフローは検証合格版だけ配信。
-- 次：1.F正本のハッシュ照合 2.GitHub初回公開 3.公開画面確認 4.作業用重複を整理。
+- リポジトリ：https://github.com/lushlifelikenightflight-hue/iroirona-jujika-nebou-dash
+- 検証・公開したゲームコミット：38cb4abdd472cf03d2dc150fee54a0c94fc3fbf8。
+- Actions成功：https://github.com/lushlifelikenightflight-hue/iroirona-jujika-nebou-dash/actions/runs/38112790122
+- 構成：Canvas 2D / ES Modules、Node.js 22。外部パッケージ／CDNなし。
+- 実装：4つの家／部屋、5能力、仲間追従・交代、一輪車、5面、任意ボス、HP／時間、セーブ、全員／少人数／時間切れエンディングと集計。
+- 仕様：仕様書.md。全体720秒、寄り道任意、全員時は指定のCongraduation!。
+- 画像：参照からimagegenの透過5×2アトラス・ライブ絵、提供集合絵、SVG18点。
+- 音：事前制作したオリジナルWAV20点。tools/make-assets.mjsでSVG／音源を再生成。
+- 検証：Node10テスト（戦闘込み5面通し含む）、素材41点、ブラウザ統合19項目合格。
+- 公開確認：初回起動、キーボード、闇で敵撃破（100点）、一輪車、ポーズ、保存後の再読み込み、844×390横画面。公開ゲームのconsole警告／エラーなし。
+- 修正：地面だけを復帰地点に保存、巡回敵の持続吸引、40px以上のHUD押下範囲、縦画面の全画面案内・自動停止。
+- 限界：実機iOS/Androidのタッチ・音声、スピーカー試聴、FPS計測は未実施。多コマ歩行アニメ未制作（上下動・反転で表現）。
+- ローカル起動：npm start → http://127.0.0.1:4186。検証：npm test / npm run check。
+- 保存：ブラウザlocalStorage。続きからはステージ入口。元画像はDownloadsに保持。
+- 整理：C側work/gameの63ファイルをFとSHA256照合後に削除。12,855,948 bytes＋一時スクリプト1,495 bytes。検証サーバー停止。
+- 案内／証拠：元チャットoutputsの成果物案内.md、公開ゲーム画面.png、整理記録.txt。
+- 復旧：上記ゲームコミットへ戻す。公開はmainへpush後のActions。未検証の変更を公開しない。
+- 次の候補：1.実機での操作・音量調整 2.専用歩行／ジャンプアニメ追加（いずれも追加依頼時）。
