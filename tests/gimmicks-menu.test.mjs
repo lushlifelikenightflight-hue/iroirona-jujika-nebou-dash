@@ -1,7 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {Game} from '../src/engine.mjs';import {STAGES} from '../src/data.mjs';import {slideSurface} from '../src/gimmicks.mjs';import {HoldAction} from '../src/hold-action.mjs';
 const tick=(g,n,input={})=>{for(let i=0;i<n;i++)g.step(1/120,input);};
-const ready=(stage=0)=>{const g=new Game();g.start();g.loadStage(stage);g.play();g.world.enemies=[];g.world.items=[];return g;};
+const ready=(stage=0)=>{const g=new Game();g.start();g.loadStage(stage);g.play();for(const e of g.world.enemies.filter(e=>e.guardId))g.kill(e);g.world.enemies=[];g.world.items=[];return g;};
 function clock(){let now=0,id=0;const pending=new Map();return {set(fn,ms){pending.set(++id,{fn,time:now+ms});return id;},clear(i){pending.delete(i);},advance(ms){now+=ms;for(const [i,t] of [...pending])if(t.time<=now){pending.delete(i);t.fn();}}};}
 test('menu requires full hold, cancels release and isolates pointers',()=>{const timer=clock();let commits=0;const hold=new HoldAction(()=>commits++,()=>true,700,timer);hold.start(1);timer.advance(600);hold.cancel(1);timer.advance(500);assert.equal(commits,0);hold.start(2);hold.cancel(3);assert.equal(hold.start(3),false);timer.advance(700);assert.equal(commits,1);timer.advance(700);assert.equal(commits,1);});
 test('menu cannot start or complete during another gameplay input',()=>{const timer=clock();let allowed=false,commits=0;const hold=new HoldAction(()=>commits++,()=>allowed,700,timer);assert.equal(hold.start(1),false);allowed=true;hold.start(2);allowed=false;timer.advance(700);assert.equal(commits,0);});

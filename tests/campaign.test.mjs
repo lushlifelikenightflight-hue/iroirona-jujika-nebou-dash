@@ -18,7 +18,7 @@ test('five-stage campaign with combat, followers and complete ending',()=>{
  const g=new Game();g.start();
  for(let s=0;s<5;s++){
   g.play();
-  if(s<4){const door=g.world.door;g.world.player.x=door.x+30;g.world.player.y=door.y+door.h-76;g.interact();g.world.player.x=800;g.step(1/120);g.world.player.x=550;g.interact();}
+  if(s<4){for(const e of g.world.enemies.filter(e=>e.guardId))g.kill(e);const door=g.world.door;g.world.player.x=door.x+30;g.world.player.y=door.y+door.h-76;g.interact();g.world.player.x=800;g.step(1/120);g.world.player.x=550;g.interact();}
   driveStage(g);g.nextStage();
  }
  assert.equal(g.mode,'ending');assert.equal(g.run.crew.length,5);assert.ok(g.run.kills>0);assert.ok(g.run.remaining>0);assert.equal(g.result.all,5000);assert.equal(g.result.clear,5000);

@@ -1,4 +1,4 @@
-# 寝坊ダッシュの素材 v1.3
+# 寝坊ダッシュの素材 v1.4
 
 表示名：たかし・たける・ぽにて・べんぞー・きんぐ。提供された人物の衣装・髪型・顔を参照しています。
 
@@ -20,3 +20,5 @@ SFX15種はローカル音声工房のプリセット合成を実行し、音量
 提供素材の権利は各権利者に帰属し、人物画像に対する再配布ライセンスは付与していません。
 
 v1.3：既存のSVG画風に合わせたspring.svg／slide.svg／room-door.svgを追加。バネ・滑走の2効果音を音声工房のconfirm／slashプリセットで生成、仕上げ、44.1kHz PCMへ出力。元音と設定は音声工房library、再開IDはwork/audio-v13-jobs。再生成はtools/generate-gimmick-sfx.mjs。
+
+v1.4：assets/live.pngを参照し、組み込みimagegenで縦長の5人ライブ絵assets/live-portrait.pngを生成。人物と楽器を前後3段に配置。顔・髪型・衣装・ピクセル画風を確認。縦画面は新画像、横画面は既存画像を使用し、object-fit:containで切り抜きなし。制作記録はsources/live-portrait.json。

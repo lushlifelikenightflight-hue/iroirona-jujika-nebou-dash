@@ -1,0 +1,7 @@
+{
+  "generator": "imagegen built-in",
+  "reference": "assets/live.png",
+  "output": "assets/live-portrait.png",
+  "composition": "Portrait, exactly five Gothic band members performing in depth tiers. Keep identity, costumes, hairstyles and instruments. No text. Show with object-fit:contain without cropping.",
+  "generated": "2026-10-11"
+}

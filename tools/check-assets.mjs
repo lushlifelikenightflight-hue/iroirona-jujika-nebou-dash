@@ -2,7 +2,7 @@ import fs from 'node:fs';import path from 'node:path';import assert from 'node:a
 import {ART,SPRITE_FILES} from '../src/render.mjs';import {AUDIO_NAMES,AUDIO_FILES,BGM_NAMES} from '../src/audio.mjs';
 const root=path.resolve(import.meta.dirname,'..');let count=0;
 for(const name of ART){assert.ok(fs.readFileSync(path.join(root,'assets/art',name+'.svg'),'utf8').includes('<svg'));count++;}
-for(const name of ['characters','portrait','live']){assert.equal(fs.readFileSync(path.join(root,'assets',name+'.png')).readUInt32BE(0),0x89504e47);count++;}
+for(const name of ['characters','portrait','live','live-portrait']){assert.equal(fs.readFileSync(path.join(root,'assets',name+'.png')).readUInt32BE(0),0x89504e47);count++;}
 for(const name of SPRITE_FILES){const b=fs.readFileSync(path.join(root,'assets/sprites',name+'.png'));assert.equal(b.readUInt32BE(0),0x89504e47);assert.equal(b[25],6,`${name}: RGBA required`);const animated=/^(run|pedal)-/.test(name);assert.equal(b.readUInt32BE(16),animated?640:800);assert.equal(b.readUInt32BE(20),animated?576:288);count++;}
 const sprites=JSON.parse(fs.readFileSync(path.join(root,'assets/sprites/manifest.json'),'utf8'));
 assert.equal(sprites.members.length,5);for(const member of sprites.members){assert.equal(member.right.length,8);assert.equal(member.left.length,8);assert.equal(new Set(member.frameHashes).size,16);assert.ok(member.bodyScaleCV<.08);}
