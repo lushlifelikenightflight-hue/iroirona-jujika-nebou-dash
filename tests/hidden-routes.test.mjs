@@ -28,7 +28,7 @@ test('two spring tiers reach sky house and allow returning to main route',()=>{
 });
 test('sealed house requires every designated guard; unrelated enemies do not unlock it',()=>{
  const g=ready(3),w=g.world,p=w.player,d=w.door,guards=w.enemies.filter(e=>e.guardId);
- p.x=d.x+30;p.y=d.y+d.h-p.h;assert.equal(d.visible,false);assert.equal(g.nearbyDoor(),null);assert.equal(g.interact(),false);
+ assert.equal(w.enemies.filter(e=>e.startX>=1740&&e.startX<=2670).length,7,'The sealed area contains exactly the seven guards');p.x=d.x+30;p.y=d.y+d.h-p.h;assert.equal(d.visible,false);assert.equal(g.nearbyDoor(),null);assert.equal(g.interact(),false);
  for(const e of w.enemies.filter(e=>!e.guardId))g.kill(e);assert.equal(d.visible,false);
  for(const e of guards.slice(0,-1))g.kill(e);assert.equal(d.visible,false);
  g.kill(guards.at(-1));assert.equal(d.visible,true);assert.equal(g.nearbyDoor(),'enter');recruit(g);assert.ok(g.run.crew.includes(4));

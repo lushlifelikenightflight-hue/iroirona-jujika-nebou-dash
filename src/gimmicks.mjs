@@ -1,4 +1,4 @@
-import {GROUND,STAGES} from './data.mjs?v=1.4.0';
+import {GROUND,STAGES} from './data.mjs?v=1.4.1';
 export const GIMMICK_LAYOUTS=[
  {spring:820,slide:2160,width:220,rise:72},
  {spring:780,slide:2560,width:260,rise:86},

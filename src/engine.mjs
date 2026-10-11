@@ -1,5 +1,5 @@
-import {MEMBERS,STAGES,GROUND,score} from './data.mjs?v=1.4.0';
-import {createGimmicks,applyGimmicks} from './gimmicks.mjs?v=1.4.0';
+import {MEMBERS,STAGES,GROUND,score} from './data.mjs?v=1.4.1';
+import {createGimmicks,applyGimmicks} from './gimmicks.mjs?v=1.4.1';
 export const overlap=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const rect=(x,y,w,h)=>({x,y,w,h});
@@ -10,6 +10,7 @@ export class Game {
  loadStage(index){const d=STAGES[index];this.run.stage=index;this.run.hp=5;this.cooldowns.fill(0);let platforms=[],last=0;for(const [x,w] of d.pits){platforms.push(rect(last,GROUND,x-last,160));last=x+w;}platforms.push(rect(last,GROUND,d.length-last,160));for(const [x,y,w,h=20] of d.platforms)platforms.push(rect(x,y,w,h));
  let enemies=[];for(let x=650,n=0;x<d.length-340;x+=420,n++){if(d.pits.some(([a,w])=>x>a-55&&x<a+w+55))continue;let kind=(n+index)%3===0?'bat':(n+index)%3===1?'ghost':'bell';enemies.push({...rect(x,kind==='bat'?280:GROUND-48,kind==='bat'?46:38,48),kind,hp:kind==='bell'?2:1,startX:x,startY:kind==='bat'?280:GROUND-48,t:n,cooldown:2,dead:false});}
  if(d.route==='battle'){
+  enemies=enemies.filter(e=>e.startX<1740||e.startX>2670);
   for(const [n,x,kind] of [[0,1830,'ghost'],[1,1950,'bell'],[2,2060,'ghost'],[3,2190,'bat'],[4,2300,'ghost'],[5,2430,'bell'],[6,2540,'ghost']]){
    const y=kind==='bat'?210:GROUND-48;
    enemies.push({...rect(x,y,kind==='bat'?46:38,48),kind,hp:kind==='bell'?2:1,startX:x,startY:y,t:n,cooldown:2,dead:false,guardId:`guard-${n}`});
