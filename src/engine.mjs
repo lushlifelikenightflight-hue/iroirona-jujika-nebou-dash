@@ -1,6 +1,6 @@
-import {MEMBERS,STAGES,GROUND,score} from './data.mjs?v=1.6.0';
-import {DIFFICULTY} from './difficulty.mjs?v=1.6.0';
-import {createGimmicks,applyGimmicks} from './gimmicks.mjs?v=1.6.0';
+import {MEMBERS,STAGES,GROUND,score} from './data.mjs?v=1.6.1';
+import {DIFFICULTY} from './difficulty.mjs?v=1.6.1';
+import {createGimmicks,applyGimmicks} from './gimmicks.mjs?v=1.6.1';
 export const overlap=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const rect=(x,y,w,h)=>({x,y,w,h});
@@ -55,7 +55,7 @@ export class Game {
  for(const fx of w.effects){fx.age+=dt;fx.tick+=dt;let hitbox;if(fx.id===0){hitbox=rect(fx.x-100,fx.y-100,200,200);}if(fx.id===1){fx.x+=fx.face*440*dt;hitbox=rect(fx.x-22,fx.y-14,44,28);}if(fx.id===2){fx.y+=MEMBERS[2].dropSpeed*dt;if(fx.y+fx.height>=(fx.floor??GROUND)){fx.y=(fx.floor??GROUND)-fx.height;fx.age=fx.life;}hitbox=rect(fx.x-fx.width/2,fx.y,fx.width,fx.height);}if(fx.id===3)hitbox=rect(fx.x-fx.width/2,fx.y,fx.width,fx.height);if(fx.id===4){for(const e of w.enemies){if(e.dead)continue;let dx=(e.x+e.w/2-fx.x)*fx.face,dy=fx.y-(e.y+e.h/2);if(dx>=0&&dx<=fx.reach&&Math.abs(dy-dx)<e.h/2+fx.width/Math.SQRT2&&!fx.hit.has(e)){fx.hit.add(e);this.hitEnemy(e,2);}}}
  if(hitbox){for(const e of w.enemies){if(e.dead)continue;if(fx.id===0&&overlap(e,hitbox)){const dx=(fx.x-e.x)*dt*3,dy=(fx.y-e.y)*dt*3;e.x+=dx;e.y+=dy;if(e.kind==='ghost'||e.kind==='bat'){e.pullX=(e.pullX||0)+dx;e.pullY=(e.pullY||0)+dy;}if(fx.tick>=.5)this.hitEnemy(e,1);}else if(overlap(e,hitbox)&&!fx.hit.has(e)){fx.hit.add(e);this.hitEnemy(e,fx.id===2?3:fx.id===1?2:1);}}if(fx.id===0&&fx.tick>=.5)fx.tick=0;if(fx.id===3)w.shots=w.shots.filter(s=>!overlap(s,hitbox));}}
  w.effects=w.effects.filter(f=>f.age<f.life);for(const shot of w.shots){shot.x+=shot.vx*dt;shot.y+=shot.vy*dt;if(overlap(p,shot)){shot.dead=true;this.damage();}}w.shots=w.shots.filter(s=>!s.dead&&s.x>0&&s.x<w.length&&s.y<(w.fallLimit||610)&&s.y>(w.top||0)-200);w.particles.forEach(v=>v.age+=dt);w.particles=w.particles.filter(v=>v.age<.6);
- p.animTime=p.grounded&&!p.crouching&&Math.abs(p.vx)>5?(p.animTime||0)+dt*Math.max(.4,Math.abs(p.vx)/300):0;w.history.push({x:p.x,y:p.y,h:p.h,crouching:p.crouching,face:p.face,wheel:p.wheel,vx:p.vx,grounded:p.grounded,animTime:p.animTime});if(w.history.length>240)w.history.shift();
+ p.animTime=p.grounded&&!p.crouching&&Math.abs(p.vx)>5?(p.animTime||0)+dt*Math.abs(p.vx)/300:0;w.history.push({x:p.x,y:p.y,h:p.h,crouching:p.crouching,face:p.face,wheel:p.wheel,vx:p.vx,grounded:p.grounded,animTime:p.animTime});if(w.history.length>240)w.history.shift();
  if(!w.room&&p.x>w.length-115){this.mode='clear';this.emit('sfx','clear');this.emit('clear',STAGES[this.run.stage].outro);}
  }
 }

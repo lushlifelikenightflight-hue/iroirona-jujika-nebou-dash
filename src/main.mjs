@@ -1,6 +1,6 @@
-import {Game,validSave} from './engine.mjs?v=1.6.0';import {MEMBERS,STAGES,score} from './data.mjs?v=1.6.0';import {Renderer} from './render.mjs?v=1.6.0';import {AudioManager} from './audio.mjs?v=1.6.0';import {AnalogStick} from './stick.mjs?v=1.6.0';
-import {endingStory,storyMarkup} from './story.mjs?v=1.6.0';
-import {HoldAction} from './hold-action.mjs?v=1.6.0';
+import {Game,validSave} from './engine.mjs?v=1.6.1';import {MEMBERS,STAGES,score} from './data.mjs?v=1.6.1';import {Renderer} from './render.mjs?v=1.6.1';import {AudioManager} from './audio.mjs?v=1.6.1';import {AnalogStick} from './stick.mjs?v=1.6.1';
+import {endingStory,storyMarkup} from './story.mjs?v=1.6.1';
+import {HoldAction} from './hold-action.mjs?v=1.6.1';
 const $=id=>document.getElementById(id),overlay=$('overlay'),renderer=new Renderer($('canvas')),audio=new AudioManager(),held={left:false,right:false,crouch:false,axis:0},pending={};let stick=null,menuHold=null,backgroundPaused=false,pageFocused=true;let toastUntil=0,high=0,saved=null,helpReturn='title',frame=0;
 const safeGet=k=>{try{return localStorage.getItem(k);}catch{return null;}},safeSet=(k,v)=>{try{localStorage.setItem(k,v);}catch{}},safeRemove=k=>{try{localStorage.removeItem(k);}catch{}};
 try{const raw=JSON.parse(safeGet('cross-nebou-save'));if(validSave(raw))saved=raw;high=Math.max(0,Number(safeGet('cross-nebou-high'))||0);audio.volume=Math.max(0,Math.min(1,Number(safeGet('cross-nebou-volume')??.55)));}catch{}
