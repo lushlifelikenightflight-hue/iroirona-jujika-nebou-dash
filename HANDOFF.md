@@ -17,7 +17,7 @@
 - 起動：npm start。検証：npm test / npm run check / tests/browser.html。静止確認：tests/routes.html。testsはPagesに配信しない。
 - 限界：実機iOS／Androidのタッチとスピーカー試聴は未実施。ブラウザで再生時刻・効果音信号を確認。
 - 復旧：変更前HEAD 8623661dbd9331e9c6bb3f24d5af0bd383e2b428へ戻す。旧素材はGit履歴に保持。
-- 公開ゲームcommit：c06a7ff3fd4480e62f2b39cc1d762e229c96b4cb。Actions成功38125940891。公開74ファイルのSHA256一致。
+- 公開ゲームcommit：1eddad386929d4d8c4aedd5f531690d1e75744a6。Actions成功38126369143。公開74ファイルのSHA256一致。
 - 公開URL：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.4.1
 - 公開390×844で続きから起動、移動、闇の発動、音声ON、短いメニュータップで開かない、Esc長押しで開くことを確認。
 - 次：任意の実機タッチ・スピーカー試聴。ソース・素材・音声工房の原音・旧成果物を保持。
