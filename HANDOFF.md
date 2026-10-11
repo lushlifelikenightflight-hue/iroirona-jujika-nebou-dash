@@ -12,7 +12,7 @@
 - セッション：無作為256ビットCookieのダイジェストだけD1へ保存。__Host-nebo_admin、Secure、HttpOnly、SameSite=Strict、Path=/、8h。期限を毎回DBで確認。logoutでDB側も失効。
 - 試行制限：登録／ログインは15分固定窓ごとにIP6回／全体50回まで。IPはSHA256で保存。超過時429。変更系APIは同一OriginのJSONだけ、8192B上限。
 - 秘密：ADMIN_AUTH_SECRETにはtoken/pepper/expiresAtをJSONで格納しWrangler secret bulkで登録。復旧用コピーはcloudflare/work/private/admin-auth-secret.json（Git無視）に保持。pepperは登録後に変更しない。
-- 登録鍵：チャットoutputs/寝坊ダッシュ_初回登録用の鍵.txtに本人用の一時コピー。登録完了を確認したので整理対象。鍵が期限切れならpepperを保持しtokenとexpiresAtだけ再発行する。
+- 登録鍵：チャットoutputs/寝坊ダッシュ_初回登録用の鍵.txtに本人用の一時コピーは登録完了後に整理済み。鍵が期限切れならpepperを保持しtokenとexpiresAtだけ再発行する。
 - 管理UI：別画面の更新時も現在の期間表示を10秒ごとに反映し、入力中のフォームは保持。日本時間で開始／終了、公開ON/OFF、期間外メッセージ、保存済み終了日時まで今すぐ公開／即時停止、logout。revisionで別画面の更新を検知。
 - 配信：全資産run_worker_first。D1 first-primaryで確認。開始<=現在<終了だけ配信。ページ・画像・音声・JSの直接アクセスも拒否。no-store、DB障害503。プレイ中は5秒ごとと期限に再確認して終了画面へ移動。
 - 検証：ユニット15項目、TypeScript／Wrangler型生成合格。隔離した実Workerの認証10項目＋期間制御12項目合格。登録鍵・Origin・再利用・Cookie・logout失効・誤パス・正しいパス・試行制限、公開／予約／停止／期限終了／競合を確認。設定を戻す。
@@ -20,10 +20,10 @@
 - 再現：cloudflare/でnpm ci、npm test、npm run typecheck。npm run test:authは8791で新規の隔離QA DBとダミー秘密を使って22項目を実行し、サーバーを停止。work/auth-qa-*に状態を残す。
 - 開発：local migration後npm run devで127.0.0.1:8790/admin。local環境＋localhostだけ認証省略。本番ではLOCAL_ADMINを受け付けない。npm run buildは83ファイルをdistへ生成し元ゲームを変更しない。
 - 配信：npm run deployは本番設定を検査。秘密設定とremote migrationを先に適用。配信だけでゲーム公開を有効にしない。
-- GitHub：CF初期source af28ada67c531f0045a5d8303e5826e526d28254、前の記録c2ede52。今回のコード・記録は検証後mainへ保存する。
+- GitHub：CF初期source af28ada67c531f0045a5d8303e5826e526d28254、前の記録c2ede52。今回のソースは578b907a74f21f6997e215856bb26b55839bd90fでmainへ保存。ゲームCI38150533793／Cloudflare CI38150533695（隔離認証22項目を含む）が成功。
 - 復旧：直前Worker ad2e2f73-c2a4-49de-9ccd-32d780549ff5へWrangler rollbackで戻すと管理画面は403。D1公開設定／資格情報はコードrollbackとは別に保持。パスワード再設定は本人依頼で資格情報／セッションだけ扱い公開設定を保持。
 - ゲーム：たかし／たける／ぽにて／べんぞー／きんぐ、全5面、闇／炎／雷／氷／光、走り・ペダル・しゃがみ、スティック、長押しメニュー、退出保護3秒、隠し家、バネ／滑り台、人数別結末、全員縦長ライブ絵、BGM8／SFX15。
 - 既存検証：ゲーム44件・素材61件、前のブラウザ実機相当表示と操作検証。スマホ実機タッチ／スピーカーは未確認。ダウンロード済みコピーと保持したPagesはCloudflareの制限対象外。
 - 記録：チャットoutputsに公開管理の使い方、初回登録画面、本番匿名検証JSON、旧管理プレビュー／スマホ／期限終了／成果物案内。素材・依存・旧成果物を保持。
-- 整理：以前にdist／dry-run計18,549,841BをSHA照合後に整理。今回の生成パッケージと小さなQA状態は検証のため一時保持。秘密の復旧用コピーは削除しない。開いたQAサーバーは停止済み。
-- 次：GitHubへコード／記録を保存してCIを確認し、検証済み生成物を整理する。新たな期間設定は本人が管理画面で行う。
+- 整理：以前にdist／dry-run計18,549,841BをSHA照合後に整理。今回はSHA256一致した配信パッケージ83ファイル、隔離QA状態、使用済み鍵の計21,723,083Bを整理。秘密の復旧用コピー、依存、素材、ローカルDB、小さな再開用補助は保持。QAサーバーは停止済み。対象とハッシュはチャットoutputs/Cloudflare_パスワード認証_整理記録.json。
+- 次：実装・配信・検証・整理は完了。新しい公開期間は本人が管理画面で設定できる。パスワード再設定が必要なら、本人の依頼を受けて公開設定を保持して行う。
