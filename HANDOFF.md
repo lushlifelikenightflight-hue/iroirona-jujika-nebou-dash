@@ -1,7 +1,7 @@
 # 寝坊ダッシュ v1.1
-- 状態：6項目の改修を実装、公開前の確認中。
+- 状態：6項目の改修を実装し、GitHub Pagesで公開済み。
 - 正本：既存のゲーム保存フォルダー。このファイルとREADMEが入口。既存参照を保つためフォルダーは移動しない。
-- 公開先：既存GitHub Pages URLを維持。リポジトリの表示説明も新名称へ変更予定。
+- 公開先：既存GitHub Pages URLを維持。リポジトリの表示説明も新名称へ変更済み。
 - 最新の変更：5人×左右8コマ、左向き立ち／一輪車、立体スティック、長押し抑制、新表示名、ACE-Step BGM8曲。
 - 新表示名：たかし・たける・ぽにて・べんぞー・きんぐ。元のバンド名・人物名をUIと現行文書から削除。
 - スプライト：assets/spritesの7アトラス、manifestの80ハッシュ、sources/spritesの原画6枚とプロンプト。抽出・アンカー・共有縮尺を検証。
@@ -14,4 +14,11 @@
 - 限界：実機iOS/Androidのタッチ・音声とスピーカー試聴は未実施。
 - 起動：npm start。検証：npm test / npm run check。ブラウザ検証：tests/browser.html、sprites.html。
 - 復旧：変更前の44843dc。新しい原画／音源は上書きで失われないよう保持。
-- 次：1.公開版でスティック・左移動確認 2.Actions成功記録 3.照合済み作業コピーを整理。
+- 次の候補：実機iOS／Androidでの確認（追加依頼時）。必須の残作業なし。
+
+- 公開ゲームのコミット：040e8d2334c1de89bccb747dcc0ce654162588eb。
+- Actions成功：https://github.com/lushlifelikenightflight-hue/iroirona-jujika-nebou-dash/actions/runs/38115717250
+- 公開URL：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.1.0
+- 公開確認：起動、新名称、スティックをドラッグして解除、左右移動、能力ボタン800ms長押し。コピー操作の表示なし、console警告／エラーなし。
+- 整理：Cの作業コピー85ファイル24,272,618 bytesをFとSHA256照合後に削除。旧チップBGM8曲はGitの44843dcから復旧可。
+- 生成原画6枚はsources/spritesへ保持。BGM原音・設定は音声工房library、再開用stateはwork/bgm-jobsへ保持。
