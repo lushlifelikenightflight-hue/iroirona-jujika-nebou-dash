@@ -1,5 +1,5 @@
 export const BGM_NAMES=['title','stage-1','stage-2','stage-3','stage-4','stage-5','live','taxi'];
-export const SFX_NAMES=['jump','land','dark','fire','lightning','ice','beam','hit','kill','join','unicycle','clear','crouch'];
+export const SFX_NAMES=['jump','land','dark','fire','lightning','ice','beam','hit','kill','join','unicycle','clear','crouch','spring','slide'];
 export const AUDIO_NAMES=[...BGM_NAMES,...SFX_NAMES];
 export const AUDIO_FILES=Object.fromEntries(AUDIO_NAMES.map(n=>[n,`assets/audio/${n}.${BGM_NAMES.includes(n)?'mp3':'wav'}`]));
 export class AudioManager{

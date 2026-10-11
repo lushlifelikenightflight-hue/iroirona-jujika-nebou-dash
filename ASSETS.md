@@ -1,4 +1,4 @@
-# 寝坊ダッシュの素材 v1.2
+# 寝坊ダッシュの素材 v1.3
 
 表示名：たかし・たける・ぽにて・べんぞー・きんぐ。提供された人物の衣装・髪型・顔を参照しています。
 
@@ -13,8 +13,10 @@
 
 BGMは導入済みローカル音声工房／ACE-Step 1.5 Turbo（8 steps）で8曲を新規生成。固定seed111200〜111207、歌なし、30秒指定、仕上げ後29.65秒。音量・低音／圧縮・ループを処理し、160kbps MP3へ書き出し。−16.00〜−16.59 LUFS、ピーク−1.51〜−4.97 dBTP。title、stage-1〜5、live、taxiの8曲。bgm-provenance.jsonにプロンプトと生成ID・測定結果。
 
-SFX13種はローカル音声工房のプリセット合成を実行し、音量・厚みを仕上げ。jump、land、dark、fire、lightning、ice、beam、hit、kill、join、unicycle、clear、crouch。44.1kHz／16bit／mono WAV。sfx-provenance.jsonに生成ID・プリセット・設定と測定結果。SFXはプリセット合成で、BGMのAI推論とは生成方式が異なります。
+SFX15種はローカル音声工房のプリセット合成を実行し、音量・厚みを仕上げ。jump、land、dark、fire、lightning、ice、beam、hit、kill、join、unicycle、clear、crouch。44.1kHz／16bit／mono WAV。sfx-provenance.jsonに生成ID・プリセット・設定と測定結果。SFXはプリセット合成で、BGMのAI推論とは生成方式が異なります。
 
 再生成はtools/generate-bgm.mjs、generate-sfx.mjs。音声工房を起動して実行し、再開IDはwork/audio-v12-jobsへ保持。ゲームのBGMはHTMLAudio、SFXはWebAudioで、タップで両方を有効化。元音・完成WAV・設定は音声工房libraryに保持。v1.1の音源はGit履歴に保持。
 
 提供素材の権利は各権利者に帰属し、人物画像に対する再配布ライセンスは付与していません。
+
+v1.3：既存のSVG画風に合わせたspring.svg／slide.svg／room-door.svgを追加。バネ・滑走の2効果音を音声工房のconfirm／slashプリセットで生成、仕上げ、44.1kHz PCMへ出力。元音と設定は音声工房library、再開IDはwork/audio-v13-jobs。再生成はtools/generate-gimmick-sfx.mjs。

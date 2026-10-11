@@ -157,6 +157,30 @@
         "lufs": -20.85,
         "peak": -1.52
       }
+    },
+    {
+      "file": "spring.wav",
+      "libraryId": "ef7067d8-1dda-4fe8-aa72-d71980c84159",
+      "preset": "confirm",
+      "pitch": 1.5,
+      "strength": 0.8,
+      "duration": 0.38,
+      "after": {
+        "lufs": -18.03,
+        "peak": -10.87
+      }
+    },
+    {
+      "file": "slide.wav",
+      "libraryId": "1552708a-2780-4707-bea2-0f1d87254f91",
+      "preset": "slash",
+      "pitch": 0.75,
+      "strength": 0.6,
+      "duration": 0.8,
+      "after": {
+        "lufs": -18.26,
+        "peak": -8.32
+      }
     }
   ]
 }
