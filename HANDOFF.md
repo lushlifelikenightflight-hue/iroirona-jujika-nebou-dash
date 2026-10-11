@@ -1,5 +1,7 @@
 # 寝坊ダッシュ：開発・公開状態
 
+- v1.9.1：読み込み進捗0〜100％とバーを実装、公開前。61素材の成功完了を集計し、失敗素材は完了に数えない。ゲーム72／素材61項目合格。ブラウザーで0→98→100とタイトル移行を確認。以下は直前の公開状態。
+
 - 状態：v1.9.0をCloudflareとGitHub Pagesへ公開済み。各面を少し延長しギミックを広範囲へ適用、実装／検証／公開を完了。正本F:\Projects\色々な十字架_寝坊ダッシュ。既存フォルダーとリポジトリ名を維持。
 - Cloudflare：https://nebo-dash-publication.bug-plus-opening.workers.dev/?v=1.9.0 。GitHub：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.9.0 。管理画面はCloudflareの/admin。
 - 検証・配信ソース0598dd6a63c159ba0608fe854cb9836bd07ffa3a。Pages CI38162630158成功。Worker d033494b-5d0f-4b15-8155-f3e6c7af04d0。後続の記録変更は公開ゲームを変更しない。

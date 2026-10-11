@@ -10,7 +10,7 @@ export class AudioManager{
   this.musicElement.addEventListener('error',()=>{this.onError(new Error('BGM playback'));this.onState();});
   for(const event of ['playing','pause','volumechange'])this.musicElement.addEventListener(event,()=>this.onState());
  }
- async preload(){await Promise.all(AUDIO_NAMES.map(async n=>{const url=new URL('../'+AUDIO_FILES[n],import.meta.url);url.searchParams.set('v','1.2.0');const r=await fetch(url);if(!r.ok)throw new Error(`音源 ${n}`);this.bytes[n]=await r.arrayBuffer();if(BGM_NAMES.includes(n))this.urls[n]=URL.createObjectURL(new Blob([this.bytes[n]],{type:'audio/mpeg'}));}));this.setTrack(this.track);}
+ async preload(onLoaded=()=>{}){await Promise.all(AUDIO_NAMES.map(async n=>{const url=new URL('../'+AUDIO_FILES[n],import.meta.url);url.searchParams.set('v','1.2.0');const r=await fetch(url);if(!r.ok)throw new Error(`音源 ${n}`);this.bytes[n]=await r.arrayBuffer();if(BGM_NAMES.includes(n))this.urls[n]=URL.createObjectURL(new Blob([this.bytes[n]],{type:'audio/mpeg'}));onLoaded(n);}));this.setTrack(this.track);}
  setTrack(name){this.track=name;const src=this.urls[name];if(src&&this.musicElement.src!==src)this.musicElement.src=src;}
  async buffer(name){
   if(this.buffers[name])return this.buffers[name];
