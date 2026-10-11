@@ -1,4 +1,5 @@
-# 寝坊ダッシュ v1.4.1
+# 寝坊ダッシュ v1.4.2
+- 表示更新：「屈」を「しゃがむ」へ変更。ボタン、案内、低い通路のヒントを統一。小さい画面でも1行に収まる文字サイズと余白。
 - 状態：新依頼を実装、GitHub Pages公開済み。必須の残作業なし。
 - 正本：既存Fドライブのゲームフォルダー。保存先・リポジトリ・公開URLを継続。
 - 名称：寝坊ダッシュ。たかし・たける・ぽにて・べんぞー・きんぐ。
@@ -18,6 +19,6 @@
 - 限界：実機iOS／Androidのタッチとスピーカー試聴は未実施。ブラウザで再生時刻・効果音信号を確認。
 - 復旧：変更前HEAD 8623661dbd9331e9c6bb3f24d5af0bd383e2b428へ戻す。旧素材はGit履歴に保持。
 - 公開ゲームcommit：1eddad386929d4d8c4aedd5f531690d1e75744a6。Actions成功38126369143。公開74ファイルのSHA256一致。
-- 公開URL：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.4.1
+- 公開URL：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.4.2
 - 公開390×844で続きから起動、移動、闇の発動、音声ON、短いメニュータップで開かない、Esc長押しで開くことを確認。
 - 次：任意の実機タッチ・スピーカー試聴。ソース・素材・音声工房の原音・旧成果物を保持。
