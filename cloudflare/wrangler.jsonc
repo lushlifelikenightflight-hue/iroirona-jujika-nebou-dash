@@ -1,0 +1,56 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "nebo-dash-publication",
+  "main": "src/worker.ts",
+  "compatibility_date": "2026-10-11",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": true,
+  "preview_urls": false,
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "none",
+    "not_found_handling": "none"
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "vars": {
+    "ENVIRONMENT": "production",
+    "ACCESS_TEAM_DOMAIN": "",
+    "ACCESS_AUD": "",
+    "ADMIN_EMAILS": ""
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "nebo-dash-publication",
+      "database_id": "d852492f-d36c-42e0-8f6d-675aa6252f9a",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "env": {
+    "local": {
+      "name": "nebo-dash-publication-local",
+      "vars": {
+        "ENVIRONMENT": "local",
+        "LOCAL_ADMIN": "true",
+        "ACCESS_TEAM_DOMAIN": "",
+        "ACCESS_AUD": "",
+        "ADMIN_EMAILS": ""
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "nebo-dash-publication-local",
+          "database_id": "00000000-0000-0000-0000-000000000000",
+          "migrations_dir": "migrations"
+        }
+      ]
+    }
+  }
+}

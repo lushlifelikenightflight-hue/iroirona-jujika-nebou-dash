@@ -49,3 +49,7 @@ npm run check
 ハイスコア、音量、直近のステージ入口をブラウザ内に保存。続きからは入口で再開。mainへのpush後、GitHub Actionsでテストと素材検査が通った版をPagesへ公開します。
 
 正本はこのREADMEのあるフォルダー。実機iOS／Androidのタッチ・音声は未確認です。提供素材の権利は各権利者に帰属します。
+
+## Cloudflare版の公開管理
+
+[管理機能の仕様・起動・検証](cloudflare/README.md)。Cloudflare側に公開期間・即時停止・終了画面・管理者ログインを追加します。GitHub Pagesは保持し、このページの公開状態は変更しません。初期状態は非公開。初回のAccess組織作成について承認待ちです。

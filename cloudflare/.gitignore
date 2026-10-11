@@ -1,0 +1,7 @@
+dist/
+.wrangler/
+.dev.vars*
+.env*
+work/
+wrangler.local.jsonc
+worker-configuration.d.ts

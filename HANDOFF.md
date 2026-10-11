@@ -1,27 +1,23 @@
-# 寝坊ダッシュ v1.5.1
-- 状態：v1.5.1のタイトル見切れ修正をGitHub Pagesへ公開済み。必須の残作業なし。
-- 正本：既存Fドライブのゲームフォルダー。保存先・リポジトリ・公開URLを継続。
-- 名前：たかし・たける・ぽにて・べんぞー・きんぐ。最新仕様は更新仕様_v1.5.md。
-- 入力修正：しゃがむと滑走／加速余韻を解除。斜面には接地し、左右へ105px/sで歩ける。画面全体でpointerup/cancelを受け、キャプチャ解除を明示。次のpointerdownで古いキャプチャを回復。マウスのbuttons=0も解除。
-- 指の独立性：しゃがむ側の指を離してもスティック側の指を解除しない。pointer captureが失敗してもボタン動作を継続し、画面側の解除で処理。メニュー予約も取り消す。
-- 結末：1人は「今日ソロだったっけ？」。2人は同行者とのユニット。3／4人は欠席者だけを列挙。5人は盛り上がったライブ終了と「たまには寝坊もいいよな」。全16組み合わせで名前を確認。時間切れとスコアは継続。
-- 結末の表示：1〜4人は既存立ち画像で同行者だけを表示。5人は既存の縦長集合ライブ絵をcontainで表示。画像／BGM8曲／SFX15種は新規生成不要、継続使用。
-- 難易度：difficulty.mjsに各面の敵位置・巡回速度・弾速・射撃間隔。敵6／8／10／13／17体で増加。後半ほど速く射撃間隔が短い。封印区画の7体は維持。最終面の鐘はHP3、ボスはHP12。
-- 会話：story.mjsでHTMLをエスケープして話者列と台詞列に分ける。2行目は本文の位置へ。開始前とクリアを意味で改行し、操作説明は語句単位で折り返す。
-- 継続：中央ドア、退出3秒保護、地下帰還バネ・高台2段バネ・全滅で家出現、低い通路の一輪車携帯、左右走り・ペダル・しゃがむ、長押しメニュー、全5面／スコア／セーブ。
-- 検証：Node44件。全5面の通常経路・戦闘、隠し家の往復、入力としゃがみ、全16結末、実際の射撃間隔と弾速の増加を確認。素材61点。
-- ブラウザ：新機能55項目合格。滑り台→しゃがむ→左移動、別pointer解除、画面側解除、再入力、キャプチャ失敗時のメニュー解除。人数別の台詞／同行者表示／結果へ進む。
-- 表示：390×844／360×640／844×390で台詞と結果ボタンが画面内。開始の2行目を字下げ。検証時の新しい警告／エラーなし。
-- 起動：npm start。検証：npm test / npm run check / tests/browser.html / tests/update-v15.html。testsはPagesへ配信しない。
-- 限界：実機iOS／Androidのタッチとスピーカー試聴は未実施。
-- 復旧：変更前HEAD 81d27179c32c9a4153d4708bb370f7fc57bfac73。原画・音声原音・再開記録・旧成果物を保持。
-- 回帰ブラウザ87項目合格。低い通路の出口に最初の面の敵が重ならないよう配置も調整。
-- 描画：PCブラウザ390×844、最終面ボス付近・5人・光の能力を1秒測定。requestAnimationFrame60回、約60fps。実機の性能は未測定。
-- 公開ゲームcommit：499cd27e1f42cfa5dd9ad9ddb0158828c09d3126。Actions成功38136793557。公開76ファイルのSHA256一致。
-- 公開URL：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.5.1
-- 公開390×844で続きから起動、改行の見た目、しゃがむキー＋スティックの左移動→右への再入力→中央へ解除を確認。操作中の新しい警告／エラーなし。
-- 次：任意の実機スマホのタッチ・音声試聴。素材・原音・旧成果物を保持。
-
-- v1.5.1：縦画面は集合画像を左右12pxの余白付きで幅に合わせる。横画面は高さ94%・右端12px余白。画像自体は保持。CSS配信クエリを1.5.1へ更新。
-- v1.5.1検証：390×844／360×640／844×390で5人と開始ボタンを確認。Node44件・素材61点の検証合格。復旧は0f496a4d9818d0945e10d3488ffdaaa36d821c5e。
-- v1.5.1公開commit：7c74ad4379221c302deb9d9edb0543a1090bae72。Actions成功38140068194。公開HTML／CSSのSHA256一致。公開390×844で5人・開始・移動・能力・メニュー・タイトル復帰を確認、新しい警告／エラーなし。確認画像はチャットoutputsの寝坊ダッシュ_v1.5.1_公開タイトル.jpg。検証サーバー停止、作業コピーなし。
+# 寝坊ダッシュ：Cloudflare公開管理
+- 状態：期間管理を実装・検証し、Cloudflareへ非公開で配置。Access組織の初回作成の明示承認待ち。認証設定が未完なので本番/adminは403。GitHub Pagesは保持。
+- 正本：F:\Projects\色々な十字架_寝坊ダッシュ。ゲームv1.5.1。Cloudflare専用コード・設定・依存はcloudflare/。古いフォルダー／素材は移動しない。
+- GitHub：https://github.com/lushlifelikenightflight-hue/iroirona-jujika-nebou-dash 。Pages：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.5.1 。index/style/src/assetsと既存Pagesワークフローを今回変更していない。
+- Cloudflare：https://nebo-dash-publication.bug-plus-opening.workers.dev 。本番D1：nebo-dash-publication / d852492f-d36c-42e0-8f6d-675aa6252f9a。初期enabled=0・日時なし。Worker version ad2e2f73-c2a4-49de-9ccd-32d780549ff5。
+- 管理UI：/admin。日本時間で開始／終了、公開ON/OFF、期間外のメッセージ。保存済み終了日時まで今すぐ公開／即時停止。公開状態を10秒ごとに更新。保存中は入力を止め、revisionで別画面の更新を検知。
+- 配信：全資産run_worker_first。D1 first-primaryで現状を確認。開始<=現在<終了のみ配信。ページ・画像・音声・JSの直接アクセスも拒否。no-store、DB障害は503。初期は非公開。
+- プレイ中：Cloudflareパッケージだけにpublication-guard.mjsを追加。5秒ごとと期限にサーバーへ再確認して終了画面へ移動。通信不能でも停止。ブラウザのタイマーはラップして呼び出し、壁時計変更に依存せずperformanceで期限を計算。
+- 認証：/admin以下のHTML/CSS/JS/APIすべてでAccess JWT署名・issuer・aud・exp・管理者メールを確認。ヘッダーのメールだけは拒否。変更APIは同一Origin JSON、8192B上限、日時と文字数検証。ローカル省略はlocal環境+localhostのみ。
+- 本番認証の未設定：ACCESS_TEAM_DOMAIN / ACCESS_AUD / ADMIN_EMAILS。Cloudflare CLIは既存アカウントに接続済みだがAccess未有効。GET organizationsは403、appsはnot_enabled。
+- 必要な承認：Access組織POSTを自動承認審査が「永続的な認証設定の権限境界変更、実装依頼だけでは具体的承認不足」として拒否。実行されていない。名前「寝坊ダッシュ 公開管理」、本人だけ、8h、/adminだけ、課金契約なしを示してasyncで作成承認を質問した。回答が来るまで再実行しない。拒否の回避をしない。
+- ブラウザ：ユーザーはスマホでCloudflareへGitHubログイン済み。PCのセッションには共有されない。Codex内tab11とChromeの「公開管理」タブはGitHubログイン画面。パスワードをチャットへ要求しない。
+- 検証：ゲーム44件、Cloudflare11件、TypeScript／Wrangler型生成合格。実ローカルWorker12項目：初期／予約／公開／停止／再公開／期限終了／資産拒否／CSRF拒否／競合409。設定は戻す。
+- ブラウザ：管理UIで期間保存→ゲーム開始・移動・能力→即時停止→プレイ中終了。別途、実際の終了時刻までゲームを起動して自動終了を確認。390×844で入力／ボタンのはみ出しなし。新しい警告／エラーなし。
+- 本番：7項目でclosed・ページ403・画像403・JS403・admin403・encoded admin403・no-storeを確認。公開ゲームへのアクセスはまだ有効化していない。管理者本人の本番ログインと期間変更は未検証。
+- 起動：ゲームnpm start。Cloudflareはcloudflare/でnpm ci、local migration後npm run dev（127.0.0.1:8790/admin）。検証npm test / npm run typecheck、サーバー中npm run test:integration。npm run buildは元ゲームを保持してdistに80配信ファイルを作る。
+- 配信：npm run deployは本番設定不足なら止まる。初回bootstrapだけ、DBがenabled=0であることを確認してWranglerから非公開配置した。新CI cloudflare-test.ymlはテストだけ。
+- ゲーム継続：たかし／たける／ぽにて／べんぞー／きんぐ。全5面、闇／炎／雷／氷／光、走り・ペダル・しゃがみ、スティック、長押しメニュー、退出保護3秒、隠し家、バネ／滑り台、人数別結末、全員縦長ライブ絵、BGM8／SFX15。
+- v1.5.1：タイトル5人を幅に合わせ左右12px余白、横画面は高さ94%。公開commit7c74ad4379221c302deb9d9edb0543a1090bae72、記録HEAD9a65df6b0bebfd35fa4c25407beee9a80cd7dc38。HTML/CSS公開SHA256一致。
+- 限界：スマホ実機のタッチ／スピーカーは未検証。ダウンロード済みコピーと保持するGitHub PagesはCloudflareの制限対象外。
+- 記録：チャットoutputsの公開管理プレビュー／スマホ画像／期限終了画像／Cloudflare配信検証JSON／成果物案内。依存と元素材は保持。
+- 復旧：ゲームは直前HEAD9a65df6b0bebfd35fa4c25407beee9a80cd7dc38。CloudflareはWrangler rollback。D1の公開設定はコードrollbackとは別で保持される。
+- 次：1)具体的なAccess作成承認があれば標準APIで作成を再試行。2)権限不足なら必要なAccess設定だけを説明し、安全な承認手段を求める。3)本人だけのAccessアプリを/adminと配下に設定、vars反映、型確認・配信。4)本番ログイン→保存→期間制御を検証し、非公開初期状態を保つ。
