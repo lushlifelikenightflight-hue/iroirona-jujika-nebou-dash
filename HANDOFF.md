@@ -1,34 +1,31 @@
-# 寝坊ダッシュ：Cloudflare公開管理
-- 状態：v1.6の交代ボタン1つ・走り80コマ再生成・3人の能力強化を実装、ゲーム51項目と素材61項目が合格。公開へ反映中。カード不要のパスワード認証は本番稼働済み。本人の本番初回登録と公開期間の保存を確認済み。現在は2026/10/12 0:00〜10/13 0:00（JST）で公開中。GitHub Pagesは保持。
-- 正本：F:\Projects\色々な十字架_寝坊ダッシュ。ゲームv1.6.0。Cloudflare専用コード・設定・依存はcloudflare/。古いフォルダー／素材は移動しない。
-- GitHub：https://github.com/lushlifelikenightflight-hue/iroirona-jujika-nebou-dash 。Pages：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.6.0 。v1.6ではゲームindex/style/src/assetsを更新。PagesワークフローとCloudflare認証・管理設定は保持。
-- 本番：https://nebo-dash-publication.bug-plus-opening.workers.dev 。管理：/admin。Worker version 134f2e78-6a1a-4be4-8e18-72425b6b77b7。
-- 専用D1：nebo-dash-publication / d852492f-d36c-42e0-8f6d-675aa6252f9a。配信前はenabled=0・日時なし・revision0。本人が初回登録後に公開期間を保存し、現在open。0002_admin_password.sqlで認証テーブルだけ追加。
-- 方針：ユーザーはカード不要の認証へ変更を指示。Zero Trust Freeの登録画面はカードと超過分請求の同意が必要だったため契約を確定していない。Accessの組織／アプリは作成していない。Wrangler OAuthは既存アカウントに接続済み。
-- 本人登録：本番タブ18の/admin/loginに登録用の鍵を入力済み。新しいパスワードの入力・確認・送信はブラウザー操作ルールにより本人へ引き継いだ。パスワードをチャットへ要求しない。16〜256文字。
-- エラー対応：ユーザーのFailed to fetchは、検証用localhost8791のタブ17で発生していた。本番タブのfeedbackは空だった。紛らわしい検証タブを閉じ、本番URLを案内した。パスワード値は読んでいない。
-- 認証：AUTH_MODE=password。初回登録は無作為256ビットの鍵・24時間以内・資格情報未登録の場合のみ。D1の一意キーとINSERT ON CONFLICT DO NOTHINGで登録の競合・上書きを拒否。
-- パスワード：Cloudflare秘密設定のpepperでHMAC→無作為saltとPBKDF2-SHA256 100,000回。DBにはhashとsaltだけを保存。秘密比較はCloudflare timingSafeEqualを優先。ログ／公開Gitに秘密なし。
-- セッション：無作為256ビットCookieのダイジェストだけD1へ保存。__Host-nebo_admin、Secure、HttpOnly、SameSite=Strict、Path=/、8h。期限を毎回DBで確認。logoutでDB側も失効。
-- 試行制限：登録／ログインは15分固定窓ごとにIP6回／全体50回まで。IPはSHA256で保存。超過時429。変更系APIは同一OriginのJSONだけ、8192B上限。
-- 秘密：ADMIN_AUTH_SECRETにはtoken/pepper/expiresAtをJSONで格納しWrangler secret bulkで登録。復旧用コピーはcloudflare/work/private/admin-auth-secret.json（Git無視）に保持。pepperは登録後に変更しない。
-- 登録鍵：チャットoutputs/寝坊ダッシュ_初回登録用の鍵.txtに本人用の一時コピーは登録完了後に整理済み。鍵が期限切れならpepperを保持しtokenとexpiresAtだけ再発行する。
-- 管理UI：別画面の更新時も現在の期間表示を10秒ごとに反映し、入力中のフォームは保持。日本時間で開始／終了、公開ON/OFF、期間外メッセージ、保存済み終了日時まで今すぐ公開／即時停止、logout。revisionで別画面の更新を検知。
-- 配信：全資産run_worker_first。D1 first-primaryで確認。開始<=現在<終了だけ配信。ページ・画像・音声・JSの直接アクセスも拒否。no-store、DB障害503。プレイ中は5秒ごとと期限に再確認して終了画面へ移動。
-- 検証：ユニット15項目、TypeScript／Wrangler型生成合格。隔離した実Workerの認証10項目＋期間制御12項目合格。登録鍵・Origin・再利用・Cookie・logout失効・誤パス・正しいパス・試行制限、公開／予約／停止／期限終了／競合を確認。設定を戻す。
-- 本番匿名：10項目でroot403、publication200closed、画像／JS403、admin303→login、login資産200、管理資産／API／encoded admin403、全no-store。偽Cfメールヘッダーは認証に使われない。本人の本番登録・セッション・設定保存を確認。匿名でも期間内のゲームが起動し、管理APIと管理資産は403。最新の匿名10項目はopenに合わせて再確認済み。
-- 再現：cloudflare/でnpm ci、npm test、npm run typecheck。npm run test:authは8791で新規の隔離QA DBとダミー秘密を使って22項目を実行し、サーバーを停止。work/auth-qa-*に状態を残す。
-- 開発：local migration後npm run devで127.0.0.1:8790/admin。local環境＋localhostだけ認証省略。本番ではLOCAL_ADMINを受け付けない。npm run buildは83ファイルをdistへ生成し元ゲームを変更しない。
-- 配信：npm run deployは本番設定を検査。秘密設定とremote migrationを先に適用。配信だけでゲーム公開を有効にしない。
-- GitHub：CF初期source af28ada67c531f0045a5d8303e5826e526d28254、前の記録c2ede52。今回のソースは578b907a74f21f6997e215856bb26b55839bd90fでmainへ保存。ゲームCI38150533793／Cloudflare CI38150533695（隔離認証22項目を含む）が成功。
-- 復旧：直前Worker ad2e2f73-c2a4-49de-9ccd-32d780549ff5へWrangler rollbackで戻すと管理画面は403。D1公開設定／資格情報はコードrollbackとは別に保持。パスワード再設定は本人依頼で資格情報／セッションだけ扱い公開設定を保持。
-- ゲーム：たかし／たける／ぽにて／べんぞー／きんぐ、全5面、闇／炎／雷／氷／光、走り・ペダル・しゃがみ、スティック、長押しメニュー、退出保護3秒、隠し家、バネ／滑り台、人数別結末、全員縦長ライブ絵、BGM8／SFX15。
-- 既存検証：ゲーム44件・素材61件、前のブラウザ実機相当表示と操作検証。スマホ実機タッチ／スピーカーは未確認。ダウンロード済みコピーと保持したPagesはCloudflareの制限対象外。
-- 記録：チャットoutputsに公開管理の使い方、初回登録画面、本番匿名検証JSON、旧管理プレビュー／スマホ／期限終了／成果物案内。素材・依存・旧成果物を保持。
-- 整理：以前にdist／dry-run計18,549,841BをSHA照合後に整理。今回はSHA256一致した配信パッケージ83ファイル、隔離QA状態、使用済み鍵の計21,723,083Bを整理。秘密の復旧用コピー、依存、素材、ローカルDB、小さな再開用補助は保持。QAサーバーは停止済み。対象とハッシュはチャットoutputs/Cloudflare_パスワード認証_整理記録.json。
-- 次：v1.6をGitHubとCloudflareへ配信し、公開URLとCIを確認。本人の公開期間を保持。一時データを検証後に整理する。
+# 寝坊ダッシュ：現在の開発・公開状態
 
-- v1.6交代：静的なswitch-buttonを1つだけ配置。加入順で循環し、1人では無効。次のメンバー／操作中のメンバー／人数を表示。既存のpointer captureと二重クリック防止を共用し、ボタンを作り直さない。
-- v1.6走り：idle-rightの顔・衣装を参照し5原画をimagegenで生成。右8コマ、左は同じ周期の反転。104px体高／80,136の足元を保持。18fps相当＋速度追随、0〜3pxの浮沈。一輪車・しゃがみ・立ちは保持。原画／プロンプトはsources/sprites/v16、再生成tools/pack-run-v16.mjs。旧版はea16880と旧原画。
-- v1.6能力：ぽにては前方140・120×140・落下1800・CD0.6。べんぞーは前方85・130×150・CD1.2。きんぐは斜め上の水平420・幅64・CD0.45。見た目と判定を共通設定にする。攻撃ダメージ・闇／炎・公開期間は保持。
-- v1.6検証：ゲーム51項目、素材61項目合格。走り16コマ×5のハッシュ・切れ・CV0.004〜0.011・同じ原画から同じPNGの再現を確認。390×844のブラウザー検証は15項目で交代／左右移動／3能力／タッチサイズ／横はみ出しを確認。
+- 状態：ゲームv1.6.1をGitHub PagesとCloudflareへ公開済み。今回の3要望は完了。正本はF:\Projects\色々な十字架_寝坊ダッシュ。既存フォルダー・リポジトリ名は維持。
+- 公開ゲーム：https://nebo-dash-publication.bug-plus-opening.workers.dev/?v=1.6.1 。GitHub：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.6.1 。管理画面：Cloudflareの/admin。
+- 検証対象ソース：df663e932c4dcd6b91e374513b89bee9f69d2499。Pages CI38155774378成功。Cloudflare Worker version：964cd3bb-4372-4240-abb1-89802b132412。後続の記録のみのコミットはゲームを変更しない。
+- 公開期間：2026/10/12 0:00〜10/13 0:00 JST（startsAt1791730800000、endsAt1791817200000）。本人が管理画面から保存した設定を保持し、今回の配信で変更していない。GitHub Pagesとダウンロード済みコピーは期間制限の対象外。
+
+## 今回の変更と検証
+- 交代：静的なswitch-buttonを1つ配置。加入順に循環、1人では無効。次の交代先・現在の人物・人数を表示。C/Kも循環。pointer captureと二重クリック防止を共用し、ボタンを作り直さない。
+- 走り：採用済みidle-rightから5人の顔・衣装を参照しimagegenで原画を再生成。右8コマと周期の対応した左8コマ、計80コマ。接地・膝の通過・蹴り出しを分ける。104px体高、足元80,136。走行距離に比例したコマ送り、通常速度18fps相当と0〜3pxの浮沈。停止・しゃがみ・空中では時計をリセット。
+- 原画／プロンプト：sources/sprites/v16。旧原画は保持。再処理：tools/pack-run-v16.mjs。左右・透過・パディング・16枚の固有ハッシュを確認し、原画から同じPNGを再現。立ち・しゃがみ・一輪車・音源は保持。
+- ぽにて：前方140、雷120×140、落下1800/秒、再使用0.6秒。べんぞー：前方85、氷130×150、再使用1.2秒。きんぐ：斜め上の水平到達420、幅64、再使用0.45秒。見た目と当たり判定を同じ設定から取得。ダメージ・他2人の能力は保持。
+- 検証：ゲーム52項目、素材61項目が合格。390×844のブラウザー15項目で交代・左右移動・3能力・タッチサイズ・横はみ出しを確認。実際の1タップで1回だけ交代。公開GitHubの5人データで循環・3能力、Cloudflareで移動・能力を確認。v1.6.1でも保存データから起動し2人の循環を確認。公開ページの警告・エラーなし。
+- 両公開先の12ファイルずつのSHA256が検証対象ソースと一致。期間設定の保持と匿名管理API403を確認。最終面・5人・光で59fpsを1秒測定。スマホ実機のタッチ／スピーカーは未検証。
+- ゲーム全体：たかし／たける／ぽにて／べんぞー／きんぐ、5面、闇／炎／雷／氷／光、走り・ペダル・しゃがみ歩き、スティック、長押しメニュー、家から退出後3秒保護、隠し家、バネ／滑り台、人数別結末、全員縦長ライブ絵、BGM8／SFX15。詳細README.md／ASSETS.md／更新仕様_v1.6.md。
+
+## Cloudflareの継続設定
+- 専用コード・設定・依存はcloudflare/。Worker nebo-dash-publication。D1 nebo-dash-publication / d852492f-d36c-42e0-8f6d-675aa6252f9a。管理者登録済み。パスワード値はチャット・ソースに記録していない。
+- カード不要のAUTH_MODE=password。Zero Trust契約は確定せずAccess組織／アプリは未作成。Wrangler OAuthは既存アカウントに接続済み。0002_admin_password.sqlの認証テーブルを使用。
+- 認証：初回鍵256ビット・24時間・1回、PBKDF2-SHA256100,000回＋salt＋秘密pepper。8時間の__Host-nebo_admin Cookie（Secure/HttpOnly/SameSiteStrict）とD1で失効管理。登録／ログインは15分ごとIP6回／全体50回。変更APIは同一Origin JSON、8192B上限。
+- ADMIN_AUTH_SECRETの復旧コピーはcloudflare/work/private/admin-auth-secret.json（Git無視）。pepperを変更しない。資格情報の再設定は本人依頼がある場合だけ。登録済みのパスワード入力・変更は本人が行う。
+- 配信：全資産run_worker_first、D1 first-primary確認、開始<=現在<終了、no-store、DB障害503。プレイ中5秒ごと＋期限確認。管理UIはJST日時、ON/OFF、即時公開／停止、期間外メッセージ、revision競合検知。
+- 認証の既存検証：ユニット15、型検証、隔離Worker認証10＋期間制御12、本番匿名10項目合格。本人登録と本番設定保存を確認済み。ローカル試験設定を本番へ持ち込まない。
+- 起動：正本でnpm start→127.0.0.1:4186。Cloudflareではnpm ci、npm test、npm run typecheck、npm run test:auth。npm run buildで83資産をdistへ生成。devは8790/admin。test:authは8791の隔離DB／ダミー秘密を使用。
+
+## 保存・復旧・次の作業
+- チャットoutputsに更新案内、GIF、公開スマホ画像、操作検証JSON、公開SHA256検証JSON、管理画面の使い方、成果物案内を保存。記録先：C:\Users\lushl\Documents\Codex\2026-10-11\new-chat-2\outputs。
+- 今回の整理：SHA照合済みのdist、原画／完成画像の一時コピー、再生成できる参照切り出し、途中の画像、計102ファイル26,905,152Bを削除。対象・SHA・復旧方法はoutputs/寝坊ダッシュ_v1.6_整理記録.json。元画像、生成ツール原本、採用素材、音、依存、秘密設定、ローカルDBを保持。
+- work/v16の小さな補助スクリプト／仕様／実装途中のコピーは再開用に保持。ここにはv1.6.0時点のコピーがあるため、正本を上書きしない。検証サーバー停止済み。公開タブと管理タブを保持。
+- 復旧：今回の前のゲームea16880、Worker134f2e78-6a1a-4be4-8e18-72425b6b77b7。距離追随の最後の修正だけを戻すなら3e2697aとWorker6466d7fc-2190-4b5d-8d49-7fd4a242fb0f。D1期間と資格情報はコードrollbackと別に保持する。
+- 次：必要な作業はなし。期間の変更は本人の指示に合わせ管理画面から行う。次の改修では正本とこの記録を確認し、保存データと無関係な素材を保持する。
