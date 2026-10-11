@@ -1,7 +1,7 @@
-import {MEMBERS,STAGES,GROUND,score,BOSS_SCORE,BEAM_DIRECTIONS} from './data.mjs?v=1.8.0';
-import {DIFFICULTY} from './difficulty.mjs?v=1.8.0';
-import {createGimmicks,applyGimmicks} from './gimmicks.mjs?v=1.8.0';
-import {stagePlatforms,floorAt,WIND_ZONES,updateStagePlatforms,stageMotion,resetCrumbling} from './stage-gimmicks.mjs?v=1.8.0';
+import {MEMBERS,STAGES,GROUND,score,BOSS_SCORE,BEAM_DIRECTIONS} from './data.mjs?v=1.9.0';
+import {DIFFICULTY} from './difficulty.mjs?v=1.9.0';
+import {createGimmicks,applyGimmicks} from './gimmicks.mjs?v=1.9.0';
+import {stagePlatforms,floorAt,WIND_ZONES,updateStagePlatforms,stageMotion,resetCrumbling} from './stage-gimmicks.mjs?v=1.9.0';
 export const overlap=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const rect=(x,y,w,h)=>({x,y,w,h});
@@ -28,7 +28,7 @@ export class Game {
    enemies.push({...rect(x,y,kind==='bat'?46:38,48),kind,hp:kind==='bell'?2:1,startX:x,startY:y,t:n,cooldown:2,dead:false,guardId:`guard-${n}`});
   }
  }
- if(index===4)enemies.push({...rect(4100,GROUND-132,120,132),kind:'boss',hp:12,startX:4100,startY:GROUND-132,t:0,cooldown:2,dead:false});
+ if(index===4)enemies.push({...rect(d.length-400,GROUND-132,120,132),kind:'boss',hp:12,startX:d.length-400,startY:GROUND-132,t:0,cooldown:2,dead:false});
  this.world={length:d.length,top:d.top||0,bottom:d.bottom||580,fallLimit:(d.bottom||580)+30,route:d.route,difficulty,platforms,enemies,windZones:index===1?structuredClone(WIND_ZONES):[],gimmicks:createGimmicks(index,platforms),items:[{...rect(390,GROUND-48,38,48),kind:'wheel',used:false},{...rect(index===0?2550:d.length-1300,index===0?GROUND-48:floorAt(platforms,d.length-1300)-48,38,48),kind:'wheel',used:false}],door:d.member===null?null:{...rect(d.doorX,d.doorY-105,90,105),member:d.member,secret:d.secret,visible:d.route!=='battle',guardIds:enemies.filter(e=>e.guardId).map(e=>e.guardId)},player:{...rect(80,GROUND-76,30,76),vx:0,vy:0,face:1,grounded:true,coyote:.1,jumpBuffer:0,animTime:0,invincible:0,wheel:0,safeX:80,safeY:GROUND-76},effects:[],shots:[],particles:[],history:[],time:0,room:false,roomMember:null};this.mainWorld=null;this.mode='intro';this.emit('intro',d.intro);this.emit('checkpoint',this.run);}
  play(){this.mode='play';this.emit('music',`stage-${this.run.stage+1}`);}
  pause(silent=false){if(this.mode==='play'){this.mode='pause';this.emit('pause',{silent});}}

@@ -1,5 +1,5 @@
-import {GROUND,STAGES} from './data.mjs?v=1.8.0';
-import {floorAt} from './stage-gimmicks.mjs?v=1.8.0';
+import {GROUND,STAGES} from './data.mjs?v=1.9.0';
+import {floorAt} from './stage-gimmicks.mjs?v=1.9.0';
 export const GIMMICK_LAYOUTS=[
  {spring:820,slide:2160,width:220,rise:72},
  {spring:780,slide:2560,width:260,rise:86},
@@ -11,6 +11,7 @@ export function createGimmicks(stage,platforms=null){
  const d=GIMMICK_LAYOUTS[stage],items=[{id:'spring',kind:'spring',x:d.spring,y:GROUND-36,w:64,h:36,pressed:0},{id:'slide',kind:'slide',x:d.slide,y:GROUND-d.rise,w:d.width,h:d.rise}];
  if(platforms){items[0].y=floorAt(platforms,d.spring+32)-36;items[1].y=floorAt(platforms,d.slide+d.width)-d.rise;}
  const spring=(id,x,floor,launch)=>({id,kind:'spring',x,y:floor-36,w:64,h:36,pressed:0,launch});
+ if(stage===0)items.push(spring('spring-last',3520,420,900),{id:'slide-last',kind:'slide',x:3910,y:360,w:160,h:60});
  if(STAGES[stage].route==='pit')items.push(spring('pit-return',930,760,1300));
  if(STAGES[stage].route==='sky')items.push(spring('sky-first',1760,420,1050),spring('sky-second',2090,150,1050));
  return items;

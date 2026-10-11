@@ -38,9 +38,16 @@ test('crumbling tiles warn, drop after the delay even after leaving, and return 
  p.x=80;p.y=344;p.vx=p.vy=0;tick(g,430);assert.equal(t.gone,false);assert.equal(t.armed,false);assert.equal(t.elapsed,0);
  const h=ready(4),tile=h.world.platforms.find(t=>t.kind==='crumble'),q=h.world.player;Object.assign(q,{x:tile.x+20,y:tile.y-q.h,grounded:true,support:tile.id});tick(h,1);q.x=80;q.y=344;tick(h,95);assert.equal(tile.gone,true);h.recover();assert.equal(tile.gone,false);
 });
-test('all five stages can be cleared with real inputs and no falls, using all three moving platforms and the crumbling chains',()=>{
- for(let stage=0;stage<5;stage++){const g=ready(stage),report=driveStage(g);assert.equal(report.mode,'clear',JSON.stringify(report));assert.equal(report.falls,0,JSON.stringify(report));assert.ok(report.jumps>0);if(stage===3)for(const id of ['ferry-west','rider-lift','ferry-east'])assert.ok(report.contacts.includes(id));if(stage===4)assert.ok(report.contacts.filter(id=>id.startsWith('crumble')).length>=8);}
+test('all five stages can be cleared with real inputs and no falls, using all four moving platforms and the crumbling chains',()=>{
+ for(let stage=0;stage<5;stage++){const g=ready(stage),report=driveStage(g);assert.equal(report.mode,'clear',JSON.stringify(report));assert.equal(report.falls,0,JSON.stringify(report));assert.ok(report.jumps>0);if(stage===3)for(const id of ['ferry-west','rider-lift','ferry-east','ferry-last'])assert.ok(report.contacts.includes(id));if(stage===4)assert.ok(report.contacts.filter(id=>id.startsWith('crumble')).length>=12);}
 });
 test('moving routes remain playable at several platform starting phases',()=>{
  for(const phase of [.7,2.4,4.1]){const g=ready(3);for(const t of g.world.platforms.filter(t=>t.kind==='moving'&&!t.trigger))t.phase=phase;const r=driveStage(g);assert.equal(r.mode,'clear',JSON.stringify(r));assert.equal(r.falls,0,JSON.stringify(r));}
+});
+
+test('the added wind valley can be crossed on foot only with the authored tailwind',()=>{
+ for(const windy of [false,true]){const g=ready(1),p=g.world.player;if(!windy)g.world.windZones=[];g.world.gimmicks=[];Object.assign(p,{x:3640,y:420-p.h,vx:300,vy:0,grounded:true});g.step(1/120,{right:true,jump:true});let crossed=false;for(let i=0;i<150;i++){g.step(1/120,{right:true});if(p.grounded&&p.x>=3970){crossed=true;break;}}assert.equal(crossed,windy);}
+});
+test('the relocated clock can be bypassed on foot via the two final ledges',()=>{
+ const g=ready(4),p=g.world.player;g.world.gimmicks=[];Object.assign(p,{x:4920,y:340-p.h,vx:300,vy:0,grounded:true});g.step(1/120,{right:true,jump:true});let above=false;for(let i=0;i<160;i++){g.step(1/120,{right:true});if(p.grounded&&p.support==='ledge-2'){above=true;assert.equal(p.y+p.h,255);break;}}assert.equal(above,true);
 });

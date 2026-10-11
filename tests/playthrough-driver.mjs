@@ -1,16 +1,17 @@
+import {STAGES} from '../src/data.mjs';
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 export function routeInput(g){
  const w=g.world,p=w.player,feet=p.y+p.h,stage=g.run.stage,tiles=w.platforms.filter(t=>!t.gone);
- if(stage===0){const pits=[[1760,110],[2780,120]],pit=pits.some(([x,width])=>p.x+p.w>x-(feet<400?100:50)&&p.x<x+width),block=tiles.some(t=>t.h<50&&t.x>p.x&&t.x<p.x+115&&t.y>p.y-30&&t.y<feet),foe=w.enemies.some(e=>!e.dead&&e.x>p.x&&e.x<p.x+110);return {right:true,jump:p.grounded&&(pit||block||foe),attack:true};}
+ if(stage===0){const pits=STAGES[0].pits,pit=pits.some(([x,width])=>p.x+p.w>x-(feet<400?100:50)&&p.x<x+width),block=tiles.some(t=>t.h<50&&t.x>p.x&&t.x<p.x+115&&t.y>p.y-30&&t.y<feet),foe=w.enemies.some(e=>!e.dead&&e.x>p.x&&e.x<p.x+110);return {right:true,jump:p.grounded&&(pit||block||foe),attack:true};}
  const ridden=tiles.find(t=>t.id===p.support&&t.kind==='moving');
  if(ridden){
-  const destination=ridden.id==='ferry-west'?1320:ridden.id==='ferry-east'?4080:2970;
+  const destination=ridden.destinationX;
   const ready=ridden.travelY?ridden.y<=180:ridden.x+ ridden.w>=destination-40;
   if(ready)return {axis:1,jump:!ridden.travelY||p.x>=ridden.x+ridden.w-45,attack:true};
   return {axis:clamp((ridden.x+ridden.w/2-(p.x+p.w/2))/40,-1,1),attack:true};
  }
  if(stage===3&&p.grounded){
-  for(const [edge,id] of [[770,'ferry-west'],[3630,'ferry-east']]){
+  for(const [edge,id] of [[770,'ferry-west'],[3630,'ferry-east'],[4500,'ferry-last']]){
    const mover=tiles.find(t=>t.id===id);
    if(p.x>edge-100&&p.x<edge&&mover.x>edge+75)return {axis:clamp((edge-75-p.x)/40,-1,1),attack:true};
   }

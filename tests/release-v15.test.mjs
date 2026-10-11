@@ -28,7 +28,7 @@ test('all sixteen possible crews get the requested ending and correct present/ab
 test('difficulty rises by enemy count, patrol rate, bullet speed and shot cadence across five stages',()=>{
  const g=new Game();g.start();let previous=null;const counts=[];
  for(let i=0;i<5;i++){g.loadStage(i);const w=g.world,d=w.difficulty;counts.push(w.enemies.length);if(previous){assert.ok(d.patrolRate>previous.patrolRate);assert.ok(d.batRate>previous.batRate);assert.ok(d.shotSpeed>previous.shotSpeed);assert.ok(d.shotInterval<previous.shotInterval);}previous=d;}
- assert.deepEqual(counts,[6,8,11,14,18]);
+ assert.deepEqual(counts,[7,9,12,15,19]);
 });
 test('later stages actually fire sooner and faster, while early stage remains gentler',()=>{
  const observed=[];
