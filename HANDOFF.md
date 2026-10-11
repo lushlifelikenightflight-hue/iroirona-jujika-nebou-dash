@@ -1,7 +1,7 @@
 # 寝坊ダッシュ：Cloudflare公開管理
-- 状態：カード不要のパスワード認証を実装・本番配信済み。本人の本番初回登録と公開期間の保存を確認済み。現在は2026/10/12 0:00〜10/13 0:00（JST）で公開中。GitHub Pagesは保持。
-- 正本：F:\Projects\色々な十字架_寝坊ダッシュ。ゲームv1.5.1。Cloudflare専用コード・設定・依存はcloudflare/。古いフォルダー／素材は移動しない。
-- GitHub：https://github.com/lushlifelikenightflight-hue/iroirona-jujika-nebou-dash 。Pages：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.5.1 。今回はゲームindex/style/src/assetsと既存Pagesワークフローを変更していない。
+- 状態：v1.6の交代ボタン1つ・走り80コマ再生成・3人の能力強化を実装、ゲーム51項目と素材61項目が合格。公開へ反映中。カード不要のパスワード認証は本番稼働済み。本人の本番初回登録と公開期間の保存を確認済み。現在は2026/10/12 0:00〜10/13 0:00（JST）で公開中。GitHub Pagesは保持。
+- 正本：F:\Projects\色々な十字架_寝坊ダッシュ。ゲームv1.6.0。Cloudflare専用コード・設定・依存はcloudflare/。古いフォルダー／素材は移動しない。
+- GitHub：https://github.com/lushlifelikenightflight-hue/iroirona-jujika-nebou-dash 。Pages：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.6.0 。v1.6ではゲームindex/style/src/assetsを更新。PagesワークフローとCloudflare認証・管理設定は保持。
 - 本番：https://nebo-dash-publication.bug-plus-opening.workers.dev 。管理：/admin。Worker version 134f2e78-6a1a-4be4-8e18-72425b6b77b7。
 - 専用D1：nebo-dash-publication / d852492f-d36c-42e0-8f6d-675aa6252f9a。配信前はenabled=0・日時なし・revision0。本人が初回登録後に公開期間を保存し、現在open。0002_admin_password.sqlで認証テーブルだけ追加。
 - 方針：ユーザーはカード不要の認証へ変更を指示。Zero Trust Freeの登録画面はカードと超過分請求の同意が必要だったため契約を確定していない。Accessの組織／アプリは作成していない。Wrangler OAuthは既存アカウントに接続済み。
@@ -26,4 +26,9 @@
 - 既存検証：ゲーム44件・素材61件、前のブラウザ実機相当表示と操作検証。スマホ実機タッチ／スピーカーは未確認。ダウンロード済みコピーと保持したPagesはCloudflareの制限対象外。
 - 記録：チャットoutputsに公開管理の使い方、初回登録画面、本番匿名検証JSON、旧管理プレビュー／スマホ／期限終了／成果物案内。素材・依存・旧成果物を保持。
 - 整理：以前にdist／dry-run計18,549,841BをSHA照合後に整理。今回はSHA256一致した配信パッケージ83ファイル、隔離QA状態、使用済み鍵の計21,723,083Bを整理。秘密の復旧用コピー、依存、素材、ローカルDB、小さな再開用補助は保持。QAサーバーは停止済み。対象とハッシュはチャットoutputs/Cloudflare_パスワード認証_整理記録.json。
-- 次：実装・配信・検証・整理は完了。新しい公開期間は本人が管理画面で設定できる。パスワード再設定が必要なら、本人の依頼を受けて公開設定を保持して行う。
+- 次：v1.6をGitHubとCloudflareへ配信し、公開URLとCIを確認。本人の公開期間を保持。一時データを検証後に整理する。
+
+- v1.6交代：静的なswitch-buttonを1つだけ配置。加入順で循環し、1人では無効。次のメンバー／操作中のメンバー／人数を表示。既存のpointer captureと二重クリック防止を共用し、ボタンを作り直さない。
+- v1.6走り：idle-rightの顔・衣装を参照し5原画をimagegenで生成。右8コマ、左は同じ周期の反転。104px体高／80,136の足元を保持。18fps相当＋速度追随、0〜3pxの浮沈。一輪車・しゃがみ・立ちは保持。原画／プロンプトはsources/sprites/v16、再生成tools/pack-run-v16.mjs。旧版はea16880と旧原画。
+- v1.6能力：ぽにては前方140・120×140・落下1800・CD0.6。べんぞーは前方85・130×150・CD1.2。きんぐは斜め上の水平420・幅64・CD0.45。見た目と判定を共通設定にする。攻撃ダメージ・闇／炎・公開期間は保持。
+- v1.6検証：ゲーム51項目、素材61項目合格。走り16コマ×5のハッシュ・切れ・CV0.004〜0.011・同じ原画から同じPNGの再現を確認。390×844のブラウザー検証は15項目で交代／左右移動／3能力／タッチサイズ／横はみ出しを確認。

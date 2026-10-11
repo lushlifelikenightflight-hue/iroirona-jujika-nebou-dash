@@ -1,9 +1,9 @@
 export const MEMBERS=[
  {id:'takashi',name:'たかし',color:'#bb8df1',element:'闇',skill:'ナイトホール',cooldown:1.8,life:1.4,description:'前方に闇の渦。敵を吸い込む。'},
  {id:'takeru',name:'たける',color:'#f17a8a',element:'炎',skill:'クリムゾンフレア',cooldown:.7,life:.75,description:'炎をまっすぐ前方へ飛ばす。'},
- {id:'ponite',name:'ぽにて',color:'#efd392',element:'雷',skill:'トワイライトボルト',cooldown:1.2,life:1.1,description:'少し前に、頭上から雷を落とす。'},
- {id:'benzo',name:'べんぞー',color:'#93dfeb',element:'氷',skill:'フローズンヴェール',cooldown:2.6,life:2,description:'目の前に氷の壁。敵弾を防ぐ。'},
- {id:'king',name:'きんぐ',color:'#f7e8b8',element:'光',skill:'セイクリッドレイ',cooldown:.9,life:.6,description:'斜め上へ光のビームを放つ。'}
+ {id:'ponite',name:'ぽにて',color:'#efd392',element:'雷',skill:'トワイライトボルト',cooldown:.6,life:1.1,reach:140,width:120,height:140,dropSpeed:1800,description:'前方へ、幅広い雷を素早く落とす。'},
+ {id:'benzo',name:'べんぞー',color:'#93dfeb',element:'氷',skill:'フローズンヴェール',cooldown:1.2,life:2,reach:85,width:130,height:150,description:'前方へ大きな氷の壁。広く敵弾を防ぐ。'},
+ {id:'king',name:'きんぐ',color:'#f7e8b8',element:'光',skill:'セイクリッドレイ',cooldown:.45,life:.6,reach:420,width:64,description:'斜め上へ、長く太い光を連続で放つ。'}
 ];
 export const STAGES=[
  {name:'寝坊の街',subtitle:'A LATE MORNING',length:3600,member:1,doorX:1160,doorY:420,secret:false,pits:[[1760,110],[2780,120]],platforms:[[600,350,180],[1500,335,160],[1900,340,220],[2440,330,260,35]],intro:'たかし「やばい。今日、ライブじゃん。\n…全員まだ寝てる？」',outro:'たかし「まずは街を抜けよう。\n誰か起きてるといいけど。」'},
