@@ -1,0 +1,235 @@
+{
+  "cellWidth": 160,
+  "cellHeight": 144,
+  "anchor": {
+    "x": 80,
+    "y": 136
+  },
+  "fps": 12,
+  "members": [
+    {
+      "id": "takashi",
+      "file": "run-takashi.png",
+      "right": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "left": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "bodyScaleCV": 0.02058048538484971,
+      "frameHashes": [
+        "24e236c423cd2e11052f2be0f550d8392d2d9c4fc2ffcb78d31ce5481545b9a0",
+        "cbd0400c771f1961971474e7eb7779ff3988cd64aca6ed55285fdd3d783cb61f",
+        "5d5327f178a2c975123894657f86e6ba5a0b5a8a0ac4e93db0590ee4fcd6b9c3",
+        "ea5d0bbd8c2e32bb7b9bcf15356f7e98125dc1e17385334c894e872e27bd14e6",
+        "6a313232ce8312c159603c6b87188cdd06e67c6348a206c5bd650a2c4ab89a06",
+        "67436981065cefdddc95877a42a0eae8e6ed2a67bc8d8218d1d73d3e7a1547c6",
+        "c0665eb564e1324fae3aafe4ae515d80163d26767665070d545b8be3053341bd",
+        "63a8a2412411f094a0e12a5c2b5f50df5d279806b5aba36a67ed691d43d622cf",
+        "4dd31256f7cf8bd320755ca5092e565c791a793c105608c751bb25cb8e74776e",
+        "b9315cc14a21d1b2128ff3da21c7aaad4994d08cc328a61788d13e57084eca52",
+        "2d61ee237e4b5be82e7d9ddedca6e2ed272a17181e710849c8e96e51f9fe784a",
+        "c113945b6374718002b794c8bb5932eebc84ddcc2ea87267e79cadd7e188ccba",
+        "03780a38d20e1f3ffd1f8b2a7a500f9ab031747eeee2d678aa0b4b238a050714",
+        "c2c9299f7ddee7fc4ab65cfcf46440d242a5de47c07a929de969df0e360e77db",
+        "ae1d06914a33b0254e93ff0ba98ba0aa6fa07f6e654fde316966d8b5a80ad249",
+        "edc3c7a9899df92ed99d293953a089bac734d3317efdcdd601639d1c8765195d"
+      ],
+      "source": "run-takashi.raw.png"
+    },
+    {
+      "id": "takeru",
+      "file": "run-takeru.png",
+      "right": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "left": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "bodyScaleCV": 0.012769833049612224,
+      "frameHashes": [
+        "39ec07093b4953517748798afc08d78253c9c823b488b8e1fc2c4a79a9226f79",
+        "e6c6057ef395170386073812417d2d4fd32a2bc80cddad6bd92667e41744d14f",
+        "507ba2fb5f6b0284204232f0ff58671bc88b3d333d17a8929d51baa48df39c67",
+        "973d6843581135963fd71ef732b8a2d1a93b3a36bae56578d81214b3dea14659",
+        "8b2085414a95615cdbdb8b9db5278bbfdfec122376fc03fd7be56726078cf732",
+        "dbf0d8e3f3e0bf2a91d51c2dd557e6a3d1fdd58c1437eb7766ac61c1b17004c6",
+        "f85e39fe0f2a1ee1a5e7eacb7f82dbbe28e9736fd2c913f583c505626f71e778",
+        "6547e0c71ca88eac8e434c7a03ef36db9b9f8e9f7b3573aa4c753ac1208d42cb",
+        "317ae57e66beb102be48ca83acef5a251976e6c8912278baa3dcc2e0f5b198e3",
+        "ffae071f14aaaa559e3cb4419ed9a75c1960b81916d12d21ade8119d328ffe8d",
+        "840a92d9da5d6f5364df294cf28f587712581b6f198ad898a26c95fa9f9b674b",
+        "ce390ce08062cdc43f4f1c2da21183b05d027dcbfc4952566a3b62eb5385ba6e",
+        "6b9691a053385c4cd15c92e9afe6a97544b48ad9683009b738aca013d38bbc19",
+        "6956760e27a5ec10a7ef48f2df799c6f519507db9bf7e4ce91db39f0e157d46c",
+        "2d48fa51e88adb6633eb8218e2df970c9b58301641ee05602b933ab3d0830250",
+        "ee1b1da583dcdac534f4de784d79988dd733c6c6638449a0e5e8511df59392bd"
+      ],
+      "source": "run-takeru.raw.png"
+    },
+    {
+      "id": "ponite",
+      "file": "run-ponite.png",
+      "right": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "left": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "bodyScaleCV": 0.014596958014622397,
+      "frameHashes": [
+        "fd093258b7faefef62d0a5cc0efc90e11b8482dda925c6960c9f3eeca521ee55",
+        "1fcbb42b5340f54f9dfa342f16bf3d119c27ae30661edfb9b93480817aafbcb3",
+        "c743f4804a281ed6d43aad50e958df4eea6aaf66a362fc9e2a7d8d27b139c30a",
+        "33d258aadf4dec711e475de50a49e9bd110f0ffbbdceecacfbdb7f483ea1da49",
+        "b47340b56da0a5bb24c3ad290d61627937aa61bea78473f1aa0b135791a32483",
+        "b1d8f7a91737657ab14000a62c15e7e5576a525e9df8ded09329f85052b9397e",
+        "733c8c7af806131f701cdc18b8f2c6da63a16049b748fb7bdd67eb52a1e20aea",
+        "9031376f567da771a1e86a249f9506be6373142fc7ba82d342f800e548979e40",
+        "7fe6b1163d4fc578677bbb1d41dfdad3aafff69e36eaa14d0be96b29b2d5d6d1",
+        "d6304890809c6ed22d67f675501655f2e13177f346bf3b96d61407ddc2476b75",
+        "333d774ff9f0cdf97ad8676792ec03014546c1464e77416a8bec25eb80e5dca6",
+        "04f9eb5d10129697c1c1fe8ce2a589ddf56c090c93bd57e4325bf3857bc9030e",
+        "835ec25766fddc66b3f24aa4e0b380968276986239b1e7beb8b80af20de2ad83",
+        "87ff949f082de9f2b997571a9c5b79775ec4fac91832eabee78c0e3168dece69",
+        "1651ba4ae71dfa9bbb1f6c7492daf7d18746cfacf4609acad877b8ab139ee728",
+        "89acb98c6ab953ad0a2f34663c74c5f1d45f2942c9e82ab23aa52530da1d2592"
+      ],
+      "source": "run-ponite.raw.png"
+    },
+    {
+      "id": "benzo",
+      "file": "run-benzo.png",
+      "right": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "left": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "bodyScaleCV": 0.014855795076596717,
+      "frameHashes": [
+        "5a0bc95756992bf51c2f348ebbf64570790ea2723400850cd2dc5cd9c0078258",
+        "b7c5ba99f01b0cb190253f2a0c79b08e639822ee21a0908c425a528b944e361c",
+        "94a13c45f49213a63057ef857d4110dbd4f1e04451656d847030056898c5f75b",
+        "aae4541ff40195334d69f573883833580ed50fa1390e3f5dc1bf6fa2ce2bc5e5",
+        "49d662cd496818b31b7c3c64a1fbaecca1960880177493fb96f5ef5f00822189",
+        "64a4534a41ee9dd21fc3854c5703ecb4807da3602f3bf222a2925a14c52181d0",
+        "081fceed266e88b531971409acb4959490f4b41d202ac0445ee334f6b695071e",
+        "4e20a8904d1f9452390c65b57a47f534bcafd986d482ec0725f92f7ba4eb2933",
+        "ba636599741c40c5db26449382f07a6243f0be75cb0d61a064ffc0aa73bbd9f6",
+        "8740ec5c48e513536f9263c11c564769053f12e03ea8ea9c5e0d501da8ac45dd",
+        "aa75beb9253feecf6b6582a8bfddade83228fc4c2338b5e6016e52b897d31071",
+        "0e8f43cea8925e38f90a2c8506f9f9f5f78e42d5c1b72cfbffc7096df1d87a79",
+        "45a8d9f537f7606fc321de36d783572be3b4e0705319e5f684b7e15fcd7709f6",
+        "83567e2ad44f430b0cca64561eb6365a32ed27bd6ddb7f2c760873b5065a9a48",
+        "813ac59256ec2f7993c0546136a4941f09cea2e1f299cf926bb67f770d36edd1",
+        "fdf79be495bf26dd358ca4979f4cb1a64dbfdfa921a123eab9b4923758f0e555"
+      ],
+      "source": "run-benzo.raw.png"
+    },
+    {
+      "id": "king",
+      "file": "run-king.png",
+      "right": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "left": [
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "bodyScaleCV": 0.01865116941380733,
+      "frameHashes": [
+        "8b94d98d58fba7057d83eb32e6a25072f96fdc3a472fb3a8a839bfe7daa08490",
+        "df061f0dd48302b290c84f66839d3ec4eb573f1d074bc1da6ccf80e2e91dd5ff",
+        "beafdafd3ccfe97c2508e7f07c2e47f24ab0237b8c5620f2f3cecb70bcd20e60",
+        "84f76aa44e664ee954f94aa14706ec2029c83805ae21a2a227548bc59bbce8c6",
+        "084ef000363a2d9225cc860c2c7910858c84be096420c6cb9eb4aba4bd34f3e6",
+        "ddbe181fae9d4f6d9db22ff70b6483b12b62bd5f685717e83191a48ba3a03994",
+        "2d75db88acfbf6c155d839315fc05c1281903018a3e4e797906032ee5f6264fb",
+        "bba18db74ade889709f8ea03a142c318417cee62f93bf17cd45439fb3c62ce21",
+        "d11ab4c079c0d8364a21392322e98f069932c19eb5544d53d90e481e84081a98",
+        "c7f9a31759265906f46eabf13af1748582afb9bd30ecb54bc7fb6174d5a3eb20",
+        "b1e92c4b1892d7a61e0ab7d56da5d7634a9339a3581e329f8c81463b6fd50993",
+        "55fb91b77104bf7a8d51f4bb4fe202940a9a4bc866b15cc0587b91b624c83294",
+        "7fc5339e94a0fbdf8c77d34c781544422c8c971f4f168f65abd4a7bc10ce62ce",
+        "202ec54faf4dfef51fd6064e47b2a1699c48bfc96a11fdd649025453768be1d3",
+        "88a24b53abc629d1dffaf5c7b22524aca3c6f37eca49054ecfc497ac9af7e650",
+        "e167eead206c1587e9915de3c5d3b99a6fe65e10ec70d079f37526112d2f3353"
+      ],
+      "source": "run-king.raw.png"
+    }
+  ],
+  "idle": {
+    "right": "idle-right.png",
+    "left": "idle-left.png"
+  }
+}

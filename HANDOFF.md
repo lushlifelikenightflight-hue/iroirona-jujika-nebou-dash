@@ -1,22 +1,17 @@
-# 現在の状態
-- 目的／状態：色々な十字架の全5面2Dアクションを完成、GitHub Pagesで公開済み。
-- 正本：F:/Projects/色々な十字架_寝坊ダッシュ。
-- URL：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/
-- リポジトリ：https://github.com/lushlifelikenightflight-hue/iroirona-jujika-nebou-dash
-- 検証・公開したゲームコミット：38cb4abdd472cf03d2dc150fee54a0c94fc3fbf8。
-- Actions成功：https://github.com/lushlifelikenightflight-hue/iroirona-jujika-nebou-dash/actions/runs/38112790122
-- 構成：Canvas 2D / ES Modules、Node.js 22。外部パッケージ／CDNなし。
-- 実装：4つの家／部屋、5能力、仲間追従・交代、一輪車、5面、任意ボス、HP／時間、セーブ、全員／少人数／時間切れエンディングと集計。
-- 仕様：仕様書.md。全体720秒、寄り道任意、全員時は指定のCongraduation!。
-- 画像：参照からimagegenの透過5×2アトラス・ライブ絵、提供集合絵、SVG18点。
-- 音：事前制作したオリジナルWAV20点。tools/make-assets.mjsでSVG／音源を再生成。
-- 検証：Node10テスト（戦闘込み5面通し含む）、素材41点、ブラウザ統合19項目合格。
-- 公開確認：初回起動、キーボード、闇で敵撃破（100点）、一輪車、ポーズ、保存後の再読み込み、844×390横画面。公開ゲームのconsole警告／エラーなし。
-- 修正：地面だけを復帰地点に保存、巡回敵の持続吸引、40px以上のHUD押下範囲、縦画面の全画面案内・自動停止。
-- 限界：実機iOS/Androidのタッチ・音声、スピーカー試聴、FPS計測は未実施。多コマ歩行アニメ未制作（上下動・反転で表現）。
-- ローカル起動：npm start → http://127.0.0.1:4186。検証：npm test / npm run check。
-- 保存：ブラウザlocalStorage。続きからはステージ入口。元画像はDownloadsに保持。
-- 整理：C側work/gameの63ファイルをFとSHA256照合後に削除。12,855,948 bytes＋一時スクリプト1,495 bytes。検証サーバー停止。
-- 案内／証拠：元チャットoutputsの成果物案内.md、公開ゲーム画面.png、整理記録.txt。
-- 復旧：上記ゲームコミットへ戻す。公開はmainへpush後のActions。未検証の変更を公開しない。
-- 次の候補：1.実機での操作・音量調整 2.専用歩行／ジャンプアニメ追加（いずれも追加依頼時）。
+# 寝坊ダッシュ v1.1
+- 状態：6項目の改修を実装、公開前の確認中。
+- 正本：既存のゲーム保存フォルダー。このファイルとREADMEが入口。既存参照を保つためフォルダーは移動しない。
+- 公開先：既存GitHub Pages URLを維持。リポジトリの表示説明も新名称へ変更予定。
+- 最新の変更：5人×左右8コマ、左向き立ち／一輪車、立体スティック、長押し抑制、新表示名、ACE-Step BGM8曲。
+- 新表示名：たかし・たける・ぽにて・べんぞー・きんぐ。元のバンド名・人物名をUIと現行文書から削除。
+- スプライト：assets/spritesの7アトラス、manifestの80ハッシュ、sources/spritesの原画6枚とプロンプト。抽出・アンカー・共有縮尺を検証。
+- 音声：ローカル音声工房のACE-Step 1.5 Turboで生成。assets/audio/bgm-provenance.json。原音／完成WAV／設定は音声工房libraryに保持。
+- BGM仕上げ：8曲各29.65秒、−15.99〜−16.00 LUFS。MP3。SFX12種は既存WAV。
+- Audio：音楽は最大2曲のデコード結果をキャッシュ、SFXは常駐。曲変更の競合を抑制。
+- Input：中心付近0.16は停止、横軸比例速度、上下だけでは移動／ジャンプしない。pointer capture、解除、cancel、ポーズ／画面離脱でリセット。
+- 画面：足元をスティックが覆わないよう表示位置を調整。物理やコリジョン座標は維持。
+- 検証：Node15テスト、素材48点、ブラウザ35項目合格。5面通しと3結末を維持。
+- 限界：実機iOS/Androidのタッチ・音声とスピーカー試聴は未実施。
+- 起動：npm start。検証：npm test / npm run check。ブラウザ検証：tests/browser.html、sprites.html。
+- 復旧：変更前の44843dc。新しい原画／音源は上書きで失われないよう保持。
+- 次：1.公開版でスティック・左移動確認 2.Actions成功記録 3.照合済み作業コピーを整理。
