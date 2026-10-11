@@ -1,5 +1,5 @@
-# 寝坊ダッシュ v1.2
-- 状態：縦画面・ズーム抑制・音声再生・しゃがみ・一輪車アニメーションを実装。ローカル検証済み、公開更新の段階。
+# 寝坊ダッシュ v1.2.1
+- 状態：縦画面・ズーム抑制・音声再生・しゃがみ・一輪車アニメーションを実装。GitHub Pagesで公開済み。
 - 正本：このREADME/HANDOFFのある既存Fドライブのゲームフォルダー。移動しない。
 - 保存先と公開先は継続。表示名：たかし・たける・ぽにて・べんぞー・きんぐ。
 - 仕様：更新仕様_v1.2.md。上部HUD／中央ゲーム／下部操作。縦画面でプレイでき、回転要求なし。
@@ -9,8 +9,12 @@
 - Sprites：左右走り80コマを維持。一輪車80コマ・しゃがみ10枚を追加。sources/spritesに原画・プロンプト、assets/spritesに透明アトラスとハッシュ。
 - Audio：ローカル音声工房でBGM8曲・SFX13種を新規生成。生成記録はassets/audioのbgm/sfx-provenance.json。原音・仕上げ・設定は音声工房libraryに保持。
 - Playback：同じHTMLAudio要素を曲間で継続。開始タップ内でplayとAudioContext.resumeをデコード前に実行。SFXはWebAudio。音声ON/OFF、試聴、音量、再開／再試行あり。
-- 検証：Node21テスト・素材55点が合格。ブラウザで8曲再生と時間進行、SFX非ゼロ出力、ON/OFF、3画面サイズ、同時操作、しゃがみ、加入と3結末の全項目合格。
+- 検証：Node21テスト・素材55点が合格。ブラウザ55項目合格。8曲再生と時間進行、SFX非ゼロ出力、ON/OFF、3画面サイズ、同時操作、しゃがみ、加入と3結末の全項目合格。
 - 実機iOS/Androidのタッチとスピーカー試聴は未確認。ブラウザの音声再生時刻とSFX信号は確認。
 - 起動：npm start。検証：npm test / npm run check / tests/browser.html。画像確認：tests/actions.html。
 - 復旧：変更前のfb3518056058ee8b105d84756792caab2d2ccb45。v1.1の音源・素材はGit履歴で復旧。
-- 次：正本へSHA256一致で反映→検証済みコミットをmainへpush→Actionsと公開画面を確認→作業コピーを整理。
+- 公開ゲームコミット：f22f81135465dd974b3191866fc7dbb25d1b57b5。Actions成功：38120522907。
+- 公開URL：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.2.1
+- 公開63ファイルのSHA256がローカル検証済みファイルと一致。公開画面390×844で起動・音声ON・屈ボタン・操作・倍率1・console警告／エラーなし。
+- Click補強：支援操作から能力とジャンプが発動、屈はclickで切替。pointer操作直後のclickを抑制して二重入力を防ぐ。
+- 必須の残作業なし。実機タッチ／スピーカー試聴は未実施。
