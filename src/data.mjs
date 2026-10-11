@@ -2,8 +2,8 @@ export const MEMBERS=[
  {id:'takashi',name:'たかし',color:'#bb8df1',element:'闇',skill:'ナイトホール',cooldown:1.8,life:1.4,description:'前方に闇の渦。敵を吸い込む。'},
  {id:'takeru',name:'たける',color:'#f17a8a',element:'炎',skill:'クリムゾンフレア',cooldown:.7,life:.75,description:'炎をまっすぐ前方へ飛ばす。'},
  {id:'ponite',name:'ぽにて',color:'#efd392',element:'雷',skill:'トワイライトボルト',cooldown:.6,life:1.1,reach:140,width:120,height:140,dropSpeed:1800,description:'前方へ、幅広い雷を素早く落とす。'},
- {id:'benzo',name:'べんぞー',color:'#93dfeb',element:'氷',skill:'フローズンヴェール',cooldown:1.2,life:2,reach:85,width:130,height:150,description:'前方へ大きな氷の壁。広く敵弾を防ぐ。'},
- {id:'king',name:'きんぐ',color:'#f7e8b8',element:'光',skill:'セイクリッドレイ',cooldown:.45,life:.6,reach:420,width:64,description:'斜め上へ、長く太い光を連続で放つ。'}
+ {id:'benzo',name:'べんぞー',color:'#93dfeb',element:'氷',skill:'フローズンヴェール',cooldown:1.2,life:2,reach:85,width:130,height:150,description:'前方へ追従する氷の盾。2秒間、敵弾を防ぐ。'},
+ {id:'king',name:'きんぐ',color:'#f7e8b8',element:'光',skill:'セイクリッドレイ',cooldown:.45,life:.6,reach:420,width:64,description:'前後の斜め上下へ、4本の光を同時に放つ。'}
 ];
 export const STAGES=[
  {name:'寝坊の街',subtitle:'A LATE MORNING',length:3600,member:1,doorX:1160,doorY:420,secret:false,pits:[[1760,110],[2780,120]],platforms:[[600,350,180],[1500,335,160],[1900,340,220],[2440,330,260,35]],intro:'たかし「やばい。今日、ライブじゃん。\n…全員まだ寝てる？」',outro:'たかし「まずは街を抜けよう。\n誰か起きてるといいけど。」'},
@@ -13,4 +13,6 @@ export const STAGES=[
  {name:'開演前の礼拝堂',subtitle:'ONE LAST ENCORE',length:4800,member:null,pits:[[1110,130],[2270,140],[3300,120]],platforms:[[580,345,170],[1290,330,210],[1740,285,220],[2470,340,200],[2920,300,200],[3500,345,200],[3770,275,200],[4030,255,300]],intro:'「開演まであと少し。\nあの時計を止めるか、\n上から抜けるか……！」',outro:'「間に合った。\nさあ、ステージへ。」'}
 ];
 export const W=960,H=540,GROUND=420;
-export function score(run,timeout=false){const rows={enemies:run.kills*100,bosses:run.bossKills*1500,time:timeout?0:Math.floor(Math.max(0,run.remaining))*20,members:run.crew.length*2000,clear:timeout?0:5000,all:!timeout&&run.crew.length===5?5000:0};return {...rows,total:Object.values(rows).reduce((a,b)=>a+b,0)};}
+export const BOSS_SCORE=2500;
+export const BEAM_DIRECTIONS=[[1,-1],[1,1],[-1,-1],[-1,1]];
+export function score(run,timeout=false){const rows={enemies:run.kills*100,bosses:run.bossKills*BOSS_SCORE,time:timeout?0:Math.floor(Math.max(0,run.remaining))*20,members:run.crew.length*2000,clear:timeout?0:5000,all:!timeout&&run.crew.length===5?5000:0};return {...rows,total:Object.values(rows).reduce((a,b)=>a+b,0)};}
