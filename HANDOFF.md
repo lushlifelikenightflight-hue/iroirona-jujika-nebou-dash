@@ -1,0 +1,17 @@
+# 現在の状態
+- 目的：全5面の寝坊ダッシュをGitHub Pagesで誰でも遊べるように公開。
+- 状態：仕様→素材→実装を完了、ローカル検証済み、公開準備中。
+- 正本：F:/Projects/色々な十字架_寝坊ダッシュ。
+- 技術：Canvas 2D / ES Modules、Node.js 22、外部パッケージ・CDN不要。
+- 仕様：仕様書.md。全体720秒、仲間の寄り道は任意、5面ボスは迂回可。
+- 画像：参照からimagegenで透過5×2アトラスと5人ライブ絵、提供集合絵、SVG18点。
+- 音：事前制作WAV20点（BGM8・SFX12）。tools/make-assets.mjsで再生成。
+- 実装：4部屋、5能力、追従、交代、一輪車、HP／時間、セーブ、3結末と内訳。
+- 検証：Node 10テスト、素材41点、ブラウザ統合19項目合格。
+- 追加修正：復帰地点を地面に限定、巡回敵の闇吸引、スマホHUD押下範囲、縦画面案内。
+- 未確認：実機iOS/Android、スピーカーの実聴、多コマ歩行アニメ未制作。
+- 保存：ブラウザのlocalStorage、ステージ入口で自動保存。元画像は変更なし。
+- 公開先：lushlifelikenightflight-hue/iroirona-jujika-nebou-dash（新規）。
+- URL：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/
+- 復旧：Git履歴から復旧。公開ワークフローは検証合格版だけ配信。
+- 次：1.F正本のハッシュ照合 2.GitHub初回公開 3.公開画面確認 4.作業用重複を整理。
