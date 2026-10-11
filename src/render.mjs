@@ -19,7 +19,7 @@ export class Renderer{
  if(!w.room&&w.route==='pit'){c.fillStyle='#d6b5b9';c.font='13px serif';c.textAlign='center';c.fillText('薔薇の気配 ↓',1020-cam,390);c.fillText('地上へ ↑',962-cam,695);}
  if(!w.room&&w.route==='sky'){c.fillStyle='#b9e5eb';c.font='12px serif';c.textAlign='center';c.fillText('さらに上へ ↑',2122-cam,76);}
  if(w.door&&!w.door.visible){const d=w.door,left=d.guardIds.filter(id=>w.enemies.some(e=>e.guardId===id&&!e.dead)).length;c.fillStyle='#c887ac';c.font='14px serif';c.textAlign='center';c.fillText(`封印された薔薇　魔物 ${left}`,d.x+45-cam,d.y-48);c.fillText('✿',d.x+45-cam,d.y+20);}
- if(!w.room&&s===0){c.fillStyle='#d1c0df';c.font='12px serif';c.textAlign='center';c.fillText('しゃがむでゆっくり →',2470-cam,402);}
+ if(!w.room&&s===0){c.fillStyle='#d1c0df';c.font='12px serif';c.textAlign='center';c.fillText('「しゃがむ」でゆっくり →',2470-cam,402);}
  for(const g of w.gimmicks||[]){if(g.x+g.w<cam||g.x>cam+W)continue;if(g.kind==='spring'){const height=g.pressed>0?25:g.h;this.art('spring',g.x-cam,g.y+g.h-height,g.w,height);c.fillStyle='#edd7ac';c.font='11px sans-serif';c.textAlign='center';c.fillText('BOUNCE ↑',g.x+g.w/2-cam,g.y-12);}else this.art('slide',g.x-cam,g.y,g.w,g.h+8);}
  for(const item of w.items)if(!item.used){this.art('unicycle',item.x-cam-4,item.y+Math.sin(t*4)*4,item.w+8,item.h+8);c.fillStyle='#e9cd9c';c.font='11px sans-serif';c.fillText('SPEED UP',item.x+15-cam,item.y-12);}
  for(const e of w.enemies)if(!e.dead&&e.x>cam-200&&e.x<cam+W+200){this.art(e.kind,e.x-cam-7,e.y-8,e.w+14,e.h+8);if(e.kind==='boss'){c.fillStyle='#110b18';c.fillRect(e.x-cam,e.y-30,e.w,8);c.fillStyle='#db7897';c.fillRect(e.x-cam,e.y-30,e.w*e.hp/12,8);c.fillStyle='#e2bd9f';c.font='12px serif';c.fillText('寝坊の大時計',e.x+e.w/2-cam,e.y-38);}}
