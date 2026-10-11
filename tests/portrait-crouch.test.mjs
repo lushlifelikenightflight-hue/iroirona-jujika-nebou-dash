@@ -1,0 +1,10 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {Game} from '../src/engine.mjs';
+import {spritePose} from '../src/render.mjs';
+const ready=()=>{const g=new Game();g.start();g.play();g.world.items=[];g.world.enemies=[];return g;};
+test('crouch preserves feet, slows movement and releases',()=>{const g=ready(),p=g.world.player;const feet=p.y+p.h;for(let i=0;i<60;i++)g.step(1/120,{right:true,crouch:true});assert.equal(p.h,42);assert.equal(p.y+p.h,feet);assert.equal(p.vx,105);assert.equal(p.crouching,true);g.step(1/120);assert.equal(p.h,76);assert.equal(p.y+p.h,feet);});
+test('ceiling prevents standing and jumping until clear',()=>{const g=ready(),p=g.world.player;g.step(1/120,{crouch:true});g.world.platforms.push({x:50,y:340,w:160,h:35});g.step(1/120,{jump:true});assert.equal(p.h,42);assert.equal(p.grounded,true);assert.equal(p.vy,0);p.x=250;g.step(1/120,{jump:true});assert.equal(p.h,76);assert.equal(p.crouching,false);assert.ok(p.vy<0);});
+test('crouch evades head-height projectile; standing takes damage',()=>{for(const crouch of [true,false]){const g=ready(),p=g.world.player;g.step(1/120,{crouch});g.world.shots.push({x:p.x,y:350,w:14,h:14,vx:0,vy:0});g.step(1/120,{crouch});assert.equal(g.run.hp,crouch?5:4);}});
+test('crouch dismounts wheel and recovery restores standing body',()=>{const g=ready(),p=g.world.player;p.wheel=10;g.step(1/120,{crouch:true});assert.equal(p.wheel,0);g.recover();assert.equal(p.h,76);assert.equal(p.crouching,false);assert.equal(p.y+p.h,420);});
+test('all riders pedal both directions and crouch chooses separate art',()=>{for(let id=0;id<5;id++){for(const face of [-1,1]){const frames=new Set();for(let i=0;i<8;i++){const pose=spritePose(id,face,true,{grounded:true,vx:465,animTime:(i+.1)/12});assert.equal(pose.action,'pedal');frames.add(pose.frame);}assert.equal(frames.size,8);assert.equal(spritePose(id,face,true,{grounded:true,vx:0,animTime:1}).frame,face<0?8:0);const pose=spritePose(id,face,false,{crouching:true,vx:105,grounded:true});assert.equal(pose.image,'crouch');assert.equal(pose.frame,id+(face<0?5:0));}}});

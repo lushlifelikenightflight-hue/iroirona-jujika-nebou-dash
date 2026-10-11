@@ -1,0 +1,162 @@
+{
+  "generator": "ローカル音声工房 / SFX presets",
+  "method": "preset synthesis with mastering",
+  "sounds": [
+    {
+      "file": "jump.wav",
+      "libraryId": "c768c5f9-c5db-48dc-8798-c14df1dd3408",
+      "preset": "confirm",
+      "pitch": 1.35,
+      "strength": 0.65,
+      "duration": 0.2,
+      "after": {
+        "lufs": -17.96,
+        "peak": -7.86
+      }
+    },
+    {
+      "file": "land.wav",
+      "libraryId": "3304bd25-0c4c-43fe-b256-242ba69a9ea4",
+      "preset": "footstep",
+      "pitch": 0.8,
+      "strength": 0.5,
+      "duration": 0.13,
+      "after": {
+        "lufs": -20.55,
+        "peak": -1.54
+      }
+    },
+    {
+      "file": "dark.wav",
+      "libraryId": "5c84703c-d526-4cc7-8146-32c7db6e7a96",
+      "preset": "laser",
+      "pitch": 0.4,
+      "strength": 0.8,
+      "duration": 0.8,
+      "after": {
+        "lufs": -17.96,
+        "peak": -8.74
+      }
+    },
+    {
+      "file": "fire.wav",
+      "libraryId": "308d17a0-a454-46f6-8b14-57bf0fab762f",
+      "preset": "explosion",
+      "pitch": 1.6,
+      "strength": 0.7,
+      "duration": 0.5,
+      "after": {
+        "lufs": -18.04,
+        "peak": -5.16
+      }
+    },
+    {
+      "file": "lightning.wav",
+      "libraryId": "718ebc08-d301-4da9-b245-f459f53e5af5",
+      "preset": "impact",
+      "pitch": 1.8,
+      "strength": 0.8,
+      "duration": 0.45,
+      "after": {
+        "lufs": -18.09,
+        "peak": -4.04
+      }
+    },
+    {
+      "file": "ice.wav",
+      "libraryId": "f5a306cd-e529-409d-8720-5b8ac44586fe",
+      "preset": "slash",
+      "pitch": 0.7,
+      "strength": 0.6,
+      "duration": 0.5,
+      "after": {
+        "lufs": -18.18,
+        "peak": -6.94
+      }
+    },
+    {
+      "file": "beam.wav",
+      "libraryId": "e44a8688-6a15-49f3-b2ac-cbfa5cba84f9",
+      "preset": "laser",
+      "pitch": 1.7,
+      "strength": 0.75,
+      "duration": 0.55,
+      "after": {
+        "lufs": -18.04,
+        "peak": -8.88
+      }
+    },
+    {
+      "file": "hit.wav",
+      "libraryId": "8da4a7a9-8be7-478f-9eea-eebd8a29595b",
+      "preset": "impact",
+      "pitch": 0.7,
+      "strength": 0.6,
+      "duration": 0.25,
+      "after": {
+        "lufs": -18.05,
+        "peak": -3.35
+      }
+    },
+    {
+      "file": "kill.wav",
+      "libraryId": "0020876b-9695-45da-9d59-ff4f399f299d",
+      "preset": "cancel",
+      "pitch": 0.85,
+      "strength": 0.65,
+      "duration": 0.3,
+      "after": {
+        "lufs": -18.02,
+        "peak": -6.14
+      }
+    },
+    {
+      "file": "join.wav",
+      "libraryId": "715e7fa5-f662-48de-8f9d-42ab4d14df72",
+      "preset": "confirm",
+      "pitch": 1.1,
+      "strength": 0.7,
+      "duration": 0.7,
+      "after": {
+        "lufs": -17.99,
+        "peak": -11.06
+      }
+    },
+    {
+      "file": "unicycle.wav",
+      "libraryId": "009ae876-4b3c-4a74-b8c5-a5261fe0125a",
+      "preset": "coin",
+      "pitch": 0.8,
+      "strength": 0.7,
+      "duration": 0.55,
+      "after": {
+        "lufs": -17.98,
+        "peak": -9.62
+      }
+    },
+    {
+      "file": "clear.wav",
+      "libraryId": "948cb292-d2a1-4177-8ed7-cf26026716b7",
+      "preset": "confirm",
+      "pitch": 0.75,
+      "strength": 0.85,
+      "duration": 1.3,
+      "after": {
+        "lufs": -17.99,
+        "peak": -12.22
+      }
+    },
+    {
+      "file": "crouch.wav",
+      "libraryId": "1be126fd-cb82-40d8-9d6d-aeea3214f312",
+      "preset": "footstep",
+      "pitch": 0.6,
+      "strength": 0.4,
+      "duration": 0.12,
+      "after": {
+        "lufs": -20.85,
+        "peak": -1.52
+      }
+    }
+  ]
+}

@@ -28,11 +28,4 @@ save('fire',`<path d="M5 30Q32 2 74 10L58 24l49 8-49 8 16 14Q32 61 5 30Z" fill="
 save('ice',`<path d="M12 100L2 30 24 4h30l20 26-8 70Z" fill="#85dfe8" fill-opacity=".65" stroke="#d8ffff" stroke-width="3"/><path d="M24 4l7 55-19 41m19-41 23-55m-23 55 35 41M2 30l29 29 43-29" fill="none" stroke="#d0ffff" stroke-width="2"/>`,80,104);
 save('lightning',`<path d="M42 0L10 55h25L9 118l61-77H46L67 0Z" fill="#f2d79b" stroke="#fffce4" stroke-width="3"/>`,80,120);
 save('beam',`<path d="M0 13L300 4v22L0 19Z" fill="#f4d5a1" opacity=".5"/><path d="M0 15L300 10v12L0 17Z" fill="#fffde3"/>`,300,32);
-// Offline, original PCM composition; no runtime oscillator placeholders.
-const SR=22050;
-function wav(name,arr){let out=Buffer.alloc(44+arr.length*2);out.write('RIFF');out.writeUInt32LE(out.length-8,4);out.write('WAVEfmt ',8);out.writeUInt32LE(16,16);out.writeUInt16LE(1,20);out.writeUInt16LE(1,22);out.writeUInt32LE(SR,24);out.writeUInt32LE(SR*2,28);out.writeUInt16LE(2,32);out.writeUInt16LE(16,34);out.write('data',36);out.writeUInt32LE(arr.length*2,40);for(let i=0;i<arr.length;i++)out.writeInt16LE(Math.max(-32767,Math.min(32767,Math.round(arr[i]*24000))),44+i*2);fs.writeFileSync(path.join(assets,'audio',name+'.wav'),out);}
-const hz=n=>440*2**((n-69)/12);
-function note(a,start,dur,n,vol,type='sine'){let begin=Math.round(start*SR),end=Math.min(a.length,Math.round((start+dur)*SR));for(let i=begin;i<end;i++){let t=(i-begin)/SR,env=Math.min(1,t/.012)*Math.min(1,(dur-t)/.065)*Math.exp(-t*.8),p=2*Math.PI*hz(n)*t;let sound=type==='pluck'?(Math.sin(p)+.35*Math.sin(p*2)+.15*Math.sin(p*4)):type==='organ'?(Math.sin(p)+.25*Math.sin(p*3)+.12*Math.sin(p*5)):Math.sin(p);a[i]+=sound*env*vol;}}
-const effects={jump:[72,79],land:[43,38],dark:[40,47,52],fire:[57,69,81],lightning:[93,65,45],ice:[88,84,79],beam:[72,84,96],hit:[54,42],kill:[69,76,81],join:[60,64,67,72],unicycle:[64,71,76,83],clear:[60,64,67,72,79]};
-for(const [name,notes] of Object.entries(effects)){let dur=notes.length*.07+.16,a=new Float32Array(Math.ceil(SR*dur));notes.forEach((n,i)=>note(a,i*.07,.15,n,.19,'pluck'));wav(name,a);}
-const files=fs.readdirSync(path.join(assets,'audio'));console.log(`Prepared ${files.length} WAV tracks and ${fs.readdirSync(path.join(assets,'art')).length} SVG assets.`);
+console.log(`Prepared ${fs.readdirSync(path.join(assets,"art")).length} SVG assets. Audio uses the local studio generation tools.`);

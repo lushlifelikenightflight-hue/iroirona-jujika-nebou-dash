@@ -1,33 +1,20 @@
-# 寝坊ダッシュの素材
+# 寝坊ダッシュの素材 v1.2
 
-## キャラクター
+表示名：たかし・たける・ぽにて・べんぞー・きんぐ。提供された人物の衣装・髪型・顔を参照しています。
 
-表示名は、たかし・たける・ぽにて・べんぞー・きんぐ。提供された人物の衣装・髪型・顔の特徴を参照し、組み込みimagegenで制作しています。
+- assets/characters.png：同じ人物・衣装・ピクセル画風の基準。portrait.pngは提供集合絵、live.pngは既存ライブ絵。
+- assets/sprites/run-*.png：左右各8コマ、5人で80。v1.1の走りを継続。
+- assets/sprites/pedal-*.png：image_genで新規生成した、左右各8コマ、5人で80のペダル動作。膝・足・クランクと車輪が変化。人物ごとに同じ倍率で抽出し、車輪の地面への接触点をアンカーとして揃える。
+- assets/sprites/crouch.png：5人の右・左しゃがみ10枚。自然に膝を曲げた新規画像。
+- 全セル160×144、アンカー80×136。run/pedalは4×4、crouchは5×2。manifest.jsonに順序・ハッシュ・身体高CV。
+- sources/spritesに採用原画6枚を追加、prompts-v12.jsonに実際のプロンプト。組み込みimage_genの透過画像を使用。tools/pack-actions.mjsとsprite-pack-utils.mjsは抽出・縮尺・配置のみ。生成された絵をコードで代用していません。
+- 元の立ち／静止一輪車の左右アトラスも復旧用に保持。ゲームの一輪車表示はペダル画像へ置き換え。
+- assets/artのSVGは既存の背景・敵・アイテム・能力。
 
-- `assets/characters.png`：既存の右向き立ち／一輪車アトラス。今回のスタイル基準として保持。
-- `assets/sprites/run-*.png`：各人物16コマ（右走り8、左走り8）。腕・脚・髪・衣服が動く走りを別々に描いて生成。4列×4行、1セル160×144、足元アンカー80×136、標準12fps。各方向に8枚の異なる画像を使用。
-- `assets/sprites/idle-right.png`、`idle-left.png`：右向き・左向きの立ち5人と一輪車5人。5列×2行。同じセルと足元アンカーで書き出し。
-- `assets/sprites/manifest.json`：再生順、アンカー、全80コマのSHA256、身体の縮尺のばらつき。
-- `sources/sprites/*.raw.png`：新しく生成した原画6枚。ゲームへの配信対象には含めません。
-- `sources/sprites/prompts.json`：実際に使用した生成プロンプト。組み込みimagegen、透過背景。CLI/APIフォールバックは使っていません。
-- `tools/pack-sprites.mjs`：透明な区切りを検出し、コマの抽出・足元揃え・共有縮尺での書き出しを行う処理。創作の絵は描かず、生成されたピクセルを使用。sharpが必要（制作PCでは同梱ランタイムを使用）。
+BGMは導入済みローカル音声工房／ACE-Step 1.5 Turbo（8 steps）で8曲を新規生成。固定seed111200〜111207、歌なし、30秒指定、仕上げ後29.65秒。音量・低音／圧縮・ループを処理し、160kbps MP3へ書き出し。−16.00〜−16.59 LUFS、ピーク−1.51〜−4.97 dBTP。title、stage-1〜5、live、taxiの8曲。bgm-provenance.jsonにプロンプトと生成ID・測定結果。
 
-5人の走りシートの身体高CVは0.013〜0.021。コマごとの拡大縮小はせず、人物ごとに1つの倍率を使用し、走りによる姿勢の変化を残しています。出力セルの端に人物が接触していないこと、16コマがそれぞれ異なることを検査。左向きは別の生成画像で、実行時の反転表示は使いません。
+SFX13種はローカル音声工房のプリセット合成を実行し、音量・厚みを仕上げ。jump、land、dark、fire、lightning、ice、beam、hit、kill、join、unicycle、clear、crouch。44.1kHz／16bit／mono WAV。sfx-provenance.jsonに生成ID・プリセット・設定と測定結果。SFXはプリセット合成で、BGMのAI推論とは生成方式が異なります。
 
-`assets/portrait.png` は提供集合絵、`assets/live.png` は既存の5人ライブ演奏絵。`assets/art/*.svg` は本作用の背景・敵・アイテム・効果18点。
+再生成はtools/generate-bgm.mjs、generate-sfx.mjs。音声工房を起動して実行し、再開IDはwork/audio-v12-jobsへ保持。ゲームのBGMはHTMLAudio、SFXはWebAudioで、タップで両方を有効化。元音・完成WAV・設定は音声工房libraryに保持。v1.1の音源はGit履歴に保持。
 
-## BGM
-
-今回は導入済みの**ローカル音声工房／ACE-Step 1.5 Turbo**を実際に使って、歌なしの30秒BGMを8曲生成しています。8 steps、固定seed、ローカルGPU推論。各曲を音声工房の音量調整・低音／圧縮・ループ加工へ通し、ゲーム用に160kbps MP3へ書き出しています。
-
-- `assets/audio/title.mp3`：タイトル
-- `stage-1.mp3`〜`stage-5.mp3`：各ステージ
-- `live.mp3`：ライブエンディング
-- `taxi.mp3`：タクシーエンディング
-- `assets/audio/bgm-provenance.json`：全8曲のプロンプト、seed、BPM、音声工房のライブラリID、長さ、仕上げ後のLUFSとピーク。
-- 各完成ループ29.65秒。仕上げ後−15.99〜−16.00 LUFS、ピーク−1.48〜−5.55 dBTP（目標は上限−1.5dBTP）。元音と完成WAV・設定は音声工房のlibraryへ保持。
-- `tools/generate-bgm.mjs`：音声工房APIを使う生成・MP3書き出し処理。音声工房が起動した状態で実行。再開用IDはゲーム側workへ記録。
-
-以前の手作りチップBGMは今回の再生対象から外しています。効果音12種は既存の本作用PCM合成WAVを継続使用。`tools/make-assets.mjs` は背景／敵SVGとSFXのみを再生成します。
-
-楽曲と画像は本作の素材です。提供素材の権利は各権利者に帰属し、提供人物画像に対する再配布ライセンスは付与していません。
+提供素材の権利は各権利者に帰属し、人物画像に対する再配布ライセンスは付与していません。

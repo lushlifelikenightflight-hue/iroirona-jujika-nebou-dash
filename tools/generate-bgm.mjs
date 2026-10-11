@@ -4,7 +4,7 @@ import {spawn} from 'node:child_process';
 const root=path.resolve(import.meta.dirname,'..');
 const studio=process.env.AUDIO_STUDIO_ROOT||'F:/Projects/ローカル音声工房';
 const config=JSON.parse(fs.readFileSync(path.join(studio,'config.json'),'utf8'));
-const work=path.join(root,'work/bgm-jobs');fs.mkdirSync(work,{recursive:true});
+const work=path.join(root,'work/audio-v12-jobs');fs.mkdirSync(work,{recursive:true});
 const songs=[
  ['title','寝坊ダッシュ・夜明けの招待',96,'Instrumental gothic rock game title theme, memorable elegant minor key melody, harpsichord arpeggio, atmospheric church organ, warm electric bass, restrained drums, rich dark romantic tone, clean polished stereo production. No vocals, no spoken words, no crowd. Seamlessly looping game soundtrack.'],
  ['stage-1','寝坊ダッシュ・寝坊の街',132,'Instrumental energetic melodic gothic rock for running through a haunted town, driving tight rock drums, electric guitar riffs, melodic bass line, sparkling harpsichord, memorable catchy lead synth melody in minor key. Urgent but playful, polished powerful game soundtrack. No vocals or speech. Continuous loop, no fade-out.'],
@@ -21,7 +21,7 @@ async function api(route,body){const r=await fetch('http://127.0.0.1:7865'+route
 async function encode(input,output){await new Promise((resolve,reject)=>{const p=spawn(config.ffmpeg,['-hide_banner','-loglevel','error','-y','-i',input,'-c:a','libmp3lame','-b:a','160k','-ar','44100',output],{windowsHide:true});let err='';p.stderr.on('data',b=>err+=b);p.on('error',reject);p.on('close',c=>c===0?resolve():reject(Error(err)));});}
 const status=await api('/api/status');if(!status.bgmReady)throw Error('BGM tool not ready');if(status.active&&!Object.values(states).some(s=>s.id===status.active))throw Error('Another user job is active; leaving it untouched');
 for(let i=0;i<songs.length;i++){
- const [name,title,bpm,prompt]=songs[i];if(!states[name]){const j=await api('/api/generate',{mode:'bgm',title,prompt,bpm,duration:30,seed:101100+i,target:-16,body:.35,loop:true});states[name]={id:j.id,name,title,bpm,prompt,seed:101100+i};save();console.log(`Submitted ${i+1}/8 ${name}: ${j.id}`);}
+ const [name,title,bpm,prompt]=songs[i];if(!states[name]){const j=await api('/api/generate',{mode:'bgm',title:title+' v1.2',prompt,bpm,duration:30,seed:111200+i,target:-16,body:.35,loop:true});states[name]={id:j.id,name,title,bpm,prompt,seed:111200+i};save();console.log(`Submitted ${i+1}/8 ${name}: ${j.id}`);}
  if(!states[name].result){let stage='';for(;;){const j=await api('/api/jobs/'+states[name].id);if(j.stage!==stage){stage=j.stage;console.log(`${name}: ${stage}`);}if(j.status==='error')throw Error(`${name}: ${j.error}`);if(j.status==='done'){states[name].result=j.result;save();break;}await new Promise(r=>setTimeout(r,12000));}}
  const item=states[name].result;await encode(path.join(item.path,'finished.wav'),path.join(root,'assets/audio',name+'.mp3'));console.log(`Ready ${name}: ${item.duration}s, ${item.after.lufs} LUFS, ${item.after.peak} dBTP`);
 }

@@ -6,8 +6,8 @@
     {
       "file": "title.mp3",
       "title": "寝坊ダッシュ・夜明けの招待",
-      "libraryId": "2fceedc2-30e7-431c-b3f7-f6d1b89fc38c",
-      "seed": 101100,
+      "libraryId": "ff5ae0af-1a0c-4323-82e6-2ebdb6a0ac29",
+      "seed": 111200,
       "bpm": 96,
       "prompt": "Instrumental gothic rock game title theme, memorable elegant minor key melody, harpsichord arpeggio, atmospheric church organ, warm electric bass, restrained drums, rich dark romantic tone, clean polished stereo production. No vocals, no spoken words, no crowd. Seamlessly looping game soundtrack.",
       "duration": 29.65,
@@ -15,104 +15,104 @@
       "loop": true,
       "after": {
         "lufs": -16,
-        "peak": -4.97
+        "peak": -2.56
       }
     },
     {
       "file": "stage-1.mp3",
       "title": "寝坊ダッシュ・寝坊の街",
-      "libraryId": "dac2780f-c5ca-43f7-ab3f-2fbe85073db8",
-      "seed": 101101,
+      "libraryId": "3f58ebd7-3ae4-47cd-ac35-a437cf0cb1a1",
+      "seed": 111201,
       "bpm": 132,
       "prompt": "Instrumental energetic melodic gothic rock for running through a haunted town, driving tight rock drums, electric guitar riffs, melodic bass line, sparkling harpsichord, memorable catchy lead synth melody in minor key. Urgent but playful, polished powerful game soundtrack. No vocals or speech. Continuous loop, no fade-out.",
       "duration": 29.65,
       "target": -16,
       "loop": true,
       "after": {
-        "lufs": -15.99,
-        "peak": -1.48
+        "lufs": -16,
+        "peak": -1.56
       }
     },
     {
       "file": "stage-2.mp3",
       "title": "寝坊ダッシュ・薔薇の墓地",
-      "libraryId": "fceed4b2-ba10-466f-95f6-c446465f65ed",
-      "seed": 101102,
+      "libraryId": "41f67919-e278-49e0-a412-d55c15dbacef",
+      "seed": 111202,
       "bpm": 116,
       "prompt": "Instrumental dark gothic action game music for a rose-covered cemetery, pizzicato strings, harpsichord ostinato, melodic cello, eerie church organ, steady punchy drums and bass, mysterious elegant minor key theme. Forward momentum with spooky romantic atmosphere. No vocals or speech, no ambient noise. Continuous loop.",
       "duration": 29.65,
       "target": -16,
       "loop": true,
       "after": {
-        "lufs": -16,
-        "peak": -3.07
+        "lufs": -16.01,
+        "peak": -3.18
       }
     },
     {
       "file": "stage-3.mp3",
       "title": "寝坊ダッシュ・氷の回廊",
-      "libraryId": "7cb523d9-e7b5-4189-ad21-de877166bfff",
-      "seed": 101103,
+      "libraryId": "499a92d2-017c-4ef3-af9a-181b102f245f",
+      "seed": 111203,
       "bpm": 124,
       "prompt": "Instrumental gothic fantasy action soundtrack for a frozen arcade, crystalline bell melody, icy celesta, orchestral strings, deep electric bass, energetic percussion, graceful memorable minor key motif. Cold blue atmosphere with clear rhythmic movement and full polished stereo sound. No vocals or speech. Continuous loop.",
       "duration": 29.65,
       "target": -16,
       "loop": true,
       "after": {
-        "lufs": -16,
-        "peak": -4.18
+        "lufs": -16.59,
+        "peak": -4.97
       }
     },
     {
       "file": "stage-4.mp3",
       "title": "寝坊ダッシュ・鐘楼の屋根",
-      "libraryId": "9bc26714-c948-4e96-a141-aa7140ad5298",
-      "seed": 101104,
+      "libraryId": "c6f5d747-ee94-4c8e-8dac-79651347dae5",
+      "seed": 111204,
       "bpm": 140,
       "prompt": "Instrumental fast gothic rock action game track for racing over bell-tower rooftops, distorted electric guitar melody, soaring strings, dramatic bell accents, galloping bass, tight rock drums, exciting minor key harmonic progression. Confident urgent rhythmic loop. No vocals, no speech, no crowd.",
       "duration": 29.65,
       "target": -16,
       "loop": true,
       "after": {
-        "lufs": -15.99,
-        "peak": -5.55
+        "lufs": -16,
+        "peak": -2.36
       }
     },
     {
       "file": "stage-5.mp3",
       "title": "寝坊ダッシュ・開演前の礼拝堂",
-      "libraryId": "69a7d54b-882b-4822-9f4c-79fdde34939b",
-      "seed": 101105,
+      "libraryId": "2cbe8310-44a4-4173-ba15-d7ca1cabab4d",
+      "seed": 111205,
       "bpm": 148,
       "prompt": "Instrumental climactic symphonic gothic metal game soundtrack, powerful electric guitar riffs, heroic minor key lead melody, cathedral organ, dramatic orchestral strings, double-time drums, heavy melodic bass, urgent final stage atmosphere. Polished stereo mix with clear transients. No vocals or speech. Loopable with no fade-out.",
       "duration": 29.65,
       "target": -16,
       "loop": true,
       "after": {
-        "lufs": -16,
-        "peak": -5.14
+        "lufs": -16.01,
+        "peak": -3.55
       }
     },
     {
       "file": "live.mp3",
       "title": "寝坊ダッシュ・間に合ったライブ",
-      "libraryId": "94a521f4-05b0-47d1-ade1-8c4453deee9e",
-      "seed": 101106,
+      "libraryId": "660c7b04-3b65-4f6c-9b09-de49cfd2b6f7",
+      "seed": 111206,
       "bpm": 144,
       "prompt": "Instrumental triumphant melodic rock concert finale for a fantasy band game, uplifting memorable electric guitar lead, big warm bass, energetic live-style drums, bright keyboard and strings, celebratory resolution, full band studio-quality stereo sound. No vocals, no speech, no crowd noise. Loopable victory theme.",
       "duration": 29.65,
       "target": -16,
       "loop": true,
       "after": {
-        "lufs": -15.99,
-        "peak": -3.93
+        "lufs": -16,
+        "peak": -2.89
       }
     },
     {
       "file": "taxi.mp3",
       "title": "寝坊ダッシュ・タクシーで開演へ",
-      "libraryId": "7ccaf7ca-b245-48fb-a90d-510572d149b6",
-      "seed": 101107,
+      "libraryId": "ea696ca4-aecf-43eb-8466-718fcd74f49c",
+      "seed": 111207,
       "bpm": 104,
       "prompt": "Instrumental playful gothic jazz rock ending theme for a taxi ride after oversleeping, cheeky pizzicato bass and harpsichord, brushed drums, muted electric guitar, light piano melody, relaxed whimsical minor key with a warm hopeful ending. Clear rich stereo sound. No vocals or speech. Loopable.",
       "duration": 29.65,
@@ -120,7 +120,7 @@
       "loop": true,
       "after": {
         "lufs": -16,
-        "peak": -2.71
+        "peak": -1.51
       }
     }
   ]

@@ -1,24 +1,16 @@
-# 寝坊ダッシュ v1.1
-- 状態：6項目の改修を実装し、GitHub Pagesで公開済み。
-- 正本：既存のゲーム保存フォルダー。このファイルとREADMEが入口。既存参照を保つためフォルダーは移動しない。
-- 公開先：既存GitHub Pages URLを維持。リポジトリの表示説明も新名称へ変更済み。
-- 最新の変更：5人×左右8コマ、左向き立ち／一輪車、立体スティック、長押し抑制、新表示名、ACE-Step BGM8曲。
-- 新表示名：たかし・たける・ぽにて・べんぞー・きんぐ。元のバンド名・人物名をUIと現行文書から削除。
-- スプライト：assets/spritesの7アトラス、manifestの80ハッシュ、sources/spritesの原画6枚とプロンプト。抽出・アンカー・共有縮尺を検証。
-- 音声：ローカル音声工房のACE-Step 1.5 Turboで生成。assets/audio/bgm-provenance.json。原音／完成WAV／設定は音声工房libraryに保持。
-- BGM仕上げ：8曲各29.65秒、−15.99〜−16.00 LUFS。MP3。SFX12種は既存WAV。
-- Audio：音楽は最大2曲のデコード結果をキャッシュ、SFXは常駐。曲変更の競合を抑制。
-- Input：中心付近0.16は停止、横軸比例速度、上下だけでは移動／ジャンプしない。pointer capture、解除、cancel、ポーズ／画面離脱でリセット。
-- 画面：足元をスティックが覆わないよう表示位置を調整。物理やコリジョン座標は維持。
-- 検証：Node15テスト、素材48点、ブラウザ35項目合格。5面通しと3結末を維持。
-- 限界：実機iOS/Androidのタッチ・音声とスピーカー試聴は未実施。
-- 起動：npm start。検証：npm test / npm run check。ブラウザ検証：tests/browser.html、sprites.html。
-- 復旧：変更前の44843dc。新しい原画／音源は上書きで失われないよう保持。
-- 次の候補：実機iOS／Androidでの確認（追加依頼時）。必須の残作業なし。
-
-- 公開ゲームのコミット：040e8d2334c1de89bccb747dcc0ce654162588eb。
-- Actions成功：https://github.com/lushlifelikenightflight-hue/iroirona-jujika-nebou-dash/actions/runs/38115717250
-- 公開URL：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.1.0
-- 公開確認：起動、新名称、スティックをドラッグして解除、左右移動、能力ボタン800ms長押し。コピー操作の表示なし、console警告／エラーなし。
-- 整理：Cの作業コピー85ファイル24,272,618 bytesをFとSHA256照合後に削除。旧チップBGM8曲はGitの44843dcから復旧可。
-- 生成原画6枚はsources/spritesへ保持。BGM原音・設定は音声工房library、再開用stateはwork/bgm-jobsへ保持。
+# 寝坊ダッシュ v1.2
+- 状態：縦画面・ズーム抑制・音声再生・しゃがみ・一輪車アニメーションを実装。ローカル検証済み、公開更新の段階。
+- 正本：このREADME/HANDOFFのある既存Fドライブのゲームフォルダー。移動しない。
+- 保存先と公開先は継続。表示名：たかし・たける・ぽにて・べんぞー・きんぐ。
+- 仕様：更新仕様_v1.2.md。上部HUD／中央ゲーム／下部操作。縦画面でプレイでき、回転要求なし。
+- 画面：100svhで高さを固定、CSS変形による全画面拡大を廃止。Canvasは画面比に合わせた横幅・高さ540で描画。背景の画像比も維持。
+- Input：スティック左右、屈長押し／↓・S。マルチポインター、cancel、ポーズ、離脱で解除。長押し・コピー・ピンチ・ダブルタップの拡大抑制。
+- Crouch：高さ76→42、足元維持、速度35%。低い天井では立たない。ジャンプで立つ。一輪車中にしゃがむと降りる。加入／セーブの形式は継続。
+- Sprites：左右走り80コマを維持。一輪車80コマ・しゃがみ10枚を追加。sources/spritesに原画・プロンプト、assets/spritesに透明アトラスとハッシュ。
+- Audio：ローカル音声工房でBGM8曲・SFX13種を新規生成。生成記録はassets/audioのbgm/sfx-provenance.json。原音・仕上げ・設定は音声工房libraryに保持。
+- Playback：同じHTMLAudio要素を曲間で継続。開始タップ内でplayとAudioContext.resumeをデコード前に実行。SFXはWebAudio。音声ON/OFF、試聴、音量、再開／再試行あり。
+- 検証：Node21テスト・素材55点が合格。ブラウザで8曲再生と時間進行、SFX非ゼロ出力、ON/OFF、3画面サイズ、同時操作、しゃがみ、加入と3結末の全項目合格。
+- 実機iOS/Androidのタッチとスピーカー試聴は未確認。ブラウザの音声再生時刻とSFX信号は確認。
+- 起動：npm start。検証：npm test / npm run check / tests/browser.html。画像確認：tests/actions.html。
+- 復旧：変更前のfb3518056058ee8b105d84756792caab2d2ccb45。v1.1の音源・素材はGit履歴で復旧。
+- 次：正本へSHA256一致で反映→検証済みコミットをmainへpush→Actionsと公開画面を確認→作業コピーを整理。
