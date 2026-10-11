@@ -9,7 +9,7 @@
 - 認証：/admin以下のHTML/CSS/JS/APIすべてでAccess JWT署名・issuer・aud・exp・管理者メールを確認。ヘッダーのメールだけは拒否。変更APIは同一Origin JSON、8192B上限、日時と文字数検証。ローカル省略はlocal環境+localhostのみ。
 - 本番認証の未設定：ACCESS_TEAM_DOMAIN / ACCESS_AUD / ADMIN_EMAILS。Cloudflare CLIは既存アカウントに接続済みだがAccess未有効。GET organizationsは403、appsはnot_enabled。
 - 必要な承認：Access組織POSTを自動承認審査が「永続的な認証設定の権限境界変更、実装依頼だけでは具体的承認不足」として拒否。実行されていない。名前「寝坊ダッシュ 公開管理」、本人だけ、8h、/adminだけ、課金契約なしを示してasyncで作成承認を質問した。回答が来るまで再実行しない。拒否の回避をしない。
-- ブラウザ：ユーザーはスマホでCloudflareへGitHubログイン済み。PCのセッションには共有されない。Codex内tab11とChromeの「公開管理」タブはGitHubログイン画面。パスワードをチャットへ要求しない。
+- ブラウザ：ユーザーはスマホでCloudflareへGitHubログイン済み。PCのセッションには共有されない。Codex内とChromeではGitHubログインが必要だった。重複する未入力のログイン用タブは閉じた。パスワードをチャットへ要求しない。
 - 検証：ゲーム44件、Cloudflare11件、TypeScript／Wrangler型生成合格。実ローカルWorker12項目：初期／予約／公開／停止／再公開／期限終了／資産拒否／CSRF拒否／競合409。設定は戻す。
 - ブラウザ：管理UIで期間保存→ゲーム開始・移動・能力→即時停止→プレイ中終了。別途、実際の終了時刻までゲームを起動して自動終了を確認。390×844で入力／ボタンのはみ出しなし。新しい警告／エラーなし。
 - 本番：7項目でclosed・ページ403・画像403・JS403・admin403・encoded admin403・no-storeを確認。公開ゲームへのアクセスはまだ有効化していない。管理者本人の本番ログインと期間変更は未検証。
@@ -21,3 +21,5 @@
 - 記録：チャットoutputsの公開管理プレビュー／スマホ画像／期限終了画像／Cloudflare配信検証JSON／成果物案内。依存と元素材は保持。
 - 復旧：ゲームは直前HEAD9a65df6b0bebfd35fa4c25407beee9a80cd7dc38。CloudflareはWrangler rollback。D1の公開設定はコードrollbackとは別で保持される。
 - 次：1)具体的なAccess作成承認があれば標準APIで作成を再試行。2)権限不足なら必要なAccess設定だけを説明し、安全な承認手段を求める。3)本人だけのAccessアプリを/adminと配下に設定、vars反映、型確認・配信。4)本番ログイン→保存→期間制御を検証し、非公開初期状態を保つ。
+- 保存・CI：source commit af28ada67c531f0045a5d8303e5826e526d28254。ゲームCI38144111983、Cloudflare CI38144111976が成功。認証設定後は本番管理者ログインを検証する。
+- 整理：サーバー99612を停止。dist全80ファイルを正本とSHA256照合し、distとwork/dry-runの計18,549,841Bを削除。記録はチャットoutputsとcloudflare/work/cleanup-record.json。npm run buildで再生成。依存・ローカルD1・Cの小さな再開用補助ファイルを保持。
