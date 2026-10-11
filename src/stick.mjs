@@ -9,10 +9,12 @@ export function stickVector(dx,dy,radius){
 export class AnalogStick{
  constructor(element,onChange,enabled){
   this.element=element;this.knob=element.querySelector('.stick-knob');this.onChange=onChange;this.enabled=enabled;this.pointer=null;this.value=0;
-  element.onpointerdown=e=>{e.preventDefault();if(!enabled()||this.pointer!==null)return;this.pointer=e.pointerId;try{element.setPointerCapture(e.pointerId);}catch{}element.classList.add('active');this.move(e);};
-  element.onpointermove=e=>{if(e.pointerId===this.pointer){e.preventDefault();this.move(e);}};
+  element.onpointerdown=e=>{e.preventDefault();if(!enabled())return;if(this.pointer!==null){if(e.pointerId===this.pointer||(element.hasPointerCapture&&!element.hasPointerCapture(this.pointer)))this.reset();else return;}this.pointer=e.pointerId;try{element.setPointerCapture(e.pointerId);}catch{}element.classList.add('active');this.move(e);};
+  element.onpointermove=e=>{if(e.pointerId===this.pointer){if(!enabled()||(e.pointerType==='mouse'&&e.buttons===0)){this.reset();return;}e.preventDefault();this.move(e);}};
   const release=e=>{if(e.pointerId===this.pointer)this.reset();};element.onpointerup=release;element.onpointercancel=release;element.onlostpointercapture=release;
+  // Capture phase still sees releases outside the control or stopped by another button.
+  const surface=element.ownerDocument;surface?.addEventListener('pointerup',release,true);surface?.addEventListener('pointercancel',release,true);
  }
  move(e){const r=this.element.getBoundingClientRect(),radius=r.width*.32,v=stickVector(e.clientX-r.left-r.width/2,e.clientY-r.top-r.height/2,radius);this.value=v.axis;this.knob.style.transform=`translate(${v.x*radius}px,${v.y*radius}px)`;this.element.setAttribute('aria-valuenow',String(Math.round(v.axis*100)));this.element.setAttribute('aria-valuetext',v.axis===0?'停止':`${v.axis<0?'左':'右'} ${Math.round(Math.abs(v.axis)*100)}%`);this.onChange(v.axis);}
- reset(){this.pointer=null;this.value=0;this.knob.style.transform='translate(0px,0px)';this.element.classList.remove('active');this.element.setAttribute('aria-valuenow','0');this.element.setAttribute('aria-valuetext','停止');this.onChange(0);}
+ reset(){const pointer=this.pointer;this.pointer=null;this.value=0;this.knob.style.transform='translate(0px,0px)';this.element.classList.remove('active');this.element.setAttribute('aria-valuenow','0');this.element.setAttribute('aria-valuetext','停止');this.onChange(0);if(pointer!==null){try{if(this.element.hasPointerCapture?.(pointer))this.element.releasePointerCapture(pointer);}catch{}}}
 }

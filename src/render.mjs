@@ -1,4 +1,4 @@
-import {W,H,GROUND,STAGES,MEMBERS} from './data.mjs?v=1.4.1';
+import {W,H,GROUND,STAGES,MEMBERS} from './data.mjs?v=1.5.0';
 export const ART=['stage-1','stage-2','stage-3','stage-4','stage-5','stone','house','ghost','bat','bell','boss','unicycle','taxi','dark','fire','ice','lightning','beam','spring','slide','room-door'];
 export const SPRITE_FILES=['idle-right','idle-left','crouch',...MEMBERS.flatMap(m=>['run-'+m.id,'pedal-'+m.id])];
 export function spritePose(id,face,wheel,motion=null){if(motion?.crouching)return {image:'crouch',frame:id+(face<0?5:0),action:'crouch'};if(wheel){const frame=motion?.grounded&&Math.abs(motion.vx)>5?Math.floor((motion.animTime||0)*12)%8:0;return {image:'pedal-'+MEMBERS[id].id,frame:frame+(face<0?8:0),action:'pedal'};}if(motion&&(!motion.grounded||Math.abs(motion.vx)>5)){const frame=motion.grounded?Math.floor((motion.animTime||0)*12)%8:3;return {image:'run-'+MEMBERS[id].id,frame:frame+(face<0?8:0),action:'run'};}return {image:face<0?'idle-left':'idle-right',frame:id,action:'idle'};}

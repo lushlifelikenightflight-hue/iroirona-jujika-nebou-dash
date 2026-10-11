@@ -1,4 +1,4 @@
-import {GROUND,STAGES} from './data.mjs?v=1.4.1';
+import {GROUND,STAGES} from './data.mjs?v=1.5.0';
 export const GIMMICK_LAYOUTS=[
  {spring:820,slide:2160,width:220,rise:72},
  {spring:780,slide:2560,width:260,rise:86},
@@ -27,8 +27,8 @@ export function applyGimmicks(w,p,prev,dt,emit){
    const blocked=w.platforms.some(t=>p.x<t.x+t.w&&p.x+p.w>t.x&&y>t.y+.01&&y-p.h<t.y+t.h);
    const continuing=before===g.id&&prev.grounded;
    if(!blocked&&p.vy>=0&&prev.y+prev.h<=y+tolerance&&(continuing||p.y+p.h>=y-1)){
-    p.y=y-p.h;p.vy=0;p.grounded=true;p.sliding=g.id;p.slideBoost=.25;
-    if(before!==g.id){emit('sfx','slide');emit('toast','滑り台！ ジャンプで抜け出せる');}
+    p.y=y-p.h;p.vy=0;p.grounded=true;p.sliding=p.crouching?null:g.id;p.slideBoost=p.crouching?0:.25;
+    if(!p.crouching&&before!==g.id){emit('sfx','slide');emit('toast','滑り台！ ジャンプで抜け出せる');}
    }
   }
  }
