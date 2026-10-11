@@ -3,17 +3,8 @@ import assert from 'node:assert/strict';
 import {Game} from '../src/engine.mjs';
 import {STAGES} from '../src/data.mjs';
 
-function driveStage(g){
- let steps=0;
- while(g.mode==='play'&&steps++<36000){
-  const {player:p,platforms,enemies}=g.world,d=STAGES[g.run.stage];
-  const pit=d.pits.some(([x,width])=>p.x+p.w>x-(p.y+p.h<400?100:50)&&p.x<x+width);
-  const block=platforms.some(t=>t.h<50&&t.x>p.x&&t.x<p.x+115&&t.y>p.y-30&&t.y<p.y+p.h);
-  const foe=enemies.some(e=>!e.dead&&e.x>p.x&&e.x<p.x+90);
-  g.step(1/120,{right:true,jump:p.grounded&&(pit||block||foe),attack:true});
- }
- assert.equal(g.mode,'clear',`Stage ${g.run.stage+1}, x=${g.world.player.x}`);
-}
+import {driveStage as runRoute} from './playthrough-driver.mjs';
+function driveStage(g){const report=runRoute(g);assert.equal(report.mode,'clear',JSON.stringify(report));}
 test('five-stage campaign with combat, followers and complete ending',()=>{
  const g=new Game();g.start();
  for(let s=0;s<5;s++){

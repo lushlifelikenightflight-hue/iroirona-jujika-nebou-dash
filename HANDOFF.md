@@ -1,6 +1,6 @@
 # 寝坊ダッシュ：開発・公開状態
 
-- 状態：v1.7.0をCloudflareとGitHub Pagesへ公開済み。今回の5要望は実装・検証・公開まで完了。正本F:\Projects\色々な十字架_寝坊ダッシュ。既存フォルダー・リポジトリ名を維持。
+- 状態：v1.8.0の面別ギミックと高低差、Congratulations表記を実装済み。ゲーム68・素材61・ブラウザー21項目合格。全5面を転落0で実入力走破し、3つの移動足場と崩落連続区間を通過。現在の公開版はv1.7.0。公開へ反映する。正本F:\Projects\色々な十字架_寝坊ダッシュ。既存フォルダー・リポジトリ名を維持。
 - Cloudflare：https://nebo-dash-publication.bug-plus-opening.workers.dev/?v=1.7.0 。GitHub：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.7.0 。管理画面はCloudflareの/admin。
 - 検証・配信ソースa61532313ce042290ae56fb693cf795a3f13cdf9。Pages CI38158368115成功。Worker version8652b07f-6e0f-4194-9b64-273c3f940dcd。後続の記録コミットはゲームを変更しない。
 - 公開日時：2026/10/12 0:00〜10/13 0:00 JST、startsAt1791730800000、endsAt1791817200000。本人の設定を保持し今回変更なし。GitHub Pagesとダウンロード済みコピーは期間制限の対象外。

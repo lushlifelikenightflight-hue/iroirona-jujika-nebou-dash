@@ -40,3 +40,5 @@ label.volume{display:flex;justify-content:center;align-items:center;gap:12px;fon
 @media(orientation:landscape) and (max-height:600px){.small-ending-panel .ending-cast{margin:6px auto}.small-ending-panel .cast-sprite{--sprite:70px}.dialogue,.story-narration{margin-block:10px;font-size:13px}.small-ending-panel h2{font-size:22px;margin-bottom:8px}}
 
 .intro-guide{display:flex;flex-wrap:wrap;justify-content:center;gap:5px 12px;margin:16px 0;color:#af9ab9;font-size:11px;line-height:1.6}.intro-guide span{white-space:nowrap}@media(max-width:340px){.dialogue{font-size:13px}}
+
+.stage-tip{border-left:2px solid #a3c7d5;background:#25304266;padding:10px!important;color:#dbeaf0!important;font-size:12px!important;line-height:1.7!important;text-align:left}
