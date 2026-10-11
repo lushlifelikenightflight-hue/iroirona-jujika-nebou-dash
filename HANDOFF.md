@@ -20,7 +20,7 @@
 ## 継続仕様・認証
 - たかし／たける／ぽにて／べんぞー／きんぐ、5面、走り・ペダル・しゃがみ歩き、スティック、しゃがむ上の単一交代ボタン、長押しメニュー、退出3秒保護、隠し家、バネ／滑り台、人数別結末、縦長5人ライブ、BGM8／SFX15を維持。
 - 光は前後斜め上下4本、1発射1敵へのダメージ1回、水平420／幅64／再使用0.45／寿命0.6。氷は前方85／130×150／寿命2／再使用1.2、移動・向き・ジャンプ・しゃがみ・交代後も追従。ボス得点2500をtoast／HUD／結果で共用。
-- 3〜5面の終盤に飛行射撃、0.45秒予兆、弾速180/205/230、射撃間隔3/2.6/2.2。1/2面は接触。敵数6/8/11/14/18。走り原画sources/sprites/v16、再処理tools/pack-run-v16.mjsを保持。左右80コマ、走行距離に比例する時計、通常18fps相当、0〜3px浮沈。
+- 3〜5面の終盤に飛行射撃、0.45秒予兆、弾速180/205/230、射撃間隔3/2.6/2.2。1/2面は接触。敵数7/9/12/15/19。走り原画sources/sprites/v16、再処理tools/pack-run-v16.mjsを保持。左右80コマ、走行距離に比例する時計、通常18fps相当、0〜3px浮沈。
 - Cloudflare専用コード・依存cloudflare/。Worker nebo-dash-publication。D1 nebo-dash-publication / d852492f-d36c-42e0-8f6d-675aa6252f9a。カード不要AUTH_MODE=password。管理者本人登録済み。秘密／パスワードをチャットやGitに保存しない。
 - Zero Trust契約未確定、Access組織／アプリ未作成。Wrangler OAuthは既存アカウントへ接続済み。0002_admin_password.sql適用済み。初回鍵256ビット・24時間・1回、PBKDF2-SHA256100,000回＋salt＋pepper、8h Secure/HttpOnly/SameSiteStrict CookieとD1失効管理。
 - 試行制限15分ごとIP6／全体50。変更API同一Origin JSON／8192B。ADMIN_AUTH_SECRET復旧コピーcloudflare/work/private/admin-auth-secret.jsonはGit無視で保持。pepperを変更しない。資格情報再設定は本人依頼のみ、新パスワードは本人が入力する。
