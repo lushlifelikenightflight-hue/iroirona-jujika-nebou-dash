@@ -1,7 +1,7 @@
-import {MEMBERS,STAGES,GROUND,score,BOSS_SCORE,BEAM_DIRECTIONS} from './data.mjs?v=1.9.1';
-import {DIFFICULTY} from './difficulty.mjs?v=1.9.1';
-import {createGimmicks,applyGimmicks} from './gimmicks.mjs?v=1.9.1';
-import {stagePlatforms,floorAt,WIND_ZONES,updateStagePlatforms,stageMotion,resetCrumbling} from './stage-gimmicks.mjs?v=1.9.1';
+import {MEMBERS,STAGES,GROUND,score,BOSS_SCORE,BEAM_DIRECTIONS} from './data.mjs?v=1.9.2';
+import {DIFFICULTY} from './difficulty.mjs?v=1.9.2';
+import {createGimmicks,applyGimmicks} from './gimmicks.mjs?v=1.9.2';
+import {stagePlatforms,floorAt,WIND_ZONES,updateStagePlatforms,stageMotion,resetCrumbling} from './stage-gimmicks.mjs?v=1.9.2';
 export const overlap=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const rect=(x,y,w,h)=>({x,y,w,h});
@@ -46,7 +46,7 @@ export class Game {
  revealHouse(){const w=this.world,d=w.door;if(!d||d.visible||!d.guardIds.length)return;const defeated=d.guardIds.every(id=>w.enemies.some(e=>e.guardId===id&&e.dead));if(defeated){d.visible=true;this.emit('sfx','join');this.emit('toast','魔物の気配が消え、薔薇の扉が現れた！');}}
  hitEnemy(e,damage){if(e.dead)return;e.hp-=damage;if(e.hp<=0)this.kill(e);}
  finish(timeout){this.mode='ending';this.endingTimeout=timeout;this.result=score(this.run,timeout);this.emit('ending',{timeout,score:this.result});}
- nextStage(){if(this.run.stage===4){this.finish(false);return;}this.loadStage(this.run.stage+1);}
+ nextStage(){if(this.mode!=='clear'||!this.run)return false;if(this.run.stage===4)this.finish(false);else this.loadStage(this.run.stage+1);return true;}
  step(dt,input={}){if(this.mode!=='play')return;dt=Math.min(dt,.04);const w=this.world,p=w.player;w.time+=dt;this.run.remaining=Math.max(0,this.run.remaining-dt);if(this.run.remaining<=0){this.finish(true);return;}for(let i=0;i<5;i++)this.cooldowns[i]=Math.max(0,this.cooldowns[i]-dt);p.invincible=Math.max(0,p.invincible-dt);p.wheel=Math.max(0,p.wheel-dt);p.exitGrace=Math.max(0,(p.exitGrace||0)-dt);
  if(input.switch)this.cycle();if(input.attack)this.attack();if(input.interact)this.interact();if(w!==this.world)return;
  updateStagePlatforms(w,p,dt,(type,value)=>this.emit(type,value));

@@ -44,3 +44,5 @@ label.volume{display:flex;justify-content:center;align-items:center;gap:12px;fon
 .stage-tip{border-left:2px solid #a3c7d5;background:#25304266;padding:10px!important;color:#dbeaf0!important;font-size:12px!important;line-height:1.7!important;text-align:left}
 
 #load-percent{font-size:32px;font-variant-numeric:tabular-nums;color:#ead7ae;margin:2px 0 12px}#load-bar{width:min(240px,75vw);height:8px;margin-bottom:16px;accent-color:#ceaa77;border:0;border-radius:4px;overflow:hidden;background:#35263c}#load-bar::-webkit-progress-bar{background:#35263c}#load-bar::-webkit-progress-value{background:#ceaa77}#load-bar::-moz-progress-bar{background:#ceaa77}
+
+#connection-status{position:fixed;z-index:12;top:70px;left:50%;transform:translateX(-50%);max-width:calc(100vw - 32px);padding:7px 10px;border:1px solid #bca07866;background:#21172ef0;color:#f0ddb7;font-size:12px;text-align:center;pointer-events:none}

@@ -1,5 +1,7 @@
 # 寝坊ダッシュ：開発・公開状態
 
+- v1.9.2改修：通信断で即座に画面を閉じる問題、音声エラーでクリア表示が残る問題、Space入力の横取りを再現して修正。ゲーム74／公開制御21／素材61／DOM画面遷移23項目、型とbuildが合格。次面はclearから1回だけ進む。通信断でも確認済み終了時刻で必ず閉じる。ブラウザー操作に接続できず、DOM検証と本番HTTP照合で確認。公開前、以下は直前の公開状態。
+
 
 - 状態：v1.9.1をCloudflareとGitHub Pagesへ公開済み。各面を少し延長しギミックを広範囲へ適用、実装／検証／公開を完了。最初の読み込み進捗％とバーも追加済み。正本F:\Projects\色々な十字架_寝坊ダッシュ。既存フォルダーとリポジトリ名を維持。
 - Cloudflare：https://nebo-dash-publication.bug-plus-opening.workers.dev/?v=1.9.1 。GitHub：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.9.1 。管理画面はCloudflareの/admin。

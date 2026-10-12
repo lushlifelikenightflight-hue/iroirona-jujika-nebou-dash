@@ -1,4 +1,4 @@
-import {MEMBERS} from './data.mjs?v=1.9.1';
+import {MEMBERS} from './data.mjs?v=1.9.2';
 export function endingStory(crew){
  const joined=new Set(crew),missing=MEMBERS.filter((_,id)=>!joined.has(id)).map(m=>m.name),partners=crew.filter(id=>id!==0).map(id=>MEMBERS[id].name);
  if(crew.length===1)return {kind:'solo',label:'SOLO ENDING',title:'今日のステージは、ひとり。',text:'たかし「今日ソロだったっけ？」'};

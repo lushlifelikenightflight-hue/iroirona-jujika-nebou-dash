@@ -1,9 +1,9 @@
-import {W,H,GROUND,STAGES,MEMBERS,BEAM_DIRECTIONS} from './data.mjs?v=1.9.1';
+import {W,H,GROUND,STAGES,MEMBERS,BEAM_DIRECTIONS} from './data.mjs?v=1.9.2';
 export const ART=['stage-1','stage-2','stage-3','stage-4','stage-5','stone','house','ghost','bat','bell','boss','unicycle','taxi','dark','fire','ice','lightning','beam','spring','slide','room-door'];
 export const SPRITE_FILES=['idle-right','idle-left','crouch',...MEMBERS.flatMap(m=>['run-'+m.id,'pedal-'+m.id])];
 export const RENDER_ASSET_COUNT=ART.length+SPRITE_FILES.length+4;
 export const RUN_FPS=18,PEDAL_FPS=12;
-function assetURL(src){const url=new URL('../'+src,import.meta.url);url.searchParams.set('v','1.9.1');return url.href;}
+function assetURL(src){const url=new URL('../'+src,import.meta.url);url.searchParams.set('v','1.9.2');return url.href;}
 export function spritePose(id,face,wheel,motion=null){if(motion?.crouching)return {image:'crouch',frame:id+(face<0?5:0),action:'crouch'};if(wheel){const frame=motion?.grounded&&Math.abs(motion.vx)>5?Math.floor((motion.animTime||0)*PEDAL_FPS)%8:0;return {image:'pedal-'+MEMBERS[id].id,frame:frame+(face<0?8:0),action:'pedal'};}if(motion&&(!motion.grounded||Math.abs(motion.vx)>5)){const frame=motion.grounded?Math.floor((motion.animTime||0)*RUN_FPS)%8:3;return {image:'run-'+MEMBERS[id].id,frame:frame+(face<0?8:0),action:'run',lift:motion.grounded?[0,0,2,3,0,0,2,3][frame]:0};}return {image:face<0?'idle-left':'idle-right',frame:id,action:'idle'};}
 export function cameraY(world,height=540){if(world.room)return 0;const feet=world.player.y+world.player.h;return Math.max(world.top||0,Math.min(Math.max(0,(world.bottom||580)-height),feet>GROUND?feet-height*.72:Math.min(0,feet-height*.72)));}
 export class Renderer{
