@@ -1,4 +1,4 @@
-import {STAGES,GROUND} from './data.mjs?v=1.9.2';
+import {STAGES,GROUND} from './data.mjs?v=1.9.3';
 
 // [x, top, width]. Ground is solid; special ledges are one-way surfaces.
 export const TERRAIN=[null,

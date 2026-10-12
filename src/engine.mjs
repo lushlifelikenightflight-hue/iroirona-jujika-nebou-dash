@@ -1,7 +1,7 @@
-import {MEMBERS,STAGES,GROUND,score,BOSS_SCORE,BEAM_DIRECTIONS} from './data.mjs?v=1.9.2';
-import {DIFFICULTY} from './difficulty.mjs?v=1.9.2';
-import {createGimmicks,applyGimmicks} from './gimmicks.mjs?v=1.9.2';
-import {stagePlatforms,floorAt,WIND_ZONES,updateStagePlatforms,stageMotion,resetCrumbling} from './stage-gimmicks.mjs?v=1.9.2';
+import {MEMBERS,STAGES,GROUND,score,BOSS_SCORE,BEAM_DIRECTIONS} from './data.mjs?v=1.9.3';
+import {DIFFICULTY} from './difficulty.mjs?v=1.9.3';
+import {createGimmicks,applyGimmicks} from './gimmicks.mjs?v=1.9.3';
+import {stagePlatforms,floorAt,WIND_ZONES,updateStagePlatforms,stageMotion,resetCrumbling} from './stage-gimmicks.mjs?v=1.9.3';
 export const overlap=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const rect=(x,y,w,h)=>({x,y,w,h});
