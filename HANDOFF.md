@@ -1,16 +1,22 @@
 # 寝坊ダッシュ：開発・公開状態
 
-- v1.9.2改修：通信断で即座に画面を閉じる問題、音声エラーでクリア表示が残る問題、Space入力の横取りを再現して修正。ゲーム74／公開制御21／素材61／DOM画面遷移23項目、型とbuildが合格。次面はclearから1回だけ進む。通信断でも確認済み終了時刻で必ず閉じる。ブラウザー操作に接続できず、DOM検証と本番HTTP照合で確認。公開前、以下は直前の公開状態。
 
 
-- 状態：v1.9.1をCloudflareとGitHub Pagesへ公開済み。各面を少し延長しギミックを広範囲へ適用、実装／検証／公開を完了。最初の読み込み進捗％とバーも追加済み。正本F:\Projects\色々な十字架_寝坊ダッシュ。既存フォルダーとリポジトリ名を維持。
-- Cloudflare：https://nebo-dash-publication.bug-plus-opening.workers.dev/?v=1.9.1 。GitHub：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.9.1 。管理画面はCloudflareの/admin。
-- 検証・配信ソース28397b890b1e509ea742daba91a64a26c1acc16c。Pages CI38164924607成功。Worker 5277ee69-ba46-43a2-aebd-6587d6081d23。後続の記録変更は公開ゲームを変更しない。
+- 状態：v1.9.2をCloudflareとGitHub Pagesへ公開済み。各面を少し延長しギミックを広範囲へ適用、実装／検証／公開を完了。最初の読み込み進捗％とバーも追加済み。正本F:\Projects\色々な十字架_寝坊ダッシュ。既存フォルダーとリポジトリ名を維持。
+- Cloudflare：https://nebo-dash-publication.bug-plus-opening.workers.dev/?v=1.9.2 。GitHub：https://lushlifelikenightflight-hue.github.io/iroirona-jujika-nebou-dash/?v=1.9.2 。管理画面はCloudflareの/admin。
+- 検証・配信ソースa5ebf278f3fa488d1257efda274529169c8c2d8d。Pages CI38198885868成功。Worker 16195304-246c-4ce8-8178-e7c8711d99ad。後続の記録変更は公開ゲームを変更しない。
 - 公開日時：2026/10/12 0:00〜10/13 0:00 JST、startsAt1791730800000、endsAt1791817200000を保持。GitHub Pagesは期間制限対象外。
 
-## 読み込み表示（v1.9.1）
+## 画面進行修正（v1.9.2）
+- 原因再現：初回許可後の一時通信失敗で直ちに画面を閉じる。BGM.playの同期例外でmodeだけintroに変わりクリア表示が残る。非プレイ時もSpaceをpreventDefaultしてボタン入力を奪う。実ユーザー端末のログは取得できず、同じコードで停止ケースを再現して修正。
+- 次面はmode clearから1回だけ進む。音声jobをcatchし、音声の同期エラー／拒否／resume待機が画面移動を止めない。非プレイ時のゲームキーをpreventしない。クリア後の離脱・復帰も確認。
+- 公開制御：一時失敗は既に確認済みの期限まで再試行、5秒ごと＋online／画面復帰で再確認。再接続の案内はpointer-events:noneで操作を覆わない。独立した期限タイマーにより通信確認が応答しなくても停止、終了後の遅いレスポンスで再開しない。未確認の初回失敗は従来どおり閉じる。サーバーのallowed:falseは即座に閉じる。期限・認証・Worker設定は変更なし。
+- 今回ゲーム74／公開制御21／素材61／型／buildが合格。DOM環境で実main.mjsを動かす画面遷移23ケースが合格、5面の次画面・通信断・音声エラー・連打・離脱復帰・期限停止を確認。本番35ファイルSHA一致、期間保持、匿名管理API403。
+- ブラウザー操作への接続がなく、実ブラウザーでの表示／タップ／音声再確認は未実施。Cuaの一覧は空。DOM検証と混同しない。tests/transitions.htmlは接続復帰後の再確認用、tests/transitions.test.mjsとcloudflare/tests/client-connection.test.mjsはCIに含む。
+
+## 読み込み表示（v1.9.1の継続仕様）
 - 0〜100％＋progressバー。画像37＋manifest1＋音源23＝61素材の成功完了数を集計、全完了後にタイトル。renderer.load／audio.preloadの任意コールバックで集計、失敗素材を完了に数えない。
-- ゲーム72／素材61項目合格。初期0→画像と音源が順次完了→98％（最後の音源待ち）→100％とタイトル移行をブラウザーで確認。本番1％表示／100％到達／タイトル／ヘルプボタン、警告／エラー0。両公開先17ファイルずつSHA一致。期間と認証を保持。
+- v1.9.1時にゲーム72／素材61項目合格。初期0→画像と音源が順次完了→98％（最後の音源待ち）→100％とタイトル移行をブラウザーで確認。v1.9.1時の本番1％表示／100％到達／タイトル／ヘルプボタン、警告／エラー0。両公開先17ファイルずつSHA一致。期間と認証を保持。
 - tests/loading.test.mjsで進捗の途中更新／manifest解析完了／全素材通知／失敗時に100％にならないことを検証。検証用サーバーの音源待ち／DOM観測はCのwork/loading-preview-server.mjsのみで本番には配信しない。
 
 ## 地形と検証（v1.9の継続仕様）
@@ -32,13 +38,13 @@
 - Cloudflare専用コード・依存cloudflare/。Worker nebo-dash-publication。D1 nebo-dash-publication / d852492f-d36c-42e0-8f6d-675aa6252f9a。カード不要AUTH_MODE=password。管理者本人登録済み。秘密／パスワードをチャットやGitに保存しない。
 - Zero Trust契約未確定、Access組織／アプリ未作成。Wrangler OAuthは既存アカウントへ接続済み。0002_admin_password.sql適用済み。初回鍵256ビット・24時間・1回、PBKDF2-SHA256100,000回＋salt＋pepper、8h Secure/HttpOnly/SameSiteStrict CookieとD1失効管理。
 - 試行制限15分ごとIP6／全体50。変更API同一Origin JSON／8192B。ADMIN_AUTH_SECRET復旧コピーcloudflare/work/private/admin-auth-secret.jsonはGit無視で保持。pepperを変更しない。資格情報再設定は本人依頼のみ、新パスワードは本人が入力する。
-- 全資産run_worker_first、D1 first-primary、開始<=現在<終了、no-store、DB障害503。プレイ中5秒＋期限確認。管理UIはJST日時・ON/OFF・即時公開／停止・期間外文・revision競合検知。今回認証コード／設定変更なし。
+- 全資産run_worker_first、D1 first-primary、開始<=現在<終了、no-store、DB障害503。プレイ中5秒＋独立期限タイマー。通信失敗は直前に確認した期限まで再試行、期限を勝手に延長しない。管理UIはJST日時・ON/OFF・即時公開／停止・期間外文・revision競合検知。今回認証コード／設定変更なし。
 - 既存認証検証：ユニット15／型／隔離Worker認証10＋期間12／本番匿名10合格、本人の登録と設定保存確認済み。ローカル試験設定は本番へ持ち込まない。
 
 ## 保存・復旧・次の作業
 - 起動：正本npm start→127.0.0.1:4186。検証npm test／npm run check、ブラウザーtests/update-v19.html（今回）／tests/browser.html（既存）。Cloudflareはnpm ci／npm test／npm run typecheck／npm run test:auth。buildとpreflight後wrangler deploy --env=。認証／設定コードは今回変更なし。
-- outputsにv1.9.1更新案内／読み込み進捗画像と0〜100の観測記録／公開SHA照合／整理記録。v1.9の操作28／描画／地形プレビューも保持。C:\Users\lushl\Documents\Codex\2026-10-11\new-chat-2\outputs。入口は成果物案内.md。旧成果物保持。
-- 整理：正本cloudflare/dist84ファイル17,914,442BをSHA一致確認後削除。cloudflareでnpm run buildすると復旧。素材・原画・音源・依存・秘密・ローカルDBは保持。今回の検証タブ32を閉じ、サーバー61847をCtrlCで終了。公開タブ33をタイトル画面で保持、画面サイズ指定は解除。
-- work/v191およびworkの小さな読み込み検証／修正補助は再開用に保持。過去のwork/v16/v17/v18/v19も保持。コピーは正本より古い場合があるため正本へ上書きしない。
-- rollback：改修前ソース2158b9b、Workerd033494b-5d0f-4b15-8155-f3e6c7af04d0。D1日時と資格情報はコードrollbackとは別に保持。
-- 次：必要な残作業なし。期間変更は本人依頼時のみ。次の変更はこの記録と正本を照合し、ユーザー保存データ／無関係な素材を保持。
+- outputsにv1.9.2更新案内／原因再現／DOM遷移23の記録／公開SHA照合／整理記録。v1.9.1読み込み画像と観測記録も保持。v1.9の操作28／描画／地形プレビューも保持。C:\Users\lushl\Documents\Codex\2026-10-11\new-chat-2\outputs。入口は成果物案内.md。旧成果物保持。
+- 整理：正本cloudflare/dist84ファイル17,916,393BをSHA一致確認後削除。cloudflareでnpm run buildすると復旧。素材・原画・音源・依存・秘密・ローカルDBは保持。今回の検証サーバー96861をCtrlCで終了。ブラウザー操作の接続がなく、新しい操作可能タブは作成していない、画面サイズ指定は解除。
+- work/v192に原因再現／DOM検証補助とjsdomの検証環境を保持。過去work/v191およびworkの読み込み検証／修正補助は再開用に保持。過去のwork/v16/v17/v18/v19も保持。コピーは正本より古い場合があるため正本へ上書きしない。
+- rollback：改修前ソースc4a9d4ef94367185172b282eef78efc6cab75204、Worker5277ee69-ba46-43a2-aebd-6587d6081d23。D1日時と資格情報はコードrollbackとは別に保持。
+- 次：実装と公開は完了。次はブラウザー接続復帰後にtests/transitions.htmlで実タップと音声を再確認する。期間変更は本人依頼時のみ。次の変更はこの記録と正本を照合し、ユーザー保存データ／無関係な素材を保持。
