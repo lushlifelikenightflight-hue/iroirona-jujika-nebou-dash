@@ -18,3 +18,13 @@ $('open').addEventListener('click',()=>action(()=>call('open','POST',{revision:c
 $('logout').addEventListener('click',async()=>{if(busy)return;busy=true;controls();try{await call('logout','POST',{});location.replace('/admin/login');}catch(error){message(error.message,true);busy=false;controls();}});
 await action(()=>call('settings'),'');
 setInterval(async()=>{if(busy||!current)return;try{const response=await fetch('/api/publication',{cache:'no-store'});if(!response.ok)return;const status=await response.json();current.serverNow=status.serverNow;current.state=status.state;$('state').textContent=labels[status.state]||'非公開';$('period').textContent=periodText(status.startsAt,status.endsAt);controls();}catch{}},10000);
+
+let analyticsBusy=false;
+async function loadAnalytics(){
+  if(analyticsBusy)return;analyticsBusy=true;$('analytics-reload').disabled=true;
+  try{const data=await call('analytics');$('game-total').textContent=data.total.gameViews.toLocaleString('ja-JP');$('closed-total').textContent=data.total.closedViews.toLocaleString('ja-JP');$('game-today').textContent=(data.days.find(row=>row.day===data.today)?.gameViews??0).toLocaleString('ja-JP');$('analytics-status').textContent=data.startedAt?'計測開始：'+jp.format(new Date(data.startedAt)):'計測開始日時を確認できません。';$('analytics-days').replaceChildren();for(const row of data.days){const tr=document.createElement('tr');for(const value of [row.day,row.gameViews,row.closedViews]){const td=document.createElement('td');td.textContent=String(value);tr.append(td);}$('analytics-days').append(tr);}if(!data.days.length){const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=3;td.textContent='まだアクセスの記録がありません。';tr.append(td);$('analytics-days').append(tr);}}
+  catch(error){$('analytics-status').textContent='アクセス数を読み込めませんでした。'+error.message;}
+  finally{analyticsBusy=false;$('analytics-reload').disabled=false;}
+}
+$('analytics-reload').addEventListener('click',loadAnalytics);
+await loadAnalytics();

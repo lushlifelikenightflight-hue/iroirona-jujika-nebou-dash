@@ -1,3 +1,4 @@
+import {shouldCount,recordView,analyticsData} from './analytics.mjs';
 import {authenticate} from './auth.mjs';
 import {authenticationRoute} from './password-auth.mjs';
 import {publicStatus,validateSettings} from './publication.mjs';
@@ -34,6 +35,7 @@ async function admin(request:Request,env:Env,path:string){
     const url=new URL(request.url);if(['/admin','/admin/'].includes(path))url.pathname='/admin/index.html';
     const asset=await env.ASSETS.fetch(new Request(url,request));return decorate(asset);
   }
+  if(path==='/admin/api/analytics'){if(request.method!=='GET')return json({error:'Method not allowed'},405);return json(await analyticsData(env.DB));}
   if(!['/admin/api/settings','/admin/api/stop','/admin/api/open'].includes(path))return json({error:'Not found'},404);
   const current=await settings(env);
   if(path==='/admin/api/settings'&&request.method==='GET')return json({...adminData(current),administrator:actor,local:env.ENVIRONMENT==='local'});
@@ -60,7 +62,7 @@ async function admin(request:Request,env:Env,path:string){
 }
 function decorate(response:Response){const headers=new Headers(response.headers);for(const [key,value]of Object.entries(secureHeaders))headers.set(key,value);return new Response(response.body,{status:response.status,statusText:response.statusText,headers});}
 export default {
-  async fetch(request:Request,env:Env):Promise<Response>{
+  async fetch(request:Request,env:Env,ctx?:ExecutionContext):Promise<Response>{
     let path:string;try{path=decodeURIComponent(new URL(request.url).pathname);}catch{return json({error:'Invalid path'},400);}
     try{
       if(path==='/admin'||path.startsWith('/admin/'))return await admin(request,env,path);
@@ -68,12 +70,14 @@ export default {
       if(path==='/publication-unavailable')return respond(unavailablePage({state:'unavailable',message:'接続できませんでした。通信環境を確認して、もう一度お試しください。'}),503,'text/html; charset=utf-8');
       const row=await settings(env),status=publicStatus(row);
       if(path==='/api/publication')return json(status);
+      const count=async(allowed:boolean)=>{if(!shouldCount(request,path))return;const job=recordView(env.DB,allowed).catch(()=>{console.error(JSON.stringify({event:'access_count_failed'}));});if(ctx)ctx.waitUntil(job);else await job;};
       if(!status.allowed){
+        await count(false);
         if(path==='/'||path==='/index.html')return respond(request.method==='HEAD'?null:unavailablePage(status),status.state==='ended'?410:403,'text/html; charset=utf-8');
         return json({error:'公開期間外です。',state:status.state},status.state==='ended'?410:403);
       }
       const assetURL=new URL(request.url);if(path==='/')assetURL.pathname='/index.html';
-      const asset=await env.ASSETS.fetch(new Request(assetURL,request));return decorate(asset);
+      const asset=await env.ASSETS.fetch(new Request(assetURL,request));if(asset.status===200)await count(true);return decorate(asset);
     }catch(error){console.error(JSON.stringify({event:'publication_error',path,message:error instanceof Error?error.message:'Unknown error'}));return respond(unavailablePage({state:'unavailable',message:'ただいま接続できません。しばらくしてからお試しください。'}),503,'text/html; charset=utf-8');}
   }
 } satisfies ExportedHandler<Env>;
