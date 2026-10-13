@@ -9,14 +9,16 @@
 - b9a4f99で管理画面へ累計／今日／直近30日日別PV追加。/と/index.htmlのGETのみ、200ゲームと期間外拒否を別計測。再訪・通常ボット・検証GETを含む表示数。HEAD・先読み・資産・管理・API除外、IP保存なし、GitHub Pages対象外。
 - D1 0003適用済み、atomic upsert＋開始日時、ctx.waitUntil保存失敗は表示を止めない。認証必須GET /admin/api/analytics。更新時の未保存設定保持。Worker d4eb80c7-7de6-44bc-b788-7e647104d373へ配信。
 - Cloudflare24／型／ローカルWorker12／ブラウザー日別集計と入力保持合格。本番root410／匿名analytics403／素材410、D1期間外1件（検証GET）記録、日時revision1保持確認。期限は終了中、資格情報維持。
-- 過去ログ：keys APIは既存OAuthで403のまま、権限拡張なし。本人のChrome再ログイン後、Dashboardで10/12 0:00〜10/13 0:00 JSTのHTTPS GET /・/index.html・HTTP200を1,932件確認。画像等・HEAD除外、再訪／ボット／検証含むPV、先読み等未検証。D1へ合算せず、outputsの過去アクセス_2026-10-12_*と取得結果.mdへ保存。計測開始前のD1の0を過去実績としない。
+- 過去ログ：本人のChrome再ログイン後に10/12のHTTPS GET /・/index.html・HTTP200を1,932件確認。0004でaccess_dailyの10/12へ取り込み済み。access_importsで根拠・条件・日時を保持、INSERT OR IGNOREで再実行重複防止、集計開始1791730800000。未記録・先読み等の差異は未検証。API OAuth権限は変更なし。
 - outputsにアクセス集計案内／ローカル画面／本番確認。Cのwork/v194に補助。rollbackコード25f711e、Worker56589c9b-8cf0-4d71-b139-defbdc008ec9。追加テーブル／日時／認証は保持する。
 
 ## 公開アクセス表示（2026/10/13）
-- Cloudflareのゲーム全画面上部と期間外画面へ表示。GET /api/access-countは合計・ゲーム／期間外・開始日時だけ公開、管理認証は維持。counter mjs/cssだけ期間外にも配信、ゲーム資産410維持。開始10/13以降のD1件数、過去1,932件は合算していない。
-- 30秒／表示復帰・onlineで更新、失敗は直前値保持、未取得は取得不可。GitHubゲーム本体v1.9.3は変更せずCloudflare buildで注入。DB migrationなし、日時・認証維持。
+- Cloudflareのゲーム全画面上部と期間外画面へ表示。GET /api/access-countは合計・ゲーム／期間外・開始日時だけ公開、管理認証は維持。counter mjs/cssだけ期間外にも配信、ゲーム資産410維持。10/12の保存ログ1,932件と10/13以降を合算。
+- 30秒／表示復帰・onlineで更新、失敗は直前値保持、未取得は取得不可。GitHubゲーム本体v1.9.3は変更せずCloudflare buildで注入。0004適用、公開日時・認証維持。
 - Worker2c4b1775-1e3e-4667-b2d9-f2ac2e406f5b配信。Cloudflare27／型／ローカル12／ブラウザータイトル・プレイ・終了／本番終了表示合格。公開集計とcounter2資産SHA一致、ゲーム410・管理403・期限維持。
 - outputsにアクセス表示_本番終了画面.png／本番確認JSON／ゲーム検証PNG／案内。Cのwork/v195に補助、ローカル設定復元済み。rollback cf2e005／Worker d4eb80c7-7de6-44bc-b788-7e647104d373。
+
+- 最新Worker7958e9b6-689f-47fc-a185-82b05711d787。28試験合格、本番ゲーム表示1,932／期間外12／10/12日別1932と期間保持をブラウザー・D1・APIで確認。rollback表示は78311c6／Worker2c4b1775-1e3e-4667-b2d9-f2ac2e406f5b。データはコードrollback後も合算維持。Cのwork/v196に検証補助、outputsに合算確認・画面・案内。
 
 ## 音声切り替え（v1.9.3）
 - 音声開始専用の「音を聴く」と初期ON表示を、共通ON／OFF処理へ変更。タイトル／ポーズ／HUDが現在状態を表示。OFFはMediaをpauseしmaster gainを0、SFX新規再生も抑止。
