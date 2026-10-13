@@ -6,6 +6,6 @@ await mkdir(dist,{recursive:true});
 for(const name of ['index.html','style.css','src','assets'])await cp(path.join(game,name),path.join(dist,name),{recursive:true});
 await cp(path.join(root,'public'),dist,{recursive:true});
 const index=await readFile(path.join(dist,'index.html'),'utf8');
-await writeFile(path.join(dist,'index.html'),index.replace('</head>','<script type="module" src="/publication-guard.mjs"></script></head>'));
+await writeFile(path.join(dist,'index.html'),index.replace('</head>','<link rel="stylesheet" href="/access-counter.css"><script type="module" src="/access-counter.mjs"></script><script type="module" src="/publication-guard.mjs"></script></head>'));
 let count=0,bytes=0;async function inventory(dir){for(const item of await readdir(dir,{withFileTypes:true})){const target=path.join(dir,item.name);if(item.isDirectory())await inventory(target);else{count++;bytes+=(await stat(target)).size;}}}await inventory(dist);
 console.log(`Cloudflare package: ${count} files, ${bytes} bytes. GitHub Pages sources unchanged.`);

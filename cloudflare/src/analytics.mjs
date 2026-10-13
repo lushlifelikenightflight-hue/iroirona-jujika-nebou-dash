@@ -12,3 +12,8 @@ export async function analyticsData(db,now=Date.now()){
   ]);
   return {startedAt:meta?.started_at??null,today:jstDay(now),total,days:recent.results};
 }
+
+export async function publicAccessData(db){
+  const row=await db.withSession('first-primary').prepare('SELECT COALESCE(SUM(game_views),0) AS gameViews,COALESCE(SUM(closed_views),0) AS closedViews,(SELECT started_at FROM access_metadata WHERE id=1) AS startedAt FROM access_daily').first();
+  return {views:row.gameViews+row.closedViews,gameViews:row.gameViews,closedViews:row.closedViews,startedAt:row.startedAt};
+}

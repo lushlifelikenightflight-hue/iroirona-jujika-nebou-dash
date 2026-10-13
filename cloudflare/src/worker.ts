@@ -1,4 +1,4 @@
-import {shouldCount,recordView,analyticsData} from './analytics.mjs';
+import {shouldCount,recordView,analyticsData,publicAccessData} from './analytics.mjs';
 import {authenticate} from './auth.mjs';
 import {authenticationRoute} from './password-auth.mjs';
 import {publicStatus,validateSettings} from './publication.mjs';
@@ -67,6 +67,8 @@ export default {
     try{
       if(path==='/admin'||path.startsWith('/admin/'))return await admin(request,env,path);
       if(!['GET','HEAD'].includes(request.method))return json({error:'Method not allowed'},405);
+      if(path==='/api/access-count'){try{if(request.method==='HEAD')return respond(null);return json(await publicAccessData(env.DB));}catch{return json({error:'アクセス数を取得できません。'},503);}}
+      if(['/access-counter.mjs','/access-counter.css'].includes(path))return decorate(await env.ASSETS.fetch(request));
       if(path==='/publication-unavailable')return respond(unavailablePage({state:'unavailable',message:'接続できませんでした。通信環境を確認して、もう一度お試しください。'}),503,'text/html; charset=utf-8');
       const row=await settings(env),status=publicStatus(row);
       if(path==='/api/publication')return json(status);
