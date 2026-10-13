@@ -20,6 +20,8 @@
 
 - 最新Worker7958e9b6-689f-47fc-a185-82b05711d787。28試験合格、本番ゲーム表示1,932／期間外12／10/12日別1932と期間保持をブラウザー・D1・APIで確認。rollback表示は78311c6／Worker2c4b1775-1e3e-4667-b2d9-f2ac2e406f5b。データはコードrollback後も合算維持。Cのwork/v196に検証補助、outputsに合算確認・画面・案内。
 
+- 表記を「アクセス：合計（ゲームプレイ回数：ゲーム表示 / 期間外アクセス：件数）」へ変更。回・開始日は補足へ。ゲームプレイ回数はページ表示回数であるとtitleに明記。書式試験と本番表示確認済み、Worker e86d57ec-2b4d-49e5-b6e2-d621e10b026a。集計・期限変更なし。
+
 ## 音声切り替え（v1.9.3）
 - 音声開始専用の「音を聴く」と初期ON表示を、共通ON／OFF処理へ変更。タイトル／ポーズ／HUDが現在状態を表示。OFFはMediaをpauseしmaster gainを0、SFX新規再生も抑止。
 - cross-nebou-mutedに設定保存。ゲーム開始／再開／タイトル／再読み込み後もOFF維持。破損したゲーム保存データにミュート設定を巻き込まない。OFFでの新規開始は不要な音声起動を行わない。
@@ -54,7 +56,7 @@
 ## 保存・復旧・次の作業
 - 起動：正本npm start→127.0.0.1:4186。検証npm test／npm run check、ブラウザーtests/update-v19.html（今回）／tests/browser.html（既存）。Cloudflareはnpm ci／npm test／npm run typecheck／npm run test:auth。buildとpreflight後wrangler deploy --env=。認証／設定コードは今回変更なし。
 - outputsにv1.9.3更新案内／音声DOM17／遷移回帰23／公開SHA照合／整理記録。v1.9.2原因再現と更新案内も保持。v1.9.1読み込み画像と観測記録も保持。v1.9の操作28／描画／地形プレビューも保持。C:\Users\lushl\Documents\Codex\2026-10-11\new-chat-2\outputs。入口は成果物案内.md。旧成果物保持。
-- 最新整理：dist86ファイル17,923,270Bを正本SHA一致確認後削除。cloudflare/npm run buildで復旧。ローカル8790サーバーと今回の検証タブ終了、設定復元済み。素材・原画・音源・依存・秘密・ローカルDB・Cのwork/v195検証補助を保持。
+- 最新整理：dist86ファイル17,923,201Bを正本SHA一致確認後削除。cloudflare/npm run buildで復旧。ローカル8790サーバーと今回の検証タブ終了、設定復元済み。素材・原画・音源・依存・秘密・ローカルDB・Cのwork/v195検証補助を保持。
 - work/v193に音声検証／修正補助、work/v192に原因再現／DOM検証補助とjsdomの検証環境を保持。過去work/v191およびworkの読み込み検証／修正補助は再開用に保持。過去のwork/v16/v17/v18/v19も保持。コピーは正本より古い場合があるため正本へ上書きしない。
 - rollback：改修前ソース5bc79c1、Worker16195304-246c-4ce8-8178-e7c8711d99ad。D1日時と資格情報はコードrollbackとは別に保持。
 - 次：アクセス集計とゲーム／終了画面表示の公開は完了。次はブラウザー接続復帰後にtests/audio-toggle.htmlとtests/transitions.htmlで実タップと音声を再確認する。期間変更は本人依頼時のみ。次の変更はこの記録と正本を照合し、ユーザー保存データ／無関係な素材を保持。
