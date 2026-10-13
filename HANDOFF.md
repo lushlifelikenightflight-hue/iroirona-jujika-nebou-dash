@@ -52,7 +52,7 @@
 ## 保存・復旧・次の作業
 - 起動：正本npm start→127.0.0.1:4186。検証npm test／npm run check、ブラウザーtests/update-v19.html（今回）／tests/browser.html（既存）。Cloudflareはnpm ci／npm test／npm run typecheck／npm run test:auth。buildとpreflight後wrangler deploy --env=。認証／設定コードは今回変更なし。
 - outputsにv1.9.3更新案内／音声DOM17／遷移回帰23／公開SHA照合／整理記録。v1.9.2原因再現と更新案内も保持。v1.9.1読み込み画像と観測記録も保持。v1.9の操作28／描画／地形プレビューも保持。C:\Users\lushl\Documents\Codex\2026-10-11\new-chat-2\outputs。入口は成果物案内.md。旧成果物保持。
-- 最新整理：正本cloudflare/dist84ファイル17,920,833BをSHA一致確認後削除。ローカル8790サーバーと検証タブを終了。cloudflareでnpm run buildすると復旧。素材・原画・音源・依存・秘密・ローカルDBは保持。今回は新しい検証サーバーを起動していない。前回のサーバー96861は終了済み。ブラウザー操作の接続がなく、新しい操作可能タブは作成していない、画面サイズ指定は解除。
+- 最新整理：dist86ファイル17,923,190Bを正本SHA一致確認後削除。cloudflare/npm run buildで復旧。ローカル8790サーバーと今回の検証タブ終了、設定復元済み。素材・原画・音源・依存・秘密・ローカルDB・Cのwork/v195検証補助を保持。
 - work/v193に音声検証／修正補助、work/v192に原因再現／DOM検証補助とjsdomの検証環境を保持。過去work/v191およびworkの読み込み検証／修正補助は再開用に保持。過去のwork/v16/v17/v18/v19も保持。コピーは正本より古い場合があるため正本へ上書きしない。
 - rollback：改修前ソース5bc79c1、Worker16195304-246c-4ce8-8178-e7c8711d99ad。D1日時と資格情報はコードrollbackとは別に保持。
-- 次：アクセス集計追加と公開は完了。次はブラウザー接続復帰後にtests/audio-toggle.htmlとtests/transitions.htmlで実タップと音声を再確認する。期間変更は本人依頼時のみ。次の変更はこの記録と正本を照合し、ユーザー保存データ／無関係な素材を保持。
+- 次：アクセス集計とゲーム／終了画面表示の公開は完了。次はブラウザー接続復帰後にtests/audio-toggle.htmlとtests/transitions.htmlで実タップと音声を再確認する。期間変更は本人依頼時のみ。次の変更はこの記録と正本を照合し、ユーザー保存データ／無関係な素材を保持。
