@@ -9,7 +9,7 @@
 - b9a4f99で管理画面へ累計／今日／直近30日日別PV追加。/と/index.htmlのGETのみ、200ゲームと期間外拒否を別計測。再訪・通常ボット・検証GETを含む表示数。HEAD・先読み・資産・管理・API除外、IP保存なし、GitHub Pages対象外。
 - D1 0003適用済み、atomic upsert＋開始日時、ctx.waitUntil保存失敗は表示を止めない。認証必須GET /admin/api/analytics。更新時の未保存設定保持。Worker d4eb80c7-7de6-44bc-b788-7e647104d373へ配信。
 - Cloudflare24／型／ローカルWorker12／ブラウザー日別集計と入力保持合格。本番root410／匿名analytics403／素材410、D1期間外1件（検証GET）記録、日時revision1保持確認。期限は終了中、資格情報維持。
-- 過去ログkeys APIは既存OAuthで403認証エラー。過去分は未取得・未集計。権限拡張なし。計測開始前の0表示を過去実績としない。
+- 過去ログ：keys APIは既存OAuthで403のまま、権限拡張なし。本人のChrome再ログイン後、Dashboardで10/12 0:00〜10/13 0:00 JSTのHTTPS GET /・/index.html・HTTP200を1,932件確認。画像等・HEAD除外、再訪／ボット／検証含むPV、先読み等未検証。D1へ合算せず、outputsの過去アクセス_2026-10-12_*と取得結果.mdへ保存。計測開始前のD1の0を過去実績としない。
 - outputsにアクセス集計案内／ローカル画面／本番確認。Cのwork/v194に補助。rollbackコード25f711e、Worker56589c9b-8cf0-4d71-b139-defbdc008ec9。追加テーブル／日時／認証は保持する。
 
 ## 音声切り替え（v1.9.3）
